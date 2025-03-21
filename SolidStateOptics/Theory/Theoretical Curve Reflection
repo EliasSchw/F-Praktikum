@@ -12,12 +12,13 @@ tau = 0.1
 
 
 omega_p = np.sqrt(N_D*e**2/(m_eff*epsilon_0))
-k = np.linspace(1,140000,140000)
+k = np.linspace(100,140000,140000)
 epsilon_strich = 1-(omega_p**2*tau**2)/(1+(1/k)**2*tau**2)
 epsilon_2strich = (omega_p**2*tau)/(1+(1/k)**2*tau**2)
 n = np.sqrt(np.sqrt(epsilon_strich+np.sqrt(epsilon_strich**2+epsilon_2strich**2))/2)
 kappa = np.sqrt((np.sqrt(-epsilon_strich+(epsilon_strich**2+epsilon_2strich**2)))/2)
 N= n+kappa*1j
-R = np.abs((N-1)/(N+1))**2
+N_conj = np.conj(N) 
+R = np.abs((N - 1) * (N_conj + 1) / ((N + 1) * (N_conj + 1)))**2
 plt.plot(k,R)
 plt.show()
