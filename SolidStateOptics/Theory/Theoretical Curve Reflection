@@ -1,0 +1,23 @@
+import numpy as np
+import scipy.constants as const
+import matplotlib.pyplot as plt
+
+# Konstanten
+e = const.e
+m_eff = 1
+epsilon_0 = const.epsilon_0
+N_D = 5.9*10**22
+
+
+
+
+omega_p = np.sqrt(N_D*e**2/(m_eff*epsilon_0))
+tau = 0.1
+k = np.linspace(0,140000,140000)
+epsilon_strich = 1-(omega_p**2*tau**2)/(1+(1/k)**2*tau)
+epsilon_2strich = (omega_p**2*tau)/(1+(1/k)**2*tau)
+n = np.sqrt(0.5*np.sqrt(epsilon_strich+epsilon_strich**2+epsilon_2strich**2))
+R = np.abs((n-1)/(n+1))**2
+plt.plot(k,R)
+plt.show()
+#test
