@@ -37,6 +37,11 @@ ax.plot(k, calculateReflectivity(d, tau3, k), linewidth=2)
 ax.plot(k, calculateReflectivity(d, tau4, k), linewidth=2)
 
 
+taus = np.logspace(10**-12, 10**-7, 50)  # Generate 50 tau values logarithmically spaced
+for tau in taus:
+    ax.plot(k, calculateReflectivity(d, tau, k), color='gray', linewidth=0.5, alpha=0.7)
+
+
 
 #ax.set_xticks([0, 0.25, 0.5, 0.75, 1], [r'$\Gamma$', 'X', 'M', 'Y', r'$\Gamma$'], size=14)
 
