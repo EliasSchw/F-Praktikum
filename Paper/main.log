@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  21 MAR 2025 13:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  21 MAR 2025 14:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -383,22 +383,22 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             ! on input line 42.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for T1+aess on input line 61.
+LaTeX Font Info:    Trying to load font information for T1+aess on input line 58.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/ae/t1aess.fd
 File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 )
 LaTeX Font Info:    Font shape `T1/aess/b/n' in size <10> not available
-(Font)              Font shape `T1/aess/bx/n' tried instead on input line 61.
+(Font)              Font shape `T1/aess/bx/n' tried instead on input line 58.
 LaTeX Font Info:    Font shape `T1/aess/b/n' in size <20.74> not available
-(Font)              Font shape `T1/aess/bx/n' tried instead on input line 61.
+(Font)              Font shape `T1/aess/bx/n' tried instead on input line 58.
 \openout2 = `abstract.aux'.
 
  (/Users/lukashein/Desktop/F-Praktikum-2/Paper/abstract.tex
@@ -421,25 +421,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--9
 
  []
 
-)
-\openout2 = `introduction.aux'.
-
- (/Users/lukashein/Desktop/F-Praktikum-2/Paper/introduction.tex
-LaTeX Font Info:    Font shape `T1/aess/b/n' in size <14.4> not available
-(Font)              Font shape `T1/aess/bx/n' tried instead on input line 1.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 2--61
-
- []
-
-\openout2 = `theory.aux'.
-
-(/Users/lukashein/Desktop/F-Praktikum-2/Paper/theory.tex)
-\openout2 = `Set-Up.aux'.
-
- (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) 
-AED: lastpage setting LastPage
-[1
+) [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -447,31 +429,44 @@ AED: lastpage setting LastPage
 
 
 
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
 
 
+]
+\openout2 = `introduction.aux'.
 
-\@writefile{toc}{\contentsline {section}{\numberline {2}theory}{1}{}\protected@file@percent }
+ (/Users/lukashein/Desktop/F-Praktikum-2/Paper/introduction.tex
+LaTeX Font Info:    Font shape `T1/aess/b/n' in size <14.4> not available
+(Font)              Font shape `T1/aess/bx/n' tried instead on input line 1.
+) [2
 
 
+]
+\openout2 = `theory.aux'.
 
-\@writefile{toc}{\contentsline {section}{\numberline {3}Set-Up}{1}{}\protected@file@percent }
-
-
+ (/Users/lukashein/Desktop/F-Praktikum-2/Paper/theory.tex) [3
 
 
 
 
 ]
+\openout2 = `Set-Up.aux'.
+
+ (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) [4
+
+
+
+
+] 
+AED: lastpage setting LastPage
 
 LaTeX3 Info: Redefining command \BeforeClosingMainAux with sig. 'm' on line
-(LaTeX3)     62.
+(LaTeX3)     66.
 
 
 LaTeX3 Info: Redefining command \BeforeClosingMainAux with sig. 'm' on line
-(LaTeX3)     62.
+(LaTeX3)     66.
 
- (/Users/lukashein/Desktop/F-Praktikum-2/Paper/main.aux (/Users/lukashein/Desktop/F-Praktikum-2/Paper/abstract.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/introduction.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/theory.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.aux)) ) 
+(/Users/lukashein/Desktop/F-Praktikum-2/Paper/main.aux (/Users/lukashein/Desktop/F-Praktikum-2/Paper/abstract.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/introduction.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/theory.aux) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.aux)) ) 
 Here is how much of TeX's memory you used:
  6921 strings out of 478994
  131062 string characters out of 5858183
@@ -481,10 +476,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  111i,9n,116p,10644b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (1 page, 47475 bytes).
+Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (4 pages, 53404 bytes).
 PDF statistics:
- 24 PDF objects out of 1000 (max. 8388607)
- 16 compressed objects within 1 object stream
+ 33 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

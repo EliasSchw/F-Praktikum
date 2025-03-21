@@ -40,23 +40,27 @@
 
 
 \begin{document}
-%\cfoot{\thepage /\pageref{LastPage}}     %macht die Seitennumerierung der Fom 2/5 (ausser auf der Titelseite)
 
-\twocolumn[{\csname @twocolumnfalse\endcsname                %erlaubt "Abstrakt" über beide Spalten
-\titlehead{                                                  %Kopfzeile
-	\begin{tabular*}{\textwidth}[]{@{\extracolsep{\fill}}lr}   %Kopfzeile
-	Betreuer: Der Betreuer & \today\\                          %Kopfzeile      hier den Betreuer eintragen!!!
-	\end{tabular*}                                             %Kopfzeile
-	}
-\title{Solid State Optics}  %Titel der Versuchs
-\author{Lukas Hein, Elias Schwarzkopf}                     %Namen der Studenten
-\date{}                                                         %benötigt um automatisches Datum auszuschalten
-\maketitle                                                      %erzeugt Titelseite
-\vspace{-8ex}                                                   %verringert Abstand zur Überschrift
-\include{abstract}
+% Titel und Abstract über beide Spalten
+\twocolumn[{\csname @twocolumnfalse\endcsname
+\titlehead{
+    \begin{tabular*}{\textwidth}[]{@{\extracolsep{\fill}}lr}
+    Betreuer: Der Betreuer & \today\\
+    \end{tabular*}
+    }
+\title{Solid State Optics}
+\author{Lukas Hein, Elias Schwarzkopf}
+\date{}
+\maketitle
+\vspace{-8ex}
+\include{abstract} % Abstract bleibt über beide Spalten
+\vspace{-6ex} % Reduziert den Abstand nach dem Abstract
+}]
+
+% Ab hier beginnt der zweispaltige Modus
+\vspace{-2ex} % Zusätzliche Anpassung, um den Abstand weiter zu reduzieren
 \include{introduction}
 \include{theory}
 \include{Set-Up}
 
-}]
 \end{document}
