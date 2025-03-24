@@ -4,10 +4,8 @@ import matplotlib.pyplot as plt
 
 
 import os, sys
-
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
-
-import macroswriter  # Import macroswriter module
+from macroswriter import writeLatexMacro  # Import macroswriter module
 
 # Konstanten
 e = const.e
@@ -68,4 +66,4 @@ def plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max):
 
 plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max)
 
-macroswriter.writeLatexMacros('N_Dichte', N_Dichte)
+writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
