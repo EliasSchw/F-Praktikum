@@ -1,6 +1,11 @@
 import numpy as np
 
-print(np.logspace(np.log10(1), np.log10(4), 5))  # Generate 5 tau values logarithmically spaced
+
+import os, sys
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
+from macroswriter import writeLatexMacro # Import macroswriter module
 
 
+writeLatexMacro('testOhneFehler', 123456789, unit='\\frac{1}{m}')
+writeLatexMacro('testMitFehler', 123456789, unit='\\frac{1}{m}', error=20000000)
 
