@@ -1,0 +1,6 @@
+PWD /Users/lukashein/Desktop/F-Praktikum-2/Paper
+INPUT /usr/local/texlive/2021/texmf.cnf
+INPUT /usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
+OUTPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.log
