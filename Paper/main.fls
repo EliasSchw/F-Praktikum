@@ -493,6 +493,8 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aesl10.vf
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer7.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer5.tfm
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
@@ -516,6 +518,9 @@ INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aeti10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aer7.vf
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aeti10.vf
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.aux
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/abstract.aux
