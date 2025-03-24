@@ -11,9 +11,14 @@ tau1 = 0.1*10**-12
 tau2 = 0.01*10**-12
 tau3 = 0.001*10**-12
 tau4 = 0.0001*10**-12
+tau5 = 0.00001*10**-12
 c=const.c
 d = 100 *10**-5 #dicke si undoped
 k_max = 1*10**8
+
+
+
+
 
 def calculateReflectivity(d, tau, k):
     omega = c*k
@@ -31,15 +36,18 @@ def calculateReflectivity(d, tau, k):
 fig, ax = plt.subplots()
         
 k = np.linspace(0, k_max, 10000)
-ax.plot(k, calculateReflectivity(d, tau1, k), linewidth=2)
-ax.plot(k, calculateReflectivity(d, tau2, k), linewidth=2)
-ax.plot(k, calculateReflectivity(d, tau3, k), linewidth=2)
-ax.plot(k, calculateReflectivity(d, tau4, k), linewidth=2)
 
-
-taus = np.logspace(10**-12, 10**-7, 50)  # Generate 50 tau values logarithmically spaced
+taus = np.logspace(np.log10(tau1), np.log10(tau5), 50)  # Generate 50 tau values logarithmically spaced
 for tau in taus:
     ax.plot(k, calculateReflectivity(d, tau, k), color='gray', linewidth=0.5, alpha=0.7)
+    
+ax.plot(k, calculateReflectivity(d, tau1, k), linewidth=3)
+ax.plot(k, calculateReflectivity(d, tau2, k), linewidth=3)
+ax.plot(k, calculateReflectivity(d, tau3, k), linewidth=3)
+ax.plot(k, calculateReflectivity(d, tau4, k), linewidth=3)
+ax.plot(k, calculateReflectivity(d, tau5, k), linewidth=3)
+
+
 
 
 
