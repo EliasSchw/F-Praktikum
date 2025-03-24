@@ -15,10 +15,11 @@ tau5 = 0.00001*10**-12
 c=const.c
 d = 100 *10**-5 #dicke si undoped
 k_max = 1*10**8
+k_max_semicon = 140000
 epsilon_inf = 10.3648
 omega_LO = 292*100 
 omega_TO = 268*100 
-gamma = 2.5*100 
+gamma = 2.5*100
 N_DichteSemicon = 1.05*10**24 
 m_eff_Semicon = 0.067*const.m_e
 
@@ -73,7 +74,7 @@ Image.open("Paper/Images/foo.png").show()
 plt.clf()
 
 
-
+s‚
 # plt.plot(k,R_FabryPerot)
 # plt.show()
 '''
@@ -81,14 +82,15 @@ plt.clf()
 
 def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau4):
     omega = c*k
-    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2)/(omega_TO**2 - omega**2 - 1j*omega*gamma))
-    sigma = (N_DichteSemicon*e**2*tau1)/(m_eff_Semicon)*(1/(1-1j*omega*tau1))
+    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j*omega*gamma))
+    sigma = (N_DichteSemicon*e**2*tau4)/(m_eff_Semicon)*(1/(1-1j*omega*tau4))
     epsilon = epsilon_S + 1j*sigma/(omega*epsilon_0)
     N_S = np.sqrt(epsilon)
     expo = 1j*2*omega*N_S*d/c
     r=(np.exp(expo)-1)*(1-N_S)/(np.exp(expo)*(1-N_S)-(1+N_S))
-    R_S = np.abs(r)**2
+    R_S = np.abs(r)**2 / max(np.abs(r)**2)
     return R_S
-k = np.linspace(0, k_max, 10000)
-plt.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau1))
-plt.show()
+k = np.linspace(0, k_max_semicon, 100)
+plt.clf()
+plt.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau4))
+
