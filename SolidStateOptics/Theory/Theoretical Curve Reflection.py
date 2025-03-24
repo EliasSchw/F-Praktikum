@@ -2,6 +2,13 @@ import numpy as np
 import scipy.constants as const
 import matplotlib.pyplot as plt
 
+
+import os, sys
+
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
+
+import macroswriter  # Import macroswriter module
+
 # Konstanten
 e = const.e
 m_eff = 1*const.m_e
@@ -61,32 +68,4 @@ def plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max):
 
 plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max)
 
-def writeLatexMacros(N_Dichte, filepath):
-    """
-    Writes or overrides LaTeX macros for N_Dichte in the specified file.
-    """
-    macro_name = "\\NDichte"
-    macro_content = f"\\newcommand{{{macro_name}}}{{{N_Dichte:.2e}}}\n"
-
-    # Read the existing file content
-    try:
-        with open(filepath, 'r') as file:
-            lines = file.readlines()
-    except FileNotFoundError:
-        lines = []
-
-    # Remove existing macro with the same name
-    lines = [line for line in lines if not line.strip().startswith(f"\\newcommand{{{macro_name}}}")]
-
-    # Append the new macro
-    lines.append(macro_content)
-
-    # Write back to the file
-    with open(filepath, 'w') as file:
-        file.writelines(lines)
-
-# Example usage with relative path
-writeLatexMacros(N_Dichte, 'Paper/macros.tex')
-
-
-
+macroswriter.writeLatexMacros('N_Dichte', N_Dichte)
