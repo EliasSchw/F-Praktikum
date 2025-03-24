@@ -13,9 +13,9 @@ tau3 = 0.001*10**-12
 tau4 = 0.0001*10**-12
 tau5 = 0.00001*10**-12
 c=const.c
-d = 100 *10**-5 #dicke si undoped
+d = 500 *10**-5 #dicke si undoped
 k_max = 1*10**8
-k_max_semicon = 140000
+k_max_semicon = 1400000
 epsilon_inf = 10.3648
 omega_LO = 292*100 
 omega_TO = 268*100 
@@ -25,8 +25,6 @@ m_eff_Semicon = 0.067*const.m_e
 
 
 
-
-'''
 def calculateReflectivity(d, tau, k):
     omega = c*k
     omega_p = np.sqrt(N_Dichte*e**2/(m_eff*epsilon_0))
@@ -74,23 +72,41 @@ Image.open("Paper/Images/foo.png").show()
 plt.clf()
 
 
-s‚
 # plt.plot(k,R_FabryPerot)
 # plt.show()
-'''
+
 #Lukas
 
-def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau4):
+def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau1):
     omega = c*k
     epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j*omega*gamma))
-    sigma = (N_DichteSemicon*e**2*tau4)/(m_eff_Semicon)*(1/(1-1j*omega*tau4))
+    sigma = (N_DichteSemicon*e**2*tau1)/(m_eff_Semicon)*(1/(1-1j*omega*tau1))
     epsilon = epsilon_S + 1j*sigma/(omega*epsilon_0)
     N_S = np.sqrt(epsilon)
     expo = 1j*2*omega*N_S*d/c
     r=(np.exp(expo)-1)*(1-N_S)/(np.exp(expo)*(1-N_S)-(1+N_S))
     R_S = np.abs(r)**2 / max(np.abs(r)**2)
     return R_S
-k = np.linspace(0, k_max_semicon, 100)
-plt.clf()
-plt.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau4))
 
+k = np.linspace(1, k_max_semicon, 1000)  
+plt.clf()
+
+# Plot für alle tau-Werte
+taus = [tau1, tau2, tau3, tau4]
+for tau in taus:
+    R_S = calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau)
+    # Überprüfung, ob R_S gültige Werte enthält
+    if np.all(np.isnan(R_S)) or np.all(R_S == 0):
+        print(f"Warnung: Alle Werte von R_S für tau={tau} sind ungültig oder Null.")
+    else:
+        plt.plot(k, R_S, label=f'tau={tau:.1e}')
+
+# Achsentitel und Legende
+plt.xlabel('wave number k / ' + r'$m^{-1}$')
+plt.ylabel('reflectivity R')
+plt.title('Theoretical reflectivity of a semiconductor')
+plt.legend()
+plt.savefig('Paper/Images/semi.png', dpi=400)
+from PIL import Image
+Image.open("Paper/Images/semi.png").show()
+plt.clf()
