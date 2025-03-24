@@ -15,11 +15,15 @@ tau5 = 0.00001*10**-12
 c=const.c
 d = 100 *10**-5 #dicke si undoped
 k_max = 1*10**8
+epsilon_inf = 10.3648
+omega_LO = 292 #cm^-1
+omega_TO = 268 #cm^-1
+gamma = 2.5 #cm^-1
 
 
 
 
-
+'''
 def calculateReflectivity(d, tau, k):
     omega = c*k
     omega_p = np.sqrt(N_Dichte*e**2/(m_eff*epsilon_0))
@@ -70,3 +74,47 @@ plt.clf()
 
 # plt.plot(k,R_FabryPerot)
 # plt.show()
+'''
+#Lukas
+
+def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k):
+    omega = c*k
+    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2)/(omega_TO**2 - omega**2 - 1j*omega*gamma))
+    N_S = np.sqrt(epsilon_S)
+    expo = 1j*2*omega*N_S*d/c
+    r=(np.exp(expo)-1)*(1-N_S)/(np.exp(expo)*(1-N_S)-(1+N_S))
+    R_S = np.abs(r)**2
+    return R_S
+
+fig, ax = plt.subplots()
+        
+k = np.linspace(0, k_max, 10000)
+
+taus = np.logspace(np.log10(tau1), np.log10(tau5), 50)  # Generate 50 tau values logarithmically spaced
+for tau in taus:
+    ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), color='gray', linewidth=0.5, alpha=0.7)
+    
+ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), linewidth=3)
+ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), linewidth=3)
+ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), linewidth=3)
+ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), linewidth=3)
+ax.plot(k, calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k), linewidth=3)
+
+
+
+
+
+#ax.set_xticks([0, 0.25, 0.5, 0.75, 1], [r'$\Gamma$', 'X', 'M', 'Y', r'$\Gamma$'], size=14)
+
+ax.set_ylabel('Reflectivity R')
+ax.set_xlabel('wavenumber k / ' + r'$m^{-1}$')
+ax.set_title('Reflectivity of a Fabry-Perot-Interferometer')
+ax.tick_params(axis='both', direction='in', which='both', top=True, right=True)
+ax.set_xlim(left=0, right=k_max)
+ax.set_ylim(bottom=0, top=1)
+#ax.grid()
+
+plt.savefig('Paper/Images/foo.png', dpi=400)
+from PIL import Image
+Image.open("Paper/Images/foo.png").show()
+plt.clf()
