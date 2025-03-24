@@ -1,9 +1,9 @@
 # Fdb version 3
-["pdflatex"] 1742833628 "c:/Users/schwa/OneDrive/EliasOneDrive/Uni/7. Semester/F-Praktikum/F-Praktikum/F-Praktikum/Paper/main.tex" "main.pdf" "main" 1742833630
+["pdflatex"] 1742835021 "c:/Users/schwa/OneDrive/EliasOneDrive/Uni/7. Semester/F-Praktikum/F-Praktikum/F-Praktikum/Paper/main.tex" "main.pdf" "main" 1742835023
   "Images/fabry-perot.png" 1742830798 322161 18ea913e3f9d5a9adf42e44f36fa3f05 ""
   "Introduction.tex" 1742833624 1746 eb30a472c666b0dd85116266ad05f972 ""
   "Set-Up.tex" 1742830798 44 29e4cd86fdb6e0164ae9bbc4365b19d1 ""
-  "abstract.aux" 1742833629 515 397135f715474bff2377fed4530c4ce6 "pdflatex"
+  "abstract.aux" 1742835022 515 397135f715474bff2377fed4530c4ce6 "pdflatex"
   "abstract.tex" 1742570599 870 7b091c61511dc494596cd22dc9db5ff2 ""
   "bibliography.tex" 1742807209 230 82f62dac8a4c077cee911cf3509eeb0c ""
   "c:/Users/schwa/OneDrive/EliasOneDrive/Uni/7. Semester/F-Praktikum/F-Praktikum/F-Praktikum/Paper/main.tex" 1742830798 2666 e6ccb0935b74abc7997c139285063b2e ""
@@ -12,6 +12,8 @@
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aeb10.tfm" 1639560893 6132 78e5594f4fe2bad148a7cb22806d1f42 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer10.tfm" 1639560893 6076 dc5394361b1c55a30e76ff07ab99157c ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer12.tfm" 1639560893 6084 d3a937b1dfbe4f0e2c719f2d6acacced ""
+  "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer5.tfm" 1639560893 6060 e6698dd00b0c710db67c8f65752c199a ""
+  "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer7.tfm" 1639560893 6100 024d47c118c2a7b28b77745849b553c7 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer9.tfm" 1639560893 6076 dd5a5352d066d5b2d2092b63c8cabf28 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aesl10.tfm" 1639560893 6232 f5cc44d387a65d3352c7dfdb2b1e3492 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aess10.tfm" 1639560893 5532 a549d0ce938990119070fe803452a180 ""
@@ -31,6 +33,7 @@
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1639574135 1528 abec98dbc43e172678c11b3b9031252a ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1639574135 1524 4414a8315f39513458b80dfc63bff03a ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1639574135 1512 f21f83efb36853c0b70002322c1ab3ad ""
+  "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm" 1639574135 1528 e2423ae06dc7dee599cceb79d1c9dc32 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1639574135 1524 d89e2d087a9828407a196f428428ef4a ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm" 1639574135 1524 554068197b70979a55370e6c6495f441 ""
   "c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1639574135 1288 655e228510b4c2a1abe905c368440826 ""
@@ -64,6 +67,7 @@
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aeb10.vf" 1639560893 3204 33087d8d1b5ca03fcc323578bd8c2ab9 ""
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aer10.vf" 1639560893 3160 99d961359fad2b22331b477acf927f3b ""
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aer12.vf" 1639560893 3160 f7f3709db083d82a972749c3a663ea58 ""
+  "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aer7.vf" 1639560893 3156 4ba968327ce2a0dde1daa13aa070f281 ""
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aer9.vf" 1639560893 3156 f2dea5d0f126618ccda762d665556ed9 ""
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aesl10.vf" 1639560893 3160 efa5a46bd18219e41a378723b7b0acaa ""
   "c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aessbx10.vf" 1639560893 3204 41a160aee0aa586464ec69c804e3c8ca ""
@@ -110,9 +114,9 @@
   "c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1639578573 4414272 53976978d6fc5587d004941f8db6c1a9 ""
   "c:/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1639578743 2820087 51a5b8a63dc4106554f2bb5e068c351e ""
   "c:/texlive/2021/texmf.cnf" 1639578519 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1742833630 1228 38bb84f8fe357eb7b02e997a1c9db30d "pdflatex"
+  "main.aux" 1742835023 1402 017fcffcf83e67f76f12b97d0be2cc7e "pdflatex"
   "main.tex" 1742830798 2666 e6ccb0935b74abc7997c139285063b2e ""
-  "theory.tex" 1742830798 2046 07f65179ec2c9ec7c8df54780dc0e268 ""
+  "theory.tex" 1742835017 4146 c76f3c637ee0f7fe7eb8b78e2cb87cff ""
   (generated)
   "abstract.aux"
   "main.aux"

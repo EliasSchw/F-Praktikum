@@ -481,6 +481,8 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aesl10.vf
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer7.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer5.tfm
 INPUT ./Set-Up.tex
 INPUT ./Set-Up.tex
 INPUT ./Set-Up.tex
@@ -496,6 +498,9 @@ INPUT ./bibliography.tex
 INPUT ./bibliography.tex
 INPUT bibliography.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/ae/aeti10.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aer7.vf
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/vf/public/ae/aeti10.vf
 INPUT main.aux
 INPUT ./abstract.aux

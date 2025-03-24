@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.15)  24 MAR 2025 17:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.15)  24 MAR 2025 17:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -354,7 +354,14 @@ File: Images/fabry-perot.png Graphic file (type png)
 <use Images/fabry-perot.png>
 Package pdftex.def Info: Images/fabry-perot.png  used on input line 8.
 (pdftex.def)             Requested size: 145.64404pt x 164.6764pt.
- [1
+
+
+LaTeX Warning: Citation `??' on page 1 undefined on input line 11.
+
+
+LaTeX Warning: Citation `??' on page 1 undefined on input line 11.
+
+[1
 
 {c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -365,19 +372,21 @@ Package pdftex.def Info: Images/fabry-perot.png  used on input line 8.
 
  <./Images/fabry-perot.png>]) (./Set-Up.tex) (./bibliography.tex) 
 AED: lastpage setting LastPage
-[2
+[2] (./main.aux (./abstract.aux))
 
-] (./main.aux (./abstract.aux)) ) 
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 7331 strings out of 478353
- 141792 string characters out of 5852100
- 558512 words of memory out of 5000000
- 25353 multiletter control sequences out of 15000+600000
- 434384 words of font info for 89 fonts, out of 8000000 for 9000
+ 7343 strings out of 478353
+ 141917 string characters out of 5852100
+ 564561 words of memory out of 5000000
+ 25361 multiletter control sequences out of 15000+600000
+ 438030 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,11n,106p,10697b,407s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,12n,106p,10697b,407s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (2 pages, 478832 bytes).
+Output written on main.pdf (2 pages, 486745 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream
