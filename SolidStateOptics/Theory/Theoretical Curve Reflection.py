@@ -13,7 +13,7 @@ tau3 = 0.001*10**-12
 tau4 = 0.0001*10**-12
 tau5 = 0.00001*10**-12
 c=const.c
-d = 500 *10**-5 #dicke si undoped
+d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
 k_max_semicon = 1400000
 epsilon_inf = 10.3648
@@ -45,27 +45,19 @@ k = np.linspace(0, k_max, 10000)
 taus = np.logspace(np.log10(tau1), np.log10(tau5), 50)  # Generate 50 tau values logarithmically spaced
 for tau in taus:
     ax.plot(k, calculateReflectivity(d, tau, k), color='gray', linewidth=0.5, alpha=0.7)
-    
-ax.plot(k, calculateReflectivity(d, tau1, k), linewidth=3)
-ax.plot(k, calculateReflectivity(d, tau2, k), linewidth=3)
-ax.plot(k, calculateReflectivity(d, tau3, k), linewidth=3)
-ax.plot(k, calculateReflectivity(d, tau4, k), linewidth=3)
-ax.plot(k, calculateReflectivity(d, tau5, k), linewidth=3)
 
+# Plot für spezifische τ-Werte
+for tau in [tau1, tau2, tau3, tau4, tau5]:
+    ax.plot(k, calculateReflectivity(d, tau, k), linewidth=3, label=f'τ={tau*1e12:.2f} ps')
 
-
-
-
-#ax.set_xticks([0, 0.25, 0.5, 0.75, 1], [r'$\Gamma$', 'X', 'M', 'Y', r'$\Gamma$'], size=14)
-
-ax.set_ylabel('Reflectivity R')
+# Achsentitel, Legende und Speichern
+ax.set_ylabel('reflectivity R')
 ax.set_xlabel('wavenumber k / ' + r'$m^{-1}$')
 ax.set_title('Reflectivity of a Fabry-Perot-Interferometer')
 ax.tick_params(axis='both', direction='in', which='both', top=True, right=True)
 ax.set_xlim(left=0, right=k_max)
 ax.set_ylim(bottom=0, top=1)
-#ax.grid()
-
+ax.legend()
 plt.savefig('Paper/Images/foo.png', dpi=400)
 from PIL import Image
 Image.open("Paper/Images/foo.png").show()
@@ -77,35 +69,38 @@ plt.clf()
 
 #Lukas
 
-def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau1):
-    omega = c*k
-    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j*omega*gamma))
-    sigma = (N_DichteSemicon*e**2*tau1)/(m_eff_Semicon)*(1/(1-1j*omega*tau1))
-    epsilon = epsilon_S + 1j*sigma/(omega*epsilon_0)
+def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
+    omega = c * k
+    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
+    sigma = (N_DichteSemicon * e**2 * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
+    epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
     N_S = np.sqrt(epsilon)
-    expo = 1j*2*omega*N_S*d/c
-    r=(np.exp(expo)-1)*(1-N_S)/(np.exp(expo)*(1-N_S)-(1+N_S))
-    R_S = np.abs(r)**2 / max(np.abs(r)**2)
+    expo = 1j * 2 * omega * N_S * d / c
+    r = (np.exp(expo) - 1) * (1 - N_S) / (np.exp(expo) * (1 - N_S) - (1 + N_S))
+    R_S = np.abs(r)**2  # Normierung entfernt
     return R_S
 
-k = np.linspace(1, k_max_semicon, 1000)  
-plt.clf()
+# Erhöhung der Auflösung von k
+k = np.linspace(1, k_max_semicon, 50000)  # Startwert auf 0.1 gesetzt, höhere Auflösung
 
-# Plot für alle tau-Werte
+# Plot für alle τ-Werte
 taus = [tau1, tau2, tau3, tau4]
 for tau in taus:
     R_S = calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau)
     # Überprüfung, ob R_S gültige Werte enthält
     if np.all(np.isnan(R_S)) or np.all(R_S == 0):
-        print(f"Warnung: Alle Werte von R_S für tau={tau} sind ungültig oder Null.")
+        print(f"Warnung: Alle Werte von R_S für τ={tau} sind ungültig oder Null.")
     else:
-        plt.plot(k, R_S, label=f'tau={tau:.1e}')
+        plt.plot(k, R_S, label=f'τ={tau*1e12:.2f} ps')
 
-# Achsentitel und Legende
+# Achsentitel, Legende und Speichern
 plt.xlabel('wave number k / ' + r'$m^{-1}$')
 plt.ylabel('reflectivity R')
 plt.title('Theoretical reflectivity of a semiconductor')
 plt.legend()
+plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
+plt.xlim(left=0, right=k_max_semicon)
+plt.ylim(bottom=0, top=1)
 plt.savefig('Paper/Images/semi.png', dpi=400)
 from PIL import Image
 Image.open("Paper/Images/semi.png").show()
