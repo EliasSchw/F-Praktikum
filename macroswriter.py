@@ -1,9 +1,12 @@
-def writeLatexMacros(macro_name, value, filepath='Paper/macros.tex'):
+def writeLatexMacros(macro_name, value, unit=None, filepath='Paper/macros.tex'):
     """
     Writes or overrides LaTeX macros in the specified file.
     """
 
-    macro_content = f"\\newcommand{{\\{macro_name}}}{{{value:.2e}}}\n"
+    macro_content = f"\\newcommand{{\\{macro_name}}}{{{value:.2e}"
+    if unit:
+        macro_content += f"\\,{unit}"
+    macro_content += "}}\n"
 
     # Read the existing file content
     try:
@@ -13,7 +16,7 @@ def writeLatexMacros(macro_name, value, filepath='Paper/macros.tex'):
         lines = []
 
     # Remove existing macro with the same name
-    lines = [line for line in lines if not line.strip().startswith(f"\\newcommand{{\\{macro_name}}}")]
+    lines = [line for line in lines if not line.strip().startswith(f"\\newcommand{{\\{macro_name}}}")] 
 
     # Append the new macro
     lines.append(macro_content)
