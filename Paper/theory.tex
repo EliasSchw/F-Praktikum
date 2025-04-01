@@ -1,5 +1,23 @@
 \nopagebreak
 \section{Theory}
+\subsection{Wave equations}
+The propagation of electromagnetic waves in a medium are described with the wave equations:
+\begin{align}
+    \nabla^2 \vec{E} &= \frac{\mu \varepsilon}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} + \sigma \mu_0 \mu \frac{\partial \vec{E}}{\partial t} \label{eq:wave_equation_E} \\
+    \nabla^2 \vec{H} &= \frac{\mu \varepsilon}{c^2} \frac{\partial^2 \vec{H}}{\partial t^2} + \sigma \mu_0 \mu \frac{\partial \vec{H}}{\partial t} \label{eq:wave_equation_H}
+\end{align}
+with $\vec{E}$ as the electric field vector, $\vec{H}$ as the magnetic field vector, $\mu$ as the permeability, $\varepsilon$ as the permittivity, $\sigma$ as the conductivity, and $c$ as the speed of light in vacuum.\\
+Under 
+the assumption of plane waves with the components $\vec{E} = E_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ 
+and $\vec{H} = H_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ can be used as an ansatz to solve the wave equations
+\ref{eq:wave_equation_E} and \ref{eq:wave_equation_H}. The dispersion relation of the plane waves is then
+described with:
+\begin{align}
+    k^2 = \omega^2\cdot(\epsilon + i\frac{\sigma}{\omega\epsilon_0}) \label{eq:dispersion_relation}
+\end{align}
+with $k$ as the wave vector, $\omega$ as the angular frequency, and $\epsilon_0$ as the permittivity of vacuum.
+
+
 \subsection{Plane parallel layer}
 The investigated semiconductor samples can in first approximation be described as a plane parallel 
 layer \ref{fig:fabry-perot} with a thickness $d$ and refractive index $N_2$ which acts like a fabry-perot interferometer.
@@ -38,12 +56,19 @@ The difference between the maxima of the modulation can be calculated with:
 \begin{align}
     \Delta \nu = \nu_{\text{m+1}}-\nu_{\text{m}} = \frac{1}{2dN_2} \label{eq:delta_nu}
 \end{align}
-The refractive index $N_2$ can be calculated either with equation \ref{eq:delta_nu} or with
+
+\subsection{Optical properties}
+The refractive index $N$:
 \begin{align}
-    N_2 = \sqrt{\epsilon} \label{eq:nu}
+    N(\omega) = n(\omega) + i\kappa(\omega) \label{eq:refractive_index}
 \end{align}
-using the square root of the dielectric function $\epsilon$ of the material.
-The dielectric function $\epsilon$ is described in the drude model as:
+consists of a real part $n$ and an imaginary part $\kappa$ and is related to the dielectric function $\epsilon$:
+\begin{align}
+    \epsilon = N^2 = n^2 - \kappa^2 + 2i n \kappa \label{eq:epsilon}
+\end{align}
+\subsection{Drude model}
+The drude model is a classical model in which the electrons in a solid are treated as a gas of free particles.
+In this model the dielectric function $\epsilon$ can be described as:
 \begin{align}
     \epsilon = 1-\frac{\omega^2_\text{p}\tau^2}{1+\omega^2\tau^2}+i\frac{\omega^2_\text{p}\tau}{\omega(1+\omega^2\tau^2)}
 \end{align}
@@ -53,7 +78,24 @@ with $\omega_\text{p}$ as the plasma frequency:
 \end{align}
 and $\tau$ as the relaxation time of the electrons. 
 $m^*$ is the effective mass of the electrons and $N_\text{e}$ the charge carrier density.
+At the plasma frequency $\omega_\text{p}$ the real part of the refractive index becomes 
+nearly zero $n(\omega_p)\approx0$ and therefore the phase velocity and wavelength diverge. 
+This means that all electrons are oscillating in phase. Absorption of light is not possible for
+frequencies below the plasma frequency. 
 \\
+\subsection{Semiconductors}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Bandgap_theory.png}
+    \caption{a) direct and b) indirect semiconductor bandgap. If a photon is absorped by a valence electron
+    the excitation to the conduction band is for the indirect bandgap only possible with an additional phonon
+    absorption or emission process.\cite{Anleitung}}
+    \label{fig:bandgap}
+\end{figure}
+While metals are described properly with the drude model, for semiconductors the bandgap has to be considered additionally.
+Like shown in \ref{fig:bandgap} the bandgap of a semiconductor can be direct or indirect. To ensure 
+energy and momentum conservation, the excitation of a valence electron to the conduction band for a 
+indirect bandgap is only possible with an additional phonon absorption or emission process.\\
 For semiconductors, $\epsilon_\text{sem}$ can be calculated as:
 \begin{align}
     \epsilon_\text{sem} = \epsilon_\text{LP} + i\frac{\sigma}{\omega\epsilon_0} \label{eq:epsilon_semiconductor}
