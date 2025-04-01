@@ -19,7 +19,6 @@ def plot_data(data):
     x_values = [point[0] for point in data]
     y_values = [point[1] for point in data]
     
-
     plt.plot(x_values, y_values, '-', linewidth=0.3)  # Plot as single points
     plt.grid(True)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
@@ -38,9 +37,9 @@ def save_and_open(title="foo", filename="foo"):
 #plt.ylabel('Transmission T')
 
 
-filepathbeginning = './SolidStateOptics/RawData/'
-file1 = './SolidStateOptics/RawData/Reflection_ex4/refl_GaAs_doped_res4_N50_normalized.DPT'
+#filepathbeginning = './SolidStateOptics/RawData/'
+#file1 = './SolidStateOptics/RawData/Reflection_ex4/refl_GaAs_doped_res4_N50_normalized.DPT'
 
 
-plot_data(read_dpt_file(file1))
-save_and_open()
+#plot_data(read_dpt_file(file1))
+#save_and_open()
