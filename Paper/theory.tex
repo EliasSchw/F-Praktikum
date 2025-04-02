@@ -90,12 +90,6 @@ to a expression including the lattice contribution of the material $\epsilon_\te
 \begin{align}
     \epsilon_\text{sem} = \epsilon_\text{LC} + i\frac{\sigma}{\omega\epsilon_0}. \label{eq:epsilon_semiconductor}
 \end{align}
-The lattice contribution is described as:
-\begin{align}
-    \epsilon_\text{LP} = \epsilon_\infty(1+\frac{\omega^2_\text{LO}-\omega^2_\text{TO}}{\omega^2_\text{TO}-\omega^2-i\Gamma\omega}) \label{eq:epsilon_LP}
-\end{align}
-with $\epsilon_\infty$ as the high frequency dielectric constant, $\omega_\text{LO}$ as the longitudinal optical phonon frequency,
-$\omega_\text{TO}$ as the transversal optical phonon frequency and $\Gamma$ as the damping constant.
 For metals the lattice contribution is set to one $\epsilon_\text{LC}=1$ as the electrons are considered
 to be a free electron gas.
 Using equations \ref{eq:epsilon_drude} and \ref{eq:epsilon} the theoretical reflectivity of a metal
@@ -124,4 +118,14 @@ to be considered additionally.
 Like shown in \ref{fig:bandgap} the bandgap of a semiconductor can be direct or indirect. To ensure 
 energy and momentum conservation, the excitation of a valence electron to the conduction band for a 
 indirect bandgap is only possible with an additional phonon absorption or emission process.
-
+For materials with a dielectric constant $\epsilon_\text{r}>1$, for example semiconductors because of
+the inter band excitation, the plasma frequency is adjusted to:
+\begin{align}
+    \omega_\text{psem} = \sqrt{\frac{N_\text{e}e^2}{\epsilon_\text{r}\epsilon_0m^*}} \label{eq:omega_p_semiconductor}
+\end{align}
+Furthermore, the lattice contribution $\epsilon_\text{LC}$ is not equal to one, but given by:
+\begin{align}
+    \epsilon_\text{LC} = \epsilon_\infty(1+\frac{\omega^2_\text{LO}-\omega^2_\text{TO}}{\omega^2_\text{TO}-\omega^2-i\Gamma\omega}) \label{eq:epsilon_LP}
+\end{align}
+with $\epsilon_\infty$ as the high frequency dielectric constant, $\omega_\text{LO}$ as the longitudinal optical phonon frequency,
+$\omega_\text{TO}$ as the transversal optical phonon frequency and $\Gamma$ as the damping constant.
