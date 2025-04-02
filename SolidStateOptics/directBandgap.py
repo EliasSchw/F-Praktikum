@@ -4,6 +4,7 @@ from DataReader import read_dpt_file
 import numpy as np
 import scipy.constants as const
 from scipy.optimize import fsolve
+from Glätteisen import bügeln
 
 e = const.e  # Elementary charge in Coulombs
 hbar = const.hbar  # Reduced Planck's constant in J.s
@@ -49,10 +50,14 @@ transmission = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_
 
 
 beta = []
-for i in calculate_beta_and_R(reflection, transmission):
+beta2 = []
+for i in calculate_beta_and_R(bügeln(reflection, 0.1), bügeln(transmission, 0.1)):
     beta.append([i[0], i[1]])
-
 plot_data(beta)
+for i in calculate_beta_and_R(reflection,transmission):
+    beta2.append([i[0], i[1]])
+
+plot_data(bügeln(beta, 0.8))
 save_and_open("foo")
 
 
