@@ -2,10 +2,9 @@ import numpy as np
 import scipy.constants as const
 import matplotlib.pyplot as plt
 
-
 import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
-from macroswriter import writeLatexMacro  # Import macroswriter module
+#from macroswriter import writeLatexMacro  # Import macroswriter module
 
 # Konstanten
 e = const.e
@@ -21,7 +20,7 @@ c=const.c
 d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
 k_max_semicon = 1400000
-epsilon_inf = 10.3648
+epsilon_inf = 3.22**2
 omega_LO = 292*100 
 omega_TO = 268*100 
 gamma = 2.5*100
@@ -29,7 +28,7 @@ N_DichteSemicon = 1.05*10**24
 m_eff_Semicon = 0.067*const.m_e
 
 
-
+'''
 def calculateReflectivity(d, tau, k):
     omega = c*k
     omega_p = np.sqrt(N_Dichte*e**2/(m_eff*epsilon_0))
@@ -79,7 +78,7 @@ plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max)
 
 
 writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
-
+'''
 #Lukas
 
 def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
@@ -87,10 +86,11 @@ def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d
     epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
     sigma = (N_DichteSemicon * e**2 * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
     epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
-    N_S = np.sqrt(epsilon)
-    expo = 1j * 2 * omega * N_S * d / c
-    r = (np.exp(expo) - 1) * (1 - N_S) / (np.exp(expo) * (1 - N_S) - (1 + N_S))
-    R_S = np.abs(r)**2  # Normierung entfernt
+    kappa = np.imag(np.sqrt(epsilon))
+    n = np.real(np.sqrt(epsilon))
+    beta = 4*np.pi*kappa*omega
+    rh = np.abs((np.sqrt(epsilon)-1)/(np.sqrt(epsilon)+1))**2
+    R_S = rh*(1+np.exp(-2*beta*d)-2*rh*np.exp(-2*beta*d)/(1-(rh**2)*np.exp(-2*beta*d)))
     return R_S
 
 # Berechnung der Plasmafrequenz und des zugehörigen Wellenvektors für den Halbleiter-Plot
@@ -127,50 +127,7 @@ Image.open("Paper/Images/semi.png").show()
 plt.clf()
 
 
-writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
+#writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
 
-#Lukas
+#Veränderter code mithilfe des nb
 
-def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
-    omega = c * k
-    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
-    sigma = (N_DichteSemicon * e**2 * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
-    epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
-    N_S = np.sqrt(epsilon)
-    expo = 1j * 2 * omega * N_S * d / c
-    r = (np.exp(expo) - 1) * (1 - N_S) / (np.exp(expo) * (1 - N_S) - (1 + N_S))
-    R_S = np.abs(r)**2  # Normierung entfernt
-    return R_S
-
-# Berechnung der Plasmafrequenz und des zugehörigen Wellenvektors für den Halbleiter-Plot
-omega_plasma_semicon = np.sqrt(N_DichteSemicon * e**2 / (m_eff_Semicon * epsilon_0))
-k_plasma_semicon = omega_plasma_semicon / c
-
-# Entfernen der Plasmafrequenzberechnung und der vertikalen Linie aus dem zweiten Plot
-k = np.linspace(1, k_max_semicon, 50000)  # Startwert auf 0.1 gesetzt, höhere Auflösung
-
-taus = [tau1, tau2, tau3, tau4]
-for tau in taus:
-    R_S = calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau)
-    # Überprüfung, ob R_S gültige Werte enthält
-    if np.all(np.isnan(R_S)) or np.all(R_S == 0):
-        print(f"Warnung: Alle Werte von R_S für τ={tau} sind ungültig oder Null.")
-    else:
-        plt.plot(k, R_S, label=f'τ={tau*1e12:.4f} ps')
-
-# Vertikale gestrichelte Linie bei k_plasma_semicon
-plt.axvline(x=k_plasma_semicon, color='black', linestyle='--', label=r'$k_{plasma}$')
-
-# Achsentitel, Legende und Speichern
-plt.xlabel('wave number k / ' + r'$m^{-1}$')
-plt.ylabel('reflectivity R')
-plt.title('Theoretical reflectivity of a semiconductor')
-plt.legend()
-plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
-plt.xlim(left=0, right=k_max_semicon)
-plt.ylim(bottom=0, top=1)
-
-plt.savefig('Paper/Images/semi.png', dpi=400)
-from PIL import Image
-Image.open("Paper/Images/semi.png").show()
-plt.clf()

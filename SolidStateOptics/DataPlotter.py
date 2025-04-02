@@ -24,9 +24,9 @@ def plot_data(data):
 
 def save_and_open(filename="foo", title=""):
     plt.title(title)
-    plt.savefig('Paper\\Images\\'+filename + '.png', dpi=600)
+    plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
-    Image.open("Paper\\Images\\"+filename + ".png").show()
+    Image.open(".\\Paper\\Images\\"+filename + ".png").show()
     plt.clf()
 
 

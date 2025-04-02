@@ -20,4 +20,4 @@ plot_data(read_dpt_file(filepathNormalized))
 plt.xlabel('wave number k / ' + r'$cm^{-1}$')
 plt.ylabel('Transmission T')
 
-save_and_open("foo")
+save_and_open("GasAbsorption")
