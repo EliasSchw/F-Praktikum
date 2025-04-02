@@ -17,7 +17,7 @@ def read_dpt_file(filepath):
                 values.append((value1, value2))
         return values
     except FileNotFoundError:
-        print(f"Error: File not found at {filepath}")
+        print(f"!!!!!!!!!!!!Error!!!!!!!!!!!!!!: File not found at {filepath}")
         return None
     except Exception as e:
         print(f"An error occurred: {e}")
