@@ -21,9 +21,9 @@ d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
 k_max_semicon = 1400000
 epsilon_inf = 3.22**2
-omega_LO = 292*100 
-omega_TO = 268*100 
-gamma = 2.5*100
+omega_LO = 292
+omega_TO = 268
+gamma = 2.5
 N_DichteSemicon = 1.05*10**24 
 m_eff_Semicon = 0.067*const.m_e
 
@@ -130,4 +130,14 @@ plt.clf()
 #writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
 
 #Veränderter code mithilfe des nb
-
+def calculateReflectivitySemiconductor(omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
+    omega = c * k
+    epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
+    sigma = (N_DichteSemicon * e**2 * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
+    epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
+    kappa = np.imag(np.sqrt(epsilon))
+    n = np.real(np.sqrt(epsilon))
+    beta = 4*np.pi*kappa*omega
+    rh = np.abs((np.sqrt(epsilon)-1)/(np.sqrt(epsilon)+1))**2
+    R_S = rh*(1+np.exp(-2*beta*d)-2*rh*np.exp(-2*beta*d)/(1-(rh**2)*np.exp(-2*beta*d)))
+    return R_S
