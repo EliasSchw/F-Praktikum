@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  1 APR 2025 17:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  2 APR 2025 11:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -452,25 +452,46 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 78--86
 
- []
+LaTeX Warning: Reference `eq:epsilon_drude' on page 2 undefined on input line 101.
 
-<Images/Bandgap_theory.png, id=17, 615.2586pt x 255.8358pt>
-File: Images/Bandgap_theory.png Graphic file (type png)
-<use Images/Bandgap_theory.png>
-Package pdftex.def Info: Images/Bandgap_theory.png  used on input line 89.
-(pdftex.def)             Requested size: 242.73761pt x 100.93497pt.
+<Images/foo.png, id=17, 462.528pt x 346.896pt>
+File: Images/foo.png Graphic file (type png)
+<use Images/foo.png>
+Package pdftex.def Info: Images/foo.png  used on input line 105.
+(pdftex.def)             Requested size: 242.73761pt x 182.0543pt.
 
-Overfull \hbox (12.5pt too wide) in paragraph at lines 89--92
+Overfull \hbox (12.5pt too wide) in paragraph at lines 105--107
  [][] 
  []
 
-[2 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/fabry-perot.png> </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png>]) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex) 
-AED: lastpage setting LastPage
-[3
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 96--113
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Images/Bandgap_theory.png, id=18, 615.2586pt x 255.8358pt>
+File: Images/Bandgap_theory.png Graphic file (type png)
+<use Images/Bandgap_theory.png>
+Package pdftex.def Info: Images/Bandgap_theory.png  used on input line 116.
+(pdftex.def)             Requested size: 242.73761pt x 100.93497pt.
+
+Overfull \hbox (12.5pt too wide) in paragraph at lines 116--119
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/fabry-perot.png>]) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+) 
+AED: lastpage setting LastPage
+[3 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png> </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png>]
 
 LaTeX3 Info: Redefining command \BeforeClosingMainAux with sig. 'm' on line
 (LaTeX3)     64.
@@ -485,18 +506,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 7002 strings out of 478994
- 132071 string characters out of 5858183
- 552168 words of memory out of 5000000
- 24378 multiletter control sequences out of 15000+600000
- 438030 words of font info for 93 fonts, out of 8000000 for 9000
+ 7020 strings out of 478994
+ 132285 string characters out of 5858183
+ 557185 words of memory out of 5000000
+ 24388 multiletter control sequences out of 15000+600000
+ 442973 words of font info for 101 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 111i,12n,116p,10644b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 111i,12n,116p,10644b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (3 pages, 532275 bytes).
+Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (3 pages, 1039310 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
+ 93 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

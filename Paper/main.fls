@@ -487,6 +487,13 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer7.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer5.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aeb10.tfm
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png
+INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aer6.tfm
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png
@@ -503,6 +510,11 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aer7.vf
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aeb10.vf
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmb10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex
@@ -526,6 +538,9 @@ INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/ae/aeti10.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aer6.vf
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/vf/public/ae/aeti10.vf
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.aux
 INPUT /Users/lukashein/Desktop/F-Praktikum-2/Paper/abstract.aux
