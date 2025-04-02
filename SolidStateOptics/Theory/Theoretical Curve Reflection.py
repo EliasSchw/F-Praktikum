@@ -20,7 +20,7 @@ c=const.c
 d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
 k_max_semicon = 1400000
-epsilon_inf = 10.3648
+epsilon_inf = 3.22**2
 omega_LO = 292*100 
 omega_TO = 268*100 
 gamma = 2.5*100
@@ -28,7 +28,7 @@ N_DichteSemicon = 1.05*10**24
 m_eff_Semicon = 0.067*const.m_e
 
 
-
+'''
 def calculateReflectivity(d, tau, k):
     omega = c*k
     omega_p = np.sqrt(N_Dichte*e**2/(m_eff*epsilon_0))
@@ -78,7 +78,7 @@ plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max)
 
 
 writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
-
+'''
 #Lukas
 
 def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
@@ -86,10 +86,11 @@ def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d
     epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
     sigma = (N_DichteSemicon * e**2 * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
     epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
-    N_S = np.sqrt(epsilon)
-    expo = 1j * 2 * omega * N_S * d / c
-    r = (np.exp(expo) - 1) * (1 - N_S) / (np.exp(expo) * (1 - N_S) - (1 + N_S))
-    R_S = np.abs(r)**2  # Normierung entfernt
+    kappa = np.imag(np.sqrt(epsilon))
+    n = np.real(np.sqrt(epsilon))
+    beta = 4*np.pi*kappa*omega
+    rh = np.abs((np.sqrt(epsilon)-1)/(np.sqrt(epsilon)+1))**2
+    R_S = rh*(1+np.exp(-2*beta*d)-2*rh*np.exp(-2*beta*d)/(1-(rh**2)*np.exp(-2*beta*d)))
     return R_S
 
 # Berechnung der Plasmafrequenz und des zugehörigen Wellenvektors für den Halbleiter-Plot
@@ -127,3 +128,6 @@ plt.clf()
 
 
 #writeLatexMacro('N_Dichte',np.round(N_Dichte,4))
+
+#Veränderter code mithilfe des nb
+
