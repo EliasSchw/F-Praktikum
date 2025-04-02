@@ -88,7 +88,7 @@ Eq.\,\ref{eq:epsilonDrude} can be simplified through the introduction of the hig
 \end{align}
 to a expression including the lattice contribution of the material $\epsilon_\text{LC}$:
 \begin{align}
-    \epsilon_\text{sem} = \epsilon_\text{LC} + i\frac{\sigma}{\omega\epsilon_0}. \label{eq:epsilon_semiconductor}
+    \epsilon = \epsilon_\text{LC} + i\frac{\sigma}{\omega\epsilon_0}. \label{eq:epsilon_semiconductor}
 \end{align}
 For metals the lattice contribution is set to one $\epsilon_\text{LC}=1$ as the electrons are considered
 to be a free electron gas.
@@ -96,14 +96,14 @@ Using equations \ref{eq:epsilon_drude} and \ref{eq:epsilon} the theoretical refl
 can be calculated. The result is shown in fig:\,\ref{fig:reflectivity}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/foo.png}
+    \includegraphics[width=0.5\textwidth]{Images/FabryPerotReflectivity.png}
     \caption{Theoretical reflectivity of a metal according to the drude model. The reflectivity is reduced
     significantly for wavenumbers above $k_\text{plasma}$}
     \label{fig:reflectivity}
 \end{figure}
 For frequencies below the plasma frequency the reflectivity is nearly one. However, if the frequency 
 of the light is larger than the plasma frequency, the reflectivity is significantly reduced.
-\\
+\newpage
 \subsection{Semiconductors}
 While metals are described properly with the drude model, for semiconductors the bandgap has 
 to be considered additionally.
@@ -118,14 +118,30 @@ to be considered additionally.
 Like shown in \ref{fig:bandgap} the bandgap of a semiconductor can be direct or indirect. To ensure 
 energy and momentum conservation, the excitation of a valence electron to the conduction band for a 
 indirect bandgap is only possible with an additional phonon absorption or emission process.
-For materials with a dielectric constant $\epsilon_\text{r}>1$, for example semiconductors because of
-the inter band excitation, the plasma frequency is adjusted to:
-\begin{align}
-    \omega_\text{psem} = \sqrt{\frac{N_\text{e}e^2}{\epsilon_\text{r}\epsilon_0m^*}} \label{eq:omega_p_semiconductor}
-\end{align}
-Furthermore, the lattice contribution $\epsilon_\text{LC}$ is not equal to one, but given by:
+Electro magnetic waves are able to polarize the lattice of the semiconductor.¿nahe am AP?
+This leads to a change in the lattice contribution $\epsilon_\text{LC}$ of the dielectric function:
 \begin{align}
     \epsilon_\text{LC} = \epsilon_\infty(1+\frac{\omega^2_\text{LO}-\omega^2_\text{TO}}{\omega^2_\text{TO}-\omega^2-i\Gamma\omega}) \label{eq:epsilon_LP}
 \end{align}
 with $\epsilon_\infty$ as the high frequency dielectric constant, $\omega_\text{LO}$ as the longitudinal optical phonon frequency,
-$\omega_\text{TO}$ as the transversal optical phonon frequency and $\Gamma$ as the damping constant.
+$\omega_\text{TO}$ as the transversal optical phonon frequency and $\Gamma$ as the damping constant. 
+Together with eq.\,\ref{eq:epsilon_semiconductor} the theoretical reflectivity of a semiconductor can be
+calculated as shown in fig.\,\ref{fig:reflectivity_semiconductor}.
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{Images/semi.png}
+    \caption{Theoretical reflectivity considering the drude model and polarization effects. 
+    }
+    \label{fig:reflectivity_semiconductor}
+\end{figure}
+For high frequencies the characteristic of the band gap needs to be considered, as inter band excitation
+processes are possible. For a direct bandgap the imaginary part of the dielectric function is described with:
+\begin{align}
+    \epsilon^{''}_d = \frac{e^2(2\mu)^{\frac{3}{2}}|p_\text{cv}|^2}{h\epsilon_0m_\text{e}^2(\hbar\omega)^2}\sqrt{\hbar\omega-E_\text{g}} \label{eq:epsilon_d}
+\end{align}
+and for an indirect bandgap with:
+\begin{align}
+    \epsilon^{''}_id \propto (\hbar\omega\pm\hbar\Omega_\text{ph}-E_\text{g}) \label{eq:epsilon_id}
+\end{align}
+for $\hbar\omega \geq E_\text{g}\pm\hbar\Omega$. 
+$|p_\text{cv}|$ is the pulse matrix element of the interband transition, $\mu$ is the reduced mass of the electron-hole pair,
+$E_\text{g}$ is the bandgap energy, $\Omega_\text{ph}$ is the phonon resonance frequency and $m_\text{e}$ is the effective mass of the electron.

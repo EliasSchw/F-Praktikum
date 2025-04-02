@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  2 APR 2025 12:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.10.24)  2 APR 2025 14:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -455,10 +455,10 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: Reference `eq:epsilon_drude' on page 2 undefined on input line 95.
 
-<Images/foo.png, id=17, 462.528pt x 346.896pt>
-File: Images/foo.png Graphic file (type png)
-<use Images/foo.png>
-Package pdftex.def Info: Images/foo.png  used on input line 99.
+<Images/FabryPerotReflectivity.png, id=17, 462.528pt x 346.896pt>
+File: Images/FabryPerotReflectivity.png Graphic file (type png)
+<use Images/FabryPerotReflectivity.png>
+Package pdftex.def Info: Images/FabryPerotReflectivity.png  used on input line 99.
 (pdftex.def)             Requested size: 242.73761pt x 182.0543pt.
 
 Overfull \hbox (12.5pt too wide) in paragraph at lines 99--101
@@ -466,14 +466,10 @@ Overfull \hbox (12.5pt too wide) in paragraph at lines 99--101
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--107
-
- []
-
-
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/Bandgap_theory.png, id=18, 615.2586pt x 255.8358pt>
+[2 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/fabry-perot.png>]
+<Images/Bandgap_theory.png, id=30, 615.2586pt x 255.8358pt>
 File: Images/Bandgap_theory.png Graphic file (type png)
 <use Images/Bandgap_theory.png>
 Package pdftex.def Info: Images/Bandgap_theory.png  used on input line 112.
@@ -483,12 +479,19 @@ Overfull \hbox (12.5pt too wide) in paragraph at lines 112--115
  [][] 
  []
 
+<Images/semi.png, id=31, 462.528pt x 346.896pt>
+File: Images/semi.png Graphic file (type png)
+<use Images/semi.png>
+Package pdftex.def Info: Images/semi.png  used on input line 131.
+(pdftex.def)             Requested size: 242.73761pt x 182.0543pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Overfull \hbox (12.5pt too wide) in paragraph at lines 131--133
+[][] 
+ []
 
-[2 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/fabry-perot.png>]) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex) 
+) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/Set-Up.tex) (/Users/lukashein/Desktop/F-Praktikum-2/Paper/bibliography.tex) 
 AED: lastpage setting LastPage
-[3 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/foo.png> </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png>]
+[3 </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/FabryPerotReflectivity.png> </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/Bandgap_theory.png> </Users/lukashein/Desktop/F-Praktikum-2/Paper/Images/semi.png>]
 
 LaTeX3 Info: Redefining command \BeforeClosingMainAux with sig. 'm' on line
 (LaTeX3)     64.
@@ -503,18 +506,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 7021 strings out of 478994
- 132311 string characters out of 5858183
- 556194 words of memory out of 5000000
- 24389 multiletter control sequences out of 15000+600000
+ 7029 strings out of 478994
+ 132562 string characters out of 5858183
+ 554211 words of memory out of 5000000
+ 24396 multiletter control sequences out of 15000+600000
  442973 words of font info for 101 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  111i,12n,116p,10644b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (3 pages, 1039986 bytes).
+</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on /Users/lukashein/Desktop/F-Praktikum-2/Paper/main.pdf (3 pages, 1230679 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 103 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
