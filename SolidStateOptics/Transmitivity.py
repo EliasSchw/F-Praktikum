@@ -1,8 +1,13 @@
-from SolidStateOptics.DataPlotter import plot_data, save_and_open
-from SolidStateOptics.DataReader import read_dpt_file
+from DataPlotter import plot_data, save_and_open
+from DataReader import read_dpt_file
 
-filepathbeginning = './SolidStateOptics/RawData/'
-file1 = 'Reflection_ex4/refl_GaAs_doped_res4_N50_normalized.DPT'
 
-plot_data(read_dpt_file(file1))
+file1 = r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_doped_res03_N50_new_normalized.DPT'
+
+ausschnitt = []
+for s in read_dpt_file(file1):
+    if s[0] > 2000 and s[0] < 2200:
+        ausschnitt.append([s[0], s[1]])
+
+plot_data(ausschnitt)
 save_and_open()
