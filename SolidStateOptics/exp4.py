@@ -4,7 +4,7 @@ from DataReader import read_dpt_file
 import numpy as np
 import scipy.constants as const
 from scipy.optimize import fsolve
-from Frauen import bügeln
+from Frauen import bügeln, average_filter
 
 
 e = const.e  # Elementary charge in Coulombs
@@ -58,7 +58,7 @@ def calculate_kappa(ReflectionData, TransmissionData):
         k_kappa_R_List.append([i[0], i[1]/(2*i[0]*100), i[2]]) # 100 wegen cm^-1
     return k_kappa_R_List
 
-def calculate_k_n1_n2(ReflectionData, TransmissionData):
+def calculate_k_n1_kappa(ReflectionData, TransmissionData):
     k_kappa_R_List = calculate_kappa(ReflectionData, TransmissionData)
     n = []
     for i in k_kappa_R_List:
@@ -67,26 +67,60 @@ def calculate_k_n1_n2(ReflectionData, TransmissionData):
         n1 = (1+R+np.sqrt(-k**2-R**2*k**2+2*R*(2+k**2)))/(1-R)
         n2 = (-1-R+np.sqrt(-k**2-R**2*k**2+2*R*(2+k**2)))/(R-1)
                 
-        n.append([i[0], n1,n2])
+        n.append([i[0], n1,i[1]])
     return n
 
+def plot_the_ns(glättwert=0.02):
+    plt.figure()
+    for reflection, transmission, label in samplesOhneSiUn:
+        n = []
+        for i in calculate_k_n1_kappa(reflection, transmission):
+            n.append([i[0], i[1]])
+        plot_data(bügeln(n, glättwert), label=label)
+    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+    plt.ylabel('n')
+    save_and_open('RefractiveIndicesSmooth')
+    
+    
+def plot_the_betas():
+    plt.figure()
+    for reflection, transmission, label in samplesOhneSiUn:
+        beta = []
+        for i in calculate_beta_and_R(reflection, transmission):
+            beta.append([i[0], i[1]])
+        plot_data(beta, label=label)
+        plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+        plt.ylabel('beta')
+
+    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+    plt.ylabel('beta')
+    save_and_open('foo')
+    
+    
+def calculate_k_epsilon_2(reflection, transmission):
+    k_n_kappa = calculate_k_n1_kappa(reflection, transmission)
+    epsilon_2 = []
+    for i in k_n_kappa:
+        n = i[1]
+        kappa = i[2]
+        epsilon_2.append([i[0], 2*n*kappa])
+    return epsilon_2
 
 
-def plotKomischeFunktion():
-    read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_doped_res03_N50_new_normalized.DPT')
+def plotKomischeFunktion(reflection, transmission, glättwert):
+    
+    k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission)
     
     komischeFunktion = []
-    for s, r in zip(dataSample, dataReference):
-        komischeFunktion.append([s[0], s[1] / r[1]])
+    for k, epsilon_2 in k_epsilon_2:
+        komischeFunktion.append([k, (epsilon_2*c**2*k**2)**2])
     
-    plot_data()
+    plot_data(bügeln(komischeFunktion, glättwert))
     plt.xlabel('wave number k / ' + r'$cm^{-1}$')    
     save_and_open("foo")
     
-    
-    
-    
-    
+        
+
 
 reflectionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_doped_res4_N50_normalized.DPT')
 transmissionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_doped_res4_N50_normalized.DPT')
@@ -117,20 +151,6 @@ samplesOhneSiUn = [
 # save_and_open("foo")
 
 
-def plot_the_betas():
-    plt.figure()
-    for reflection, transmission, label in samplesOhneSiUn:
-        beta = []
-        for i in calculate_beta_and_R(reflection, transmission):
-            beta.append([i[0], i[1]])
-        plot_data(beta, label=label)
-        plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-        plt.ylabel('beta')
-
-    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-    plt.ylabel('beta')
-    save_and_open('foo')
-
 
 #plot_the_betas()
 
@@ -142,22 +162,10 @@ def plot_the_betas():
 # plt.ylabel('kappa')
 # save_and_open('foo')
 
-def plot_the_ns():
-    plt.figure()
-    for reflection, transmission, label in samplesOhneSiUn:
-        n = []
-        for i in calculate_k_n1_n2(reflection, transmission):
-            n.append([i[0], i[1]])
-        plot_data(bügeln(n, 0.1), label=label)
-    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-    plt.ylabel('n')
-    save_and_open('foo')
 
-plot_the_ns()
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01)
+plot_the_ns(0.005)
 
 
 
-
-
-#print(calculate_k_n1_n2([[1,0.3]],[[1,0.3]]))
 
