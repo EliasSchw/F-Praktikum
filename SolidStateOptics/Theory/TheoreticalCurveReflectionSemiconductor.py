@@ -9,10 +9,10 @@ e = const.e
 m_eff = 1*const.m_e
 epsilon_0 = 1.66818
 N_Dichte = 5.9*10**28
-tau1 = 0.01
-tau2 = 0.001
-tau3 = 0.0001
-tau4 = 0.00001
+tau1 = 0.1
+tau2 = 0.01
+tau3 = 0.001
+tau4 = 0.0001
 c=const.c
 d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
@@ -27,7 +27,7 @@ esquared = 28202.2
 
 
 def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
-    omega = k  # k wird korrekt verwendet
+    omega = k  
     epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))
     sigma = (N_DichteSemicon * esquared * tau) / (m_eff_Semicon) * (1 / (1 - 1j * omega * tau))
     epsilon = epsilon_S + 1j * sigma / (omega * epsilon_0)
