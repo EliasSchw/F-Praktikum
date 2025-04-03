@@ -69,6 +69,7 @@ consists of a real part $n$ and an imaginary part $\kappa$ and is related to the
 \end{align}
 
 
+
 \subsection{Drude model}
 The drude model is a classical model in which the electrons in a solid are treated as a gas of free particles.
 In this model the dielectric function $\epsilon$ can be described as:
@@ -95,8 +96,9 @@ to a expression including the lattice contribution of the material $\epsilon_\te
 \end{align}
 For metals the lattice contribution is set to one $\epsilon_\text{LC}=1$ as the electrons are considered
 to be a free electron gas.
-Using equations \ref{eq:epsilon_drude} and \ref{eq:epsilon} the theoretical reflectivity of a metal
-can be calculated. The result is shown in fig:\,\ref{fig:reflectivity}.
+Using equations \ref{eq:epsilon},\ref{eq:epsilonDrude} and \ref{eq:omega_p} with 
+the effective mass $m^* = m_\text{e}$ equal to the electron mass, the theoretical reflectivity of a metal
+can be calculated. The result is shown in fig\,\ref{fig:reflectivity}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/FabryPerotReflectivity.png}
@@ -104,6 +106,21 @@ can be calculated. The result is shown in fig:\,\ref{fig:reflectivity}.
     significantly for wavenumbers above $k_\text{plasma}$}
     \label{fig:reflectivity}
 \end{figure}
+The used constants for the theoretical reflection of a metal are listed in table\,\ref{tab:metalConstants}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        charge carrier density $N_\text{e}$ & $5.9\cdot10^{28}\,\text{m}^{-3}$ \\ \hline
+        electron mass $m_\text{e}$  & $9.11\cdot10^{-31}\,\text{kg}$   \\ \hline
+        layer thickness $d$   & $500\,\mu\text{m}$   \\ \hline\hline
+    \end{tabular}
+    \caption{Constants used for the calculation of the theoretical reflectivity of a metal, shown in
+    fig\,\ref{fig:reflectivity}. The charge carrier Density is taken from \cite{Mathematica}}
+    \label{tab:metalConstants}
+\end{table}
+
+
 For frequencies below the plasma frequency the reflectivity is nearly one. However, if the frequency 
 of the light is larger than the plasma frequency, the reflectivity is significantly reduced.
 \newpage
@@ -138,6 +155,24 @@ calculated as shown in fig.\,\ref{fig:reflectivity_semiconductor}.
     }
     \label{fig:reflectivity_semiconductor}
 \end{figure}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        charge carrier density $N_\text{sc}$ & $1.05\cdot10^{24}\,\text{m}^{-3}$ \\ \hline
+        effective mass $m_\text{eff}$  & $0.063\cdot m_\text{e}$   \\ \hline
+        layer thickness $d$   & $500\,\mu\text{m}$   \\ \hline
+        damping constant $\Gamma$   & $250\,\text{m}^{-1}$   \\ \hline
+        l.o. phonon frequency $\omega_\text{lo}$   & $\hbar^{-1}10^{-3}\cdot36.1\,\text{meV}$   \\ \hline
+        t.o. phonon frequency $\omega_\text{to}$   & $\hbar^{-1}10^{-3}\cdot33.2\,\text{meV}$   \\ \hline
+        relative dielectric constant $\epsilon_\inf$ & $10.89$ \\ \hline\hline
+    \end{tabular}
+    \caption{Constants used for the calculation of the theoretical reflectivity of intrinsic GaAs, shown in
+    fig\,\ref{fig:reflectivity}. Constants are taken from \cite{ioffe}}
+    \label{tab:metalConstants}
+\end{table}
+
 For high frequencies the characteristic of the band gap needs to be considered, as inter band excitation
 processes are possible. For a direct bandgap the imaginary part of the dielectric function is described with:
 \begin{align}

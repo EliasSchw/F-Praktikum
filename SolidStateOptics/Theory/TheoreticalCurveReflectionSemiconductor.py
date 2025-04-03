@@ -26,6 +26,7 @@ m_eff_Semicon = 0.063
 esquared = 28202.2
 
 
+
 def calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau):
     omega = k  
     epsilon_S = epsilon_inf * (1 + (omega_LO**2 - omega_TO**2) / (omega_TO**2 - omega**2 - 1j * omega * gamma))

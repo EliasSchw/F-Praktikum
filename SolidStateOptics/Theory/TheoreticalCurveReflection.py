@@ -10,6 +10,7 @@ sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
 e = const.e
 m_eff = 1*const.m_e
 epsilon_0 = const.epsilon_0
+print(const.m_e)
 N_Dichte = 5.9*10**28
 tau1 = 0.1*10**-12
 tau2 = 0.01*10**-12
