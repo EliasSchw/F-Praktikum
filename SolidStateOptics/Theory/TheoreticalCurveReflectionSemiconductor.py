@@ -9,20 +9,20 @@ e = const.e
 m_eff = 1*const.m_e
 epsilon_0 = 1.66818
 N_Dichte = 5.9*10**28
-tau1 = 0.1
-tau2 = 0.01
-tau3 = 0.001
-tau4 = 0.0001
+tau1 = 1
+tau2 = 0.1
+tau3 = 0.01
+tau4 = 0.001
 c=const.c
 d = 500*10**-5 #dicke si undoped
 k_max = 1*10**8
-k_max_semicon = 1500
+k_max_semicon = 1500000
 epsilon_r = 10.3648
 omega_LO = 292
 omega_TO = 268
 gamma = 2.5
 N_DichteSemicon = 1.05
-m_eff_Semicon = 0.067
+m_eff_Semicon = 0.063
 esquared = 28202.2
 
 
@@ -44,7 +44,7 @@ def calculateKPlasmaSemiconductor(N_DichteSemicon, esquared, m_eff_Semicon, epsi
     return k_plasma_semicon
 
 def plotReflectivitySemiconductor(d, tau1, tau2, tau3, tau4, k_max_semicon):
-    k = np.linspace(1, k_max_semicon, 50000)  # k wird hier definiert
+    k = np.linspace(0.1, k_max_semicon, 500000)  # k wird hier definiert
     k_plasma_semicon = calculateKPlasmaSemiconductor(N_DichteSemicon, esquared, m_eff_Semicon, epsilon_0, epsilon_r)
 
     taus = [tau1, tau2, tau3, tau4]
