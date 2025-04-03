@@ -38,9 +38,10 @@ def equations(vars, T_fabry_perot_value, R_fabry_perot_value):
 def calculate_beta_and_R(Reflection, Transmission):
     omega_beta_R_List = []
     for r, t in zip(Reflection, Transmission):
-        
         beta, R = fsolve(equations, initial_guess, args=(t[1], r[1]))
         omega_beta_R_List.append([r[0], beta, R])
+        if equations((beta, R), t[1], r[1])[0] + equations((beta, R), t[1], r[1])[1] > 0.001:
+            print('Für beta = ' + str(beta) + ' und R = ' + str(R) + ' ist die Lsg: ' + str(equations((beta, R), t[1], r[1])))
 
     return omega_beta_R_List
 
@@ -51,13 +52,12 @@ transmission = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_
 
 beta = []
 beta2 = []
-for i in calculate_beta_and_R(bügeln(reflection, 0.1), bügeln(transmission, 0.1)):
+for i in calculate_beta_and_R(bügeln(reflection, 1), bügeln(transmission, 1)):
     beta.append([i[0], i[1]])
 plot_data(beta)
-for i in calculate_beta_and_R(reflection,transmission):
-    beta2.append([i[0], i[1]])
-
-plot_data(bügeln(beta, 0.8))
+#for i in calculate_beta_and_R(reflection,transmission):
+#    beta2.append([i[0], i[1]])
+#plot_data(bügeln(beta2, 0.8))
 save_and_open("foo")
 
 
