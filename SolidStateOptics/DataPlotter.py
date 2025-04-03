@@ -5,7 +5,7 @@ from DataReader import read_dpt_file
 
 
 plt.figure(figsize=(10, 6))
-def plot_data(data):
+def plot_data(data, label=''):
     """
     Plots the data using matplotlib.
 
@@ -16,13 +16,14 @@ def plot_data(data):
     x_values = [point[0] for point in data]
     y_values = [point[1] for point in data]
     
-    plt.plot(x_values, y_values, '-', linewidth=0.3)  # Plot as single points
+    plt.plot(x_values, y_values, '-', linewidth=0.9, label=label)  # Plot as single points
     plt.grid(True)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
     plt.xlim(left=min(x_values), right=max(x_values))
 
 
 def save_and_open(filename="foo", title=""):
+    plt.legend()
     plt.title(title)
     plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
