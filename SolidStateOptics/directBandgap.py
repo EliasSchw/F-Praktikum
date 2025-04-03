@@ -38,10 +38,11 @@ def equations(vars, T_fabry_perot_value, R_fabry_perot_value):
 def calculate_beta_and_R(Reflection, Transmission):
     omega_beta_R_List = []
     for r, t in zip(Reflection, Transmission):
+        initial_guess = omega_beta_R_List[-1][1:] if omega_beta_R_List else [1, 1]  # Use last beta and R or default
         beta, R = fsolve(equations, initial_guess, args=(t[1], r[1]))
+        if beta < 200000:
+            beta = 10**7
         omega_beta_R_List.append([r[0], beta, R])
-        if equations((beta, R), t[1], r[1])[0] + equations((beta, R), t[1], r[1])[1] > 0.001:
-            print('Für beta = ' + str(beta) + ' und R = ' + str(R) + ' ist die Lsg: ' + str(equations((beta, R), t[1], r[1])))
 
     return omega_beta_R_List
 
@@ -75,5 +76,4 @@ def plotKomischeFunktion():
     save_and_open("foo")
     
 #plotKomischeFunktion()
-    
-    
+
