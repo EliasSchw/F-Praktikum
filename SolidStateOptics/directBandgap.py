@@ -55,10 +55,10 @@ def calculate_kappa(ReflectionData, TransmissionData):
     k_beta_R_List = calculate_beta_and_R(ReflectionData, TransmissionData)
     k_kappa_R_List = []
     for i in k_beta_R_List:
-        k_kappa_R_List.append([i[0], c*i[1]/(2*i[0]), i[2]])
+        k_kappa_R_List.append([i[0], i[1]/(2*i[0]*100), i[2]]) # 100 wegen cm^-1
     return k_kappa_R_List
 
-def calculate_n(ReflectionData, TransmissionData):
+def calculate_k_n1_n2(ReflectionData, TransmissionData):
     k_kappa_R_List = calculate_kappa(ReflectionData, TransmissionData)
     n = []
     for i in k_kappa_R_List:
@@ -134,21 +134,33 @@ def plot_the_betas():
     save_and_open('foo')
 
 
-plot_the_betas()
+#plot_the_betas()
 
-# plot_data(reflectionSiDo)
-# plt.ylabel("Reflection")
-# save_and_open("foo")
-# plot_data(transmissionSiDo)
-# plt.ylabel("Transmission")
-# save_and_open("foo")
+# kappa =[]
+# for i in calculate_kappa(reflectionGaAsDo, transmissionGaAsDo):
+#     kappa.append([i[0], i[1]])
+# plot_data(kappa)
+# plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+# plt.ylabel('kappa')
+# save_and_open('foo')
 
-# betasAndR = calculate_beta_and_R(reflectionSiDo, transmissionSiDo)
-# betas = []
-# for i in betasAndR:
-#     betas.append([i[0], i[2]])
 
-# plot_data(betas)
-# plt.ylabel("R")
-# save_and_open("foo")
+n1 =[]
+n2=[]
+for i in calculate_k_n1_n2(reflectionGaAsDo, transmissionGaAsDo):
+    n1.append([i[0], i[1]])
+plot_data(n1)
+for i in calculate_k_n1_n2(reflectionGaAsDo, transmissionGaAsDo):
+    n2.append([i[0], i[2]])
+plot_data(n2)
+plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+plt.ylabel('n1')
+save_and_open('foo')
+
+
+
+
+
+
+#print(calculate_k_n1_n2([[1,0.3]],[[1,0.3]]))
 
