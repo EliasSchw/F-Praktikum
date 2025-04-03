@@ -103,6 +103,12 @@ transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4
 reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_doped_res4_N50_normalized.DPT')
 transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
 
+samplesOhneSiUn = [
+        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped"),
+        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped"),
+        (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped"),
+        (reflectionSiUnDo, transmissionSiUnDo, "Si UnDoped")
+    ]
 
 # n1=[]
 # for i in calculate_n(reflection, transmission):
@@ -113,14 +119,7 @@ transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\S
 
 def plot_the_betas():
     plt.figure()
-    samples = [
-        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped"),
-        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped"),
-        (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped"),
-        (reflectionSiUnDo, transmissionSiUnDo, "Si UnDoped")
-    ]
-
-    for reflection, transmission, label in samples:
+    for reflection, transmission, label in samplesOhneSiUn:
         beta = []
         for i in calculate_beta_and_R(reflection, transmission):
             beta.append([i[0], i[1]])
@@ -128,7 +127,6 @@ def plot_the_betas():
         plt.xlabel('wave number k / ' + r'$cm^{-1}$')
         plt.ylabel('beta')
 
-    
     plt.xlabel('wave number k / ' + r'$cm^{-1}$')
     plt.ylabel('beta')
     save_and_open('foo')
@@ -144,19 +142,18 @@ def plot_the_betas():
 # plt.ylabel('kappa')
 # save_and_open('foo')
 
+def plot_the_ns():
+    plt.figure()
+    for reflection, transmission, label in samplesOhneSiUn:
+        n = []
+        for i in calculate_k_n1_n2(reflection, transmission):
+            n.append([i[0], i[1]])
+        plot_data(bügeln(n, 0.1), label=label)
+    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+    plt.ylabel('n')
+    save_and_open('foo')
 
-n1 =[]
-n2=[]
-for i in calculate_k_n1_n2(reflectionGaAsDo, transmissionGaAsDo):
-    n1.append([i[0], i[1]])
-plot_data(n1)
-for i in calculate_k_n1_n2(reflectionGaAsDo, transmissionGaAsDo):
-    n2.append([i[0], i[2]])
-plot_data(n2)
-plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-plt.ylabel('n1')
-save_and_open('foo')
-
+plot_the_ns()
 
 
 
