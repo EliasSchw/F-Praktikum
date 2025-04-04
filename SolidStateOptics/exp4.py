@@ -37,10 +37,11 @@ reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_
 transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
 
 samplesOhneSiUn = [
-        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped", 440*10**-6),
-        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6),
+    (reflectionSiUnDo, transmissionSiUnDo, "Si Undoped", 530*10**-6),
         (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped", 500*10**-6),
-        (reflectionSiUnDo, transmissionSiUnDo, "Si Undoped", 530*10**-6)
+        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6),
+        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped", 440*10**-6)
+        
     ]
 
 def T_fabry_perot(vars, T_fabry_perot_value, d):
@@ -112,6 +113,22 @@ def plot_the_betas(title="foo"):
 
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
     plt.ylabel(r'absorption coefficient $\beta$ / ' + r'$cm^{-1}$')
+    plt.legend()
+    save_and_open(filename=title)
+    
+    
+def plot_the_kappas(title="foo", glättwert = 1):
+    plt.figure()
+    for reflection, transmission, label, d in samplesOhneSiUn:
+        kappa = []
+        for i in calculate_kappa(bügeln(reflection, glättwert), bügeln(transmission,glättwert), d):
+            kappa.append([i[0], i[1]])
+        plot_data(kappa, label=label)
+        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+        plt.ylabel('kappa')
+
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+    plt.ylabel(r'absorption coefficient $\kappa$ / ' + r'$cm^{-1}$')
     plt.legend()
     save_and_open(filename=title)
     
@@ -188,35 +205,17 @@ def linear_regression(komischeFunktion):
 
 
 
+# plot_the_kappas(glättwert=0.9, title="kappa")
 
-# kappa =[]
-# for i in calculate_kappa(reflectionGaAsDo, transmissionGaAsDo):
-#     kappa.append([i[0], i[1]])
-# plot_data(kappa)
-# plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-# plt.ylabel('kappa')
-# save_and_open('foo')
+# plot_the_betas()
 
+# plot_the_ns(0.005)
 
+# plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
+# plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
+# plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
+# plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
 
-
-
-
-
-
-
-
-
-
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[0][3], glättwert=0.03, title="GaAs Doped")
-plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[1][3], glättwert=0.1, title="GaAs Undoped")
-plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[2][3], glättwert=0.1, title="GaSb Doped")
-plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[3][3], glättwert=0.1, title="Si Undoped")
-
-
-plot_the_ns(0.005)
-
-plot_the_betas()
 
 
 
