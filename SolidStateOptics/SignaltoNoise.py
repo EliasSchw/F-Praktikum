@@ -70,10 +70,10 @@ def save_and_open(filename="SignalToNoise", title=""):
     inset_ax.set_ylabel(r'transmission $T$', fontsize=10)  # Beschriftung für die linke y-Achse
     inset_ax_right.set_ylabel(r'transmission $T$', fontsize=10)  # Gleiche Beschriftung für die rechte y-Achse
 
-    #plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
-    #from PIL import Image
-    #Image.open(".\\Paper\\Images\\"+filename + ".png").show()
-    #plt.clf()
+    plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
+    from PIL import Image
+    Image.open(".\\Paper\\Images\\"+filename + ".png").show()
+    plt.clf()
 
 N10 = read_dpt_file(filepathNormalizedN10) 
 N20 = read_dpt_file(filepathNormalizedN20)
@@ -85,9 +85,10 @@ N100 = read_dpt_file(filepathNormalizedN100)
 datasets = [(N10, 'N=10'), (N20, 'N=20'), (N50, 'N=50'), (N75, 'N=75'), (N100, 'N=100')]
 x_min = 6000
 x_max = 7000
-def calculateSNR(datasets, x_min, x_max):
+
+def calculateSNRWithError(datasets, x_min, x_max):
     """
-    Berechnet die Signal-to-Noise-Ratio (SNR) für eine Liste von Datensätzen.
+    Berechnet die Signal-to-Noise-Ratio (SNR) und die zugehörigen Fehler für eine Liste von Datensätzen.
 
     Parameters:
         datasets (list): Liste von Tupeln, die die Daten und Labels enthalten.
@@ -95,63 +96,78 @@ def calculateSNR(datasets, x_min, x_max):
         x_max (float): Obere Grenze des x-Bereichs.
 
     Returns:
-        list: Liste von SNR-Werten mit zugehörigen Labels.
+        tuple: Liste von SNR-Werten, zugehörigen Fehlern und Labels.
     """
     snr_results = []
+    snr_errors = []
     snr_labels = []
     for data, label in datasets:
         x_values = [row[0] for row in data]  # Extrahiere die x-Werte
         y_values = [row[1] for row in data]  # Extrahiere die y-Werte
         
-        # Mittelwert berechnen
-        mean_value = np.mean([y for x, y in zip(x_values, y_values) if x_min < x < x_max])
+        # Werte im Bereich filtern
+        filtered_y = [y for x, y in zip(x_values, y_values) if x_min < x < x_max]
         
-        # Standardabweichung berechnen
-        std_dev = np.std([y for x, y in zip(x_values, y_values) if x_min < x < x_max])
+        # Mittelwert und Standardabweichung berechnen
+        mean_value = np.mean(filtered_y)
+        std_dev = np.std(filtered_y)
         
-        # Signal-to-Noise-Ratio berechnen
-        snr = mean_value / std_dev if std_dev != 0 else float('inf')  # Vermeidung von Division durch 0
+        # SNR berechnen
+        snr = mean_value / std_dev if std_dev != 0 else float('inf')
         snr_results.append(snr)
         snr_labels.append(label)
-    return snr_results, snr_labels
+        
+        # Gaußsche Fehlerfortpflanzung für den Fehler des SNR
+        error = snr * np.sqrt((std_dev / mean_value)**2 + (1 / len(filtered_y)))
+        snr_errors.append(error)
+    
+    return snr_results, snr_errors, snr_labels
 
 def plotSNR(datasets, x_min, x_max):
     """
-    Plottet die Signal-to-Noise-Ratio (SNR) für eine Liste von Datensätzen und führt eine lineare Regression durch.
+    Plottet die Signal-to-Noise-Ratio (SNR) mit Fehlerbalken und führt eine lineare Regression im Log-Log-Raum durch.
 
     Parameters:
         datasets (list): Liste von Tupeln, die die Daten und Labels enthalten.
         x_min (float): Untere Grenze des x-Bereichs.
         x_max (float): Obere Grenze des x-Bereichs.
     """
-    snr_results, snr_labels = calculateSNR(datasets, x_min, x_max)
+    snr_results, snr_errors, snr_labels = calculateSNRWithError(datasets, x_min, x_max)
     
-    # Konvertiere Labels in numerische Werte für die Regression
-    x_numeric = np.arange(len(snr_labels))
+    # Konvertiere Labels in numerische Werte (z. B. 10, 20, 50, 75, 100)
+    x_numeric = np.array([int(label.split('=')[1]) for _, label in datasets])
+    y_numeric = np.array(snr_results)
+    y_errors = np.array(snr_errors)
     
-    # Lineare Regression
-    slope, intercept, r_value, p_value, std_err = linregress(x_numeric, snr_results)
-    regression_line = slope * x_numeric + intercept
+    # Log-Log-Transformation
+    log_x = np.log(x_numeric)
+    log_y = np.log(y_numeric)
+    
+    # Lineare Regression im Log-Log-Raum mit linregress
+    slope, intercept, r_value, p_value, std_err = linregress(log_x, log_y)
+    regression_line = slope * log_x + intercept
 
     # Plot
     plt.figure(figsize=(8, 5))
-    plt.scatter(snr_labels, snr_results, color='blue', label='SNR Data Points')
-    plt.plot(snr_labels, regression_line, color='red', linestyle='--', label='linear regression')
-    plt.xlabel('scans')
+    plt.errorbar(x_numeric, y_numeric, yerr=y_errors, fmt='o', color='blue', capsize=2.5, label='SNR Data Points')
+    plt.plot(x_numeric, np.exp(regression_line), color='red', linestyle='--', label=f'linear regression')
+    plt.xscale('log')  # Logarithmische Skalierung der x-Achse
+    plt.yscale('log')  # Logarithmische Skalierung der y-Achse
+    plt.xlabel('Number of Scans (N)')
     plt.ylabel('Signal-to-Noise Ratio (SNR)')
-    plt.title('Signal-to-Noise Ratio for Different Datasets')
-    plt.grid(True)
+    #plt.title('Log-Log Plot of Signal-to-Noise Ratio with Errors')
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+    plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)  # Ticks an allen Seiten nach innen
     plt.legend()
 
-    # Regressionsparameter ausgeben
-    print(f"Linear Regression Parameters:")
-    print(f"  Slope: {slope}")
-    print(f"  Intercept: {intercept}")
-    print(f"  R-squared: {r_value**2}")
-    print(f"  P-value: {p_value}")
-    print(f"  Standard Error: {std_err}")
-    writeLatexMacro('slope', slope)
-    plt.show()
+    # Exponenten und Fehler ausgeben und in LaTeX-Makro schreiben
+    print(f"Exponent (x) from Log-Log Fit: {slope}")
+    print(f"Standard Error of Exponent: {std_err}")
+    writeLatexMacro('snr_exponent', slope, std_err)
+    plt.savefig('.\\Paper\\Images\\'+'STNLog' + '.png', dpi=600)
+    from PIL import Image
+    Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
+    plt.clf()
 
 plotSNR(datasets, x_min, x_max)
 
