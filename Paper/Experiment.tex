@@ -1,6 +1,8 @@
 \section{Experiment}
 All following transmission and reflection experiments are done at ambient air in the chamber. The evaluation of the signal with a 'Mertz' phase
 correction is done automatically by the system. Furthermore, the spectal range for all measurements is set to: $(1500-15000)\,\text{cm}^{-1}$.
+
+
 \subsection{Gas absorption}
 \begin{figure}[h]
     \centering
@@ -63,15 +65,26 @@ From the slope of the linear regression $a$ can be determined as:
     a = 4.967 \cdot 10^{-1}\pm0.025 ????
 \end{align} 
 which matches with the expectation.
+
+
 \subsection{Transmission at high resolution}
-\subsection{Reflection and transmission at low resolution}
+
+
+\subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
+
+
 \subsection{Refractive index $N$}
+The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
+The absorption coefficient can be determined by numerically solving equations \ref{eq:R} and \ref{eq:T},
+using the measured reflection and transmission spectra (see sec.\,\ref{sec:RTlowRes}).
+The result is shown in fig.\,\ref{fig:beta}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
-    \caption{Refractive index $n$ of different semiconductor samples.}
-    \label{fig:n}
+    \includegraphics[width=0.5\textwidth]{Images/betas.png}
+    \caption{Absorption coefficient $\beta$ of different semiconductor samples.}
+    \label{fig:beta}
 \end{figure}
+The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown in fig.\,\ref{fig:kappa}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/kappa.png}
@@ -80,10 +93,14 @@ which matches with the expectation.
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/betas.png}
-    \caption{Absorption coefficient $\beta$ of different semiconductor samples.}
-    \label{fig:beta}
+    \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
+    \caption{Refractive index $n$ of different semiconductor samples.}
+    \label{fig:n}
 \end{figure}
+
+
+
+
 \subsection{Bandgap and pulse matrix element}
 \begin{figure}[h]
     \centering
