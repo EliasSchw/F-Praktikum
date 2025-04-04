@@ -36,6 +36,8 @@ transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4
 reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_doped_res4_N50_normalized.DPT')
 transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
 
+d_SiDo = 500*10**-6
+
 samplesOhneSiUn = [
     (reflectionSiUnDo, transmissionSiUnDo, "Si Undoped", 530*10**-6),
         (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped", 500*10**-6),
@@ -56,7 +58,7 @@ def equations(vars, T_fabry_perot_value, R_fabry_perot_value, d):
     return [T_fabry_perot(vars, T_fabry_perot_value, d), R_fabry_perot(vars, R_fabry_perot_value, d)]
 
 
-def calculate_k_beta_and_R(ReflectionData, TransmissionData, d):
+def calculate_nu_beta_and_R(ReflectionData, TransmissionData, d):
     k_beta_R_List = []
     for r, t in zip(bügeln(ReflectionData,1), bügeln(TransmissionData,1)):
         initial_guess = k_beta_R_List[-1][1:] if k_beta_R_List else [10000, 0.3]  # Use last beta and R or default
@@ -71,7 +73,7 @@ def calculate_k_beta_and_R(ReflectionData, TransmissionData, d):
 
 
 def calculate_kappa(ReflectionData, TransmissionData, d):
-    k_beta_R_List = calculate_k_beta_and_R(ReflectionData, TransmissionData, d)
+    k_beta_R_List = calculate_nu_beta_and_R(ReflectionData, TransmissionData, d)
     k_kappa_R_List = []
     for i in k_beta_R_List:
         k_kappa_R_List.append([i[0], i[1]/(2*i[0]*100), i[2]]) # 100 wegen cm^-1
@@ -105,7 +107,7 @@ def plot_the_betas(title="foo", glättwert=1):
     plt.figure()
     for reflection, transmission, label, d in samplesOhneSiUn:
         beta = []
-        for i in calculate_k_beta_and_R(bügeln(reflection, glättwert), bügeln(transmission, glättwert), d):
+        for i in calculate_nu_beta_and_R(bügeln(reflection, glättwert), bügeln(transmission, glättwert), d):
             beta.append([i[0], i[1]/100])
         plot_data(beta, label=label)
         plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
@@ -133,7 +135,7 @@ def plot_the_kappas(title="foo", glättwert = 1):
     save_and_open(filename=title)
     
     
-def calculate_k_epsilon_2(reflection, transmission, d):
+def calculate_nu_epsilon_2(reflection, transmission, d):
     k_n_kappa = calculate_k_n1_kappa(reflection, transmission, d)
     epsilon_2 = []
     for i in k_n_kappa:
@@ -149,11 +151,11 @@ def k_chopper(data, k_min, k_max):
 
 def calculate_KomischeFunktion(reflection, transmission, d):
     
-    k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission, d)
+    nu_epsilon_2 = calculate_nu_epsilon_2(reflection, transmission, d)
     
     komischeFunktion = []
-    for k, epsilon_2 in k_epsilon_2:
-        komischeFunktion.append([k, (epsilon_2*c**2*k**2)**2])
+    for nu, epsilon_2 in nu_epsilon_2:
+        komischeFunktion.append([nu, (epsilon_2*c**2*nu**2*4*np.pi**2/(100**2))**2])
     return komischeFunktion
 
 
@@ -175,7 +177,10 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     plt.legend()
     plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
     
-    writeLatexMacro('bandgap_' + title, x_intercept*100*c*hbar/e*2*np.pi, 'eV')
+    pulseMatrixElement = np.sqrt(steig/factor)
+    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??')
+    
+    writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV')
     
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')    
     save_and_open(filename=title)
@@ -203,10 +208,10 @@ def linear_regression(komischeFunktion):
     
 def calculate_komische_indirect_function(reflection, transmission, d):    
     komischeFunktion = []
-    for i in calculate_k_beta_and_R(reflection, transmission, d):
-        k = i[0]
+    for i in calculate_nu_beta_and_R(reflection, transmission, d):
+        nu = i[0]
         beta = i[1]/100+1 #convert to cm^-1 and make sure beta is posivive (constant shift of 1), negative beta is not physical
-        komischeFunktion.append([k, np.sqrt(beta)*k*c])
+        komischeFunktion.append([nu, np.sqrt(beta)*nu*c*2*np.pi])
     return komischeFunktion
 
 def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_min_regression, 
@@ -237,6 +242,8 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     
     bandgap = (x_intercept1+x_intercept2)/2*100*c*hbar/e*2*np.pi
     writeLatexMacro("bandgap_" + title, bandgap, 'eV')
+    hquerOMEGA = (x_intercept2-x_intercept1)/2*100*c*hbar/e*2*np.pi
+    writeLatexMacro("hquerOMEGA_" + title, hquerOMEGA, 'eV')
     
     plt.legend()
     
@@ -260,16 +267,9 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
 # save_and_open(filename="SiUnDo_beta_plot")
 
 
-plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
-                             k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
-                             glättwert=0.01, title="foo")
-
-
-
-
-
-
-
+#plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
+#                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
+#                              glättwert=0.01, title="Si_Undoped")
 
 
 # plot_the_kappas(glättwert=0.9, title="kappa")
@@ -278,10 +278,10 @@ plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6,
 
 # plot_the_ns(0.005)
 
-# plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-# plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
-# plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
-# plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
+plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
+plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
+plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
 
 
 
