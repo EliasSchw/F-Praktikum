@@ -5,6 +5,8 @@ import numpy as np
 import scipy.constants as const
 from scipy.optimize import fsolve
 from Frauen import bügeln
+import os, sys
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
 
 
 e = const.e  # Elementary charge in Coulombs
@@ -111,7 +113,7 @@ def k_chopper(data, k_min, k_max):
     return [point for point in data if k_min <= point[0] <= k_max]
 
 
-def calculate_KomischeFunktion(reflection, transmission, glättwert):
+def calculate_KomischeFunktion(reflection, transmission):
     
     k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission)
     
@@ -121,16 +123,18 @@ def calculate_KomischeFunktion(reflection, transmission, glättwert):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, glättwert=0.01):
-    komischeFunktion = calculate_KomischeFunktion(reflection, transmission, glättwert)
-    plot_data(k_chopper(bügeln(komischeFunktion, glättwert),9000,13000))
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, glättwert=0.01):
+    komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission),glättwert)
     
-    chopped = k_chopper(calculate_KomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01), 11000, 11500)
-    linear_regression(chopped)
+    chopped = k_chopper(komischeFunktion, k_min=k_min_regression, k_max=k_max_regression)
+    steig, x_intercept, y_intercept = linear_regression(chopped)
     
-    
-    
-    
+    x_vals = np.linspace(x_intercept, k_max_regression, 10)  # Generate x values for the line
+    y_vals = steig * x_vals + y_intercept       # Calculate corresponding y values
+    plt.plot(x_vals, y_vals, label='Linear Fit', color='red', linestyle='-')  # Plot the line
+    plt.legend()
+        
+    plot_data(k_chopper(komischeFunktion,k_min, k_max))
     
     plt.xlabel('wave number k / ' + r'$cm^{-1}$')    
     save_and_open("foo")
@@ -148,13 +152,12 @@ def linear_regression(komischeFunktion):
     """
     x = np.array([point[0] for point in komischeFunktion])
     y = np.array([point[1] for point in komischeFunktion])
-    x = np.array(komischeFunktion[0])
-    y = np.array(komischeFunktion[1])
+    # Removed incorrect overwriting of x and y
     n = len(x)
     slope = (n * np.sum(x * y) - np.sum(x) * np.sum(y)) / (n * np.sum(x**2) - np.sum(x)**2)
-    intercept = (np.sum(y) - slope * np.sum(x)) / n
-    x_intercept = -intercept / slope if slope != 0 else None
-    return slope, intercept, x_intercept
+    y_intercept = (np.sum(y) - slope * np.sum(x)) / n
+    x_intercept = -y_intercept / slope if slope != 0 else None
+    return slope, x_intercept, y_intercept
 
     
 
@@ -200,7 +203,7 @@ samplesOhneSiUn = [
 # save_and_open('foo')
 
 
-#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01)
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11150, 11200, glättwert=0.03)
 #plot_the_ns(0.005)
 
 

@@ -1,4 +1,4 @@
-def bügeln(data, alpha = 0.5):
+def bügeln(data, alpha = 1):
     """
     Applies exponential smoothing to the given data. 
     Higher alpha values give more weight to recent observations.
