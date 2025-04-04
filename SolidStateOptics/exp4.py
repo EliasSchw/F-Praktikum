@@ -7,6 +7,7 @@ from scipy.optimize import fsolve
 from Frauen import bügeln
 import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
+from macroswriter import writeLatexMacro
 
 
 e = const.e  # Elementary charge in Coulombs
@@ -91,10 +92,10 @@ def plot_the_betas():
         for i in calculate_beta_and_R(reflection, transmission):
             beta.append([i[0], i[1]])
         plot_data(beta, label=label)
-        plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
         plt.ylabel('beta')
 
-    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+    plt.xlabel(r'wave number \nu / ' + r'$cm^{-1}$')
     plt.ylabel('beta')
     save_and_open('foo')
     
@@ -123,7 +124,7 @@ def calculate_KomischeFunktion(reflection, transmission):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, glättwert=0.01):
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, glättwert=0.01, title="foo"):
     komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission),glättwert)
     
     chopped = k_chopper(komischeFunktion, k_min=k_min_regression, k_max=k_max_regression)
@@ -134,10 +135,17 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     plt.plot(x_vals, y_vals, label='Linear Fit', color='red', linestyle='-')  # Plot the line
     plt.legend()
         
-    plot_data(k_chopper(komischeFunktion,k_min, k_max))
+    plot_data(k_chopper(komischeFunktion,k_min, k_max), label=title)
     
-    plt.xlabel('wave number k / ' + r'$cm^{-1}$')    
-    save_and_open("foo")
+    # Plot a vertical line at k_min_regression
+    plt.axvline(x=k_min_regression, color='blue', linestyle='--', label='boundary for fit', linewidth=0.5)
+    plt.legend()
+    plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
+    
+    writeLatexMacro('bandgap_' + title, x_intercept*100*c*hbar/e*2*np.pi, 'eV')
+    
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')    
+    save_and_open(filename=title)
     
 def linear_regression(komischeFunktion):
     """
@@ -203,7 +211,14 @@ samplesOhneSiUn = [
 # save_and_open('foo')
 
 
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11150, 11200, glättwert=0.03)
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, glättwert=0.03, title="GaAs Doped")
+plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, glättwert=0.1, title="GaAs Undoped")
+plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, glättwert=0.1, title="GaSb Doped")
+plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, glättwert=0.1, title="Si Undoped")
+
+
+
+
 #plot_the_ns(0.005)
 
 
