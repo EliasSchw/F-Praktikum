@@ -20,32 +20,47 @@ c= const.c  # Speed of light in m/s
 mu_GaAs = 0.036872 * const.m_e  # Effective mass of electron in GaAs (müssen quelle finden!!)
 m_e = const.m_e  # Electron mass in kg
 factor = e*e*(2*mu_GaAs)**(3/2)*2*np.pi/(epsilon_0*m_e**2*hbar**3)    
-d = 440*10**-6  # Thickness of the sample in m
 
+reflectionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_doped_res4_N50_normalized.DPT')
+transmissionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_doped_res4_N50_normalized.DPT')
 
+reflectionGaAsUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_undoped_res4_N50_normalized.DPT')
+transmissionGaAsUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_undoped_res4_N50_normalized.DPT')
 
-#calculate n
+reflectionGaSbDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaSb_doped_res4_N50_normalized.DPT')
+transmissionGaSbDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaSb_doped_res4_N50_normalized.DPT')
 
-initial_guess = [1,1] # Initial guess for beta and R
+reflectionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_undoped_res4_N50_normalized.DPT')
+transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_undoped_res4_N50_normalized.DPT')
 
-def T_fabry_perot(vars, T_fabry_perot_value):
+reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_doped_res4_N50_normalized.DPT')
+transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
+
+samplesOhneSiUn = [
+        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped", 440*10**-6),
+        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6),
+        (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped", 500*10**-6),
+        (reflectionSiUnDo, transmissionSiUnDo, "Si Undoped", 530*10**-6)
+    ]
+
+def T_fabry_perot(vars, T_fabry_perot_value, d):
     beta, R_halbraum = vars
     return T_fabry_perot_value - (1-R_halbraum)**2*np.exp(-beta*d)/(1-R_halbraum**2*np.exp(-2*beta*d))
 
-def R_fabry_perot(vars, R_fabry_perot_value):
+def R_fabry_perot(vars, R_fabry_perot_value, d):
     beta, R_halbraum = vars
     return R_fabry_perot_value -(R_halbraum + (1-R_halbraum)**2*R_halbraum*np.exp(-2*beta*d)/(1-R_halbraum**2*np.exp(-2*beta*d)))
 
-def equations(vars, T_fabry_perot_value, R_fabry_perot_value):
-    return [T_fabry_perot(vars, T_fabry_perot_value), R_fabry_perot(vars, R_fabry_perot_value)]
+def equations(vars, T_fabry_perot_value, R_fabry_perot_value, d):
+    return [T_fabry_perot(vars, T_fabry_perot_value, d), R_fabry_perot(vars, R_fabry_perot_value, d)]
 
 
-def calculate_beta_and_R(ReflectionData, TransmissionData):
+def calculate_beta_and_R(ReflectionData, TransmissionData, d):
     k_beta_R_List = []
     for r, t in zip(bügeln(ReflectionData,1), bügeln(TransmissionData,1)):
         initial_guess = k_beta_R_List[-1][1:] if k_beta_R_List else [10000, 0.3]  # Use last beta and R or default
         #initial_guess = [20000,0.3]
-        beta, R = fsolve(equations, initial_guess, args=(t[1], r[1]))
+        beta, R = fsolve(equations, initial_guess, args=(t[1], r[1], d))
         if beta > 28000:
             beta = k_beta_R_List[-1][1] if k_beta_R_List else 10000  # Use last beta or default
         if R >1:
@@ -54,54 +69,55 @@ def calculate_beta_and_R(ReflectionData, TransmissionData):
     return k_beta_R_List
 
 
-def calculate_kappa(ReflectionData, TransmissionData):
-    k_beta_R_List = calculate_beta_and_R(ReflectionData, TransmissionData)
+def calculate_kappa(ReflectionData, TransmissionData, d):
+    k_beta_R_List = calculate_beta_and_R(ReflectionData, TransmissionData, d)
     k_kappa_R_List = []
     for i in k_beta_R_List:
         k_kappa_R_List.append([i[0], i[1]/(2*i[0]*100), i[2]]) # 100 wegen cm^-1
     return k_kappa_R_List
 
-def calculate_k_n1_kappa(ReflectionData, TransmissionData):
-    k_kappa_R_List = calculate_kappa(ReflectionData, TransmissionData)
+def calculate_k_n1_kappa(ReflectionData, TransmissionData, d):
+    k_kappa_R_List = calculate_kappa(ReflectionData, TransmissionData, d)
     n = []
     for i in k_kappa_R_List:
         k = i[1]
         R = i[2]
         n1 = (1+R+np.sqrt(-k**2-R**2*k**2+2*R*(2+k**2)))/(1-R)
-        n2 = (-1-R+np.sqrt(-k**2-R**2*k**2+2*R*(2+k**2)))/(R-1)
+        #n2 = (-1-R+np.sqrt(-k**2-R**2*k**2+2*R*(2+k**2)))/(R-1)
                 
         n.append([i[0], n1,i[1]])
     return n
 
 def plot_the_ns(glättwert=0.02):
     plt.figure()
-    for reflection, transmission, label in samplesOhneSiUn:
+    for reflection, transmission, label, d in samplesOhneSiUn:
         n = []
-        for i in calculate_k_n1_kappa(reflection, transmission):
+        for i in calculate_k_n1_kappa(reflection, transmission, d):
             n.append([i[0], i[1]])
         plot_data(bügeln(n, glättwert), label=label)
-    plt.xlabel('wave number k / ' + r'$cm^{-1}$')
+    plt.xlabel(r'wave number $\nu$  / ' + r'$cm^{-1}$')
     plt.ylabel('n')
     save_and_open('RefractiveIndicesSmooth')
     
     
-def plot_the_betas():
+def plot_the_betas(title="foo"):
     plt.figure()
-    for reflection, transmission, label in samplesOhneSiUn:
+    for reflection, transmission, label, d in samplesOhneSiUn:
         beta = []
-        for i in calculate_beta_and_R(reflection, transmission):
-            beta.append([i[0], i[1]])
+        for i in calculate_beta_and_R(reflection, transmission, d):
+            beta.append([i[0], i[1]/100])
         plot_data(beta, label=label)
         plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
         plt.ylabel('beta')
 
-    plt.xlabel(r'wave number \nu / ' + r'$cm^{-1}$')
-    plt.ylabel('beta')
-    save_and_open('foo')
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+    plt.ylabel(r'absorption coefficient $\beta$ / ' + r'$cm^{-1}$')
+    plt.legend()
+    save_and_open(filename=title)
     
     
-def calculate_k_epsilon_2(reflection, transmission):
-    k_n_kappa = calculate_k_n1_kappa(reflection, transmission)
+def calculate_k_epsilon_2(reflection, transmission, d):
+    k_n_kappa = calculate_k_n1_kappa(reflection, transmission, d)
     epsilon_2 = []
     for i in k_n_kappa:
         n = i[1]
@@ -114,9 +130,9 @@ def k_chopper(data, k_min, k_max):
     return [point for point in data if k_min <= point[0] <= k_max]
 
 
-def calculate_KomischeFunktion(reflection, transmission):
+def calculate_KomischeFunktion(reflection, transmission, d):
     
-    k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission)
+    k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission, d)
     
     komischeFunktion = []
     for k, epsilon_2 in k_epsilon_2:
@@ -124,8 +140,8 @@ def calculate_KomischeFunktion(reflection, transmission):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, glättwert=0.01, title="foo"):
-    komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission),glättwert)
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, glättwert=0.01, title="foo"):
+    komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission, d),glättwert)
     
     chopped = k_chopper(komischeFunktion, k_min=k_min_regression, k_max=k_max_regression)
     steig, x_intercept, y_intercept = linear_regression(chopped)
@@ -170,37 +186,8 @@ def linear_regression(komischeFunktion):
     
 
 
-reflectionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_doped_res4_N50_normalized.DPT')
-transmissionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_doped_res4_N50_normalized.DPT')
-
-reflectionGaAsUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_undoped_res4_N50_normalized.DPT')
-transmissionGaAsUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_undoped_res4_N50_normalized.DPT')
-
-reflectionGaSbDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaSb_doped_res4_N50_normalized.DPT')
-transmissionGaSbDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaSb_doped_res4_N50_normalized.DPT')
-
-reflectionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_undoped_res4_N50_normalized.DPT')
-transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_undoped_res4_N50_normalized.DPT')
-
-reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_doped_res4_N50_normalized.DPT')
-transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
-
-samplesOhneSiUn = [
-        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped"),
-        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped"),
-        (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped"),
-        (reflectionSiUnDo, transmissionSiUnDo, "Si UnDoped")
-    ]
-
-# n1=[]
-# for i in calculate_n(reflection, transmission):
-#     n1.append([i[0], i[1]])
-# plot_data(n1)
-# save_and_open("foo")
 
 
-
-#plot_the_betas()
 
 # kappa =[]
 # for i in calculate_kappa(reflectionGaAsDo, transmissionGaAsDo):
@@ -211,15 +198,26 @@ samplesOhneSiUn = [
 # save_and_open('foo')
 
 
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, glättwert=0.03, title="GaAs Doped")
-plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, glättwert=0.1, title="GaAs Undoped")
-plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, glättwert=0.1, title="GaSb Doped")
-plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, glättwert=0.1, title="Si Undoped")
 
 
 
 
-#plot_the_ns(0.005)
+
+
+
+
+
+
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[0][3], glättwert=0.03, title="GaAs Doped")
+plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[1][3], glättwert=0.1, title="GaAs Undoped")
+plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[2][3], glättwert=0.1, title="GaSb Doped")
+plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[3][3], glättwert=0.1, title="Si Undoped")
+
+
+plot_the_ns(0.005)
+
+plot_the_betas()
+
 
 
 
