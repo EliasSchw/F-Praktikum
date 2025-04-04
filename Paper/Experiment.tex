@@ -1,7 +1,30 @@
 \section{Experiment}
+All following transmission and reflection experiments are done at ambient air in the chamber. The evaluation of the signal with a 'Mertz' phase
+correction is done automatically by the system. Furthermore, the spectal range for all measurements is set to: $(1500-15000)\,\text{cm}^{-1}$.
+\subsection{Gas absorption}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/GasAbsorption.png}
-    \caption{}
+    \caption{Normalized transmission of an empty chamber filled with ambient air. The spectral
+    ranges for gas absorption are highlighted.}
     \label{fig:GasAbsorption}
 \end{figure}
+To identifythe spectral ranges where the result is influenced by the gas absorption, a measurement at ambient air with a resolution
+of $0.3\,\text{cm}^{-1}$ and $N=10$ scans is performed. 
+The measurement at air is normalized. The corresponding reference measurement is done under vacuum.
+One expects gas absorption dips at frequencies that are similar to the resonance frequencies of the air molecules.
+The wavenumbers of the measured gas absorption is shown in tab\,\ref{tab:gasAbsorption}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c}
+        \hline\hline
+        $\text{CO}_2$ & $\text{H}_2\text{O}$ $\text{CO}_2$ & $\text{H}_2\text{O}$ & $\text{H}_2\text{O}$ \\\hline
+        $2350\,\text{cm}^{-1}$ & $3750\,\text{cm}^{-1}$ & $5320\,\text{cm}^{-1}$ & $7180\,\text{cm}^{-1}$ \\
+        \hline\hline
+    \end{tabular}
+    \caption{Regions of strong gas absorption in fig\,\ref{fig:GasAbsorption}. The measured values agree
+    with literature values for $\text{H}_2\text{O}$ and $\text{CO}_2$ \cite{cite:GasAbsorption}.}
+    \label{tab:gasAbsorption}
+\end{table}
+All the measured data agrees with the literature values for the gases $\text{H}_2\text{O}$ and $\text{CO}_2$.
+\subsection{Signal to noise ratio}
