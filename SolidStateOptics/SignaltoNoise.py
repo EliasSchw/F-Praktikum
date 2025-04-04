@@ -176,11 +176,8 @@ plot_data(N10)
 #plot_data(N50)
 #plot_data(N75)
 plot_data(N100)
-
 save_and_open()
 
 
-
-
-plotSNR(datasets, x_min, x_max)
-save_and_open()
+# plotSNR(datasets, x_min, x_max)
+# save_and_open()
