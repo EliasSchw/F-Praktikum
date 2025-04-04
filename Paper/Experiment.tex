@@ -28,3 +28,66 @@ The wavenumbers of the measured gas absorption is shown in tab\,\ref{tab:gasAbso
 \end{table}
 All the measured data agrees with the literature values for the gases $\text{H}_2\text{O}$ and $\text{CO}_2$.
 \subsection{Signal to noise ratio}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/SignalToNoise.png}
+    \caption{Transmission measurements for $N_\text{scan}=10$ and $N_\text{scan}=100$ mirror passes.
+    The inset shows the part used for evaluation of the signal to noise ratio (see fig.\,\ref{fig:StNlog})}
+    \label{fig:StN}
+\end{figure}
+To determine the influence of the number of scans $N_\text{scan}$ on the signal to noise ratio, measurements with a resolution
+of $4\,\text{cm}^{-1}$ are done at various $N_\text{scan}$. Those are transmission measurements with ambient air.
+Between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$ a region with generally less noise (see fig.\,\ref{fig:StN})
+and no gas absorption (see fig.\,\ref{fig:GasAbsorption}) is identified. To quantitatively examine the
+behaviour of the signal to noise ratio, the mean value $T_\text{mean}$ is divided by the Standard deviation
+$T_\text{std}$ for every transmission measurement. 
+Thus the signal to noise ratio $SNR$ is given by:
+\begin{align}
+    SNR = \frac{T_\text{mean}}{T_\text{std}}
+\end{align}
+Theoretically, one expects $SNR$ to grow according to:
+\begin{align}
+    SNR = N^{a}
+\end{align}
+with $a=0.5$ \cite{Script}. To check this dependency, the signal
+to noise ratio is plottet for various N's in a double logarithmic scale.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/STNLog.png}
+    \caption{$SNR$ over the number of mirror passes in double logarithmic scaling using the specral range between
+    $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$.}
+    \label{fig:StNlog}
+\end{figure}
+From the slope of the linear regression $a$ can be determined as:
+\begin{align}
+    a = 4.967 \cdot 10^{-1}\pm0.025 ????
+\end{align} 
+which matches with the expectation.
+\subsection{Transmission at high resolution}
+\subsection{Reflection and transmission at low resolution}
+\subsection{Refractive index $N$}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
+    \caption{Refractive index $n$ of different semiconductor samples.}
+    \label{fig:n}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/kappa.png}
+    \caption{Extiction coefficient $\kappa$ of different semiconductor samples.}
+    \label{fig:kappa}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/betas.png}
+    \caption{Absorption coefficient $\beta$ of different semiconductor samples.}
+    \label{fig:beta}
+\end{figure}
+\subsection{Bandgap and pulse matrix element}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/GaAs Doped.png}
+    \caption{Determination of the bandgap.}
+    \label{fig:GaAsDopedBandGap}
+\end{figure}
