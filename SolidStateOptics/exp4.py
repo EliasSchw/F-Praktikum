@@ -4,7 +4,7 @@ from DataReader import read_dpt_file
 import numpy as np
 import scipy.constants as const
 from scipy.optimize import fsolve
-from Frauen import bügeln, average_filter
+from Frauen import bügeln
 
 
 e = const.e  # Elementary charge in Coulombs
@@ -107,19 +107,56 @@ def calculate_k_epsilon_2(reflection, transmission):
     return epsilon_2
 
 
-def plotKomischeFunktion(reflection, transmission, glättwert):
+def k_chopper(data, k_min, k_max):
+    return [point for point in data if k_min <= point[0] <= k_max]
+
+
+def calculate_KomischeFunktion(reflection, transmission, glättwert):
     
     k_epsilon_2 = calculate_k_epsilon_2(reflection, transmission)
     
     komischeFunktion = []
     for k, epsilon_2 in k_epsilon_2:
         komischeFunktion.append([k, (epsilon_2*c**2*k**2)**2])
+    return komischeFunktion
+
+
+def plotKomischeFunktion(reflection, transmission, glättwert=0.01):
+    komischeFunktion = calculate_KomischeFunktion(reflection, transmission, glättwert)
+    plot_data(k_chopper(bügeln(komischeFunktion, glättwert),9000,13000))
     
-    plot_data(bügeln(komischeFunktion, glättwert))
+    chopped = k_chopper(calculate_KomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01), 11000, 11500)
+    linear_regression(chopped)
+    
+    
+    
+    
+    
     plt.xlabel('wave number k / ' + r'$cm^{-1}$')    
     save_and_open("foo")
     
-        
+def linear_regression(komischeFunktion):
+    """
+    Perform a linear regression on the given x and y data.
+
+    Parameters:
+        x (list or np.ndarray): Independent variable data.
+        y (list or np.ndarray): Dependent variable data.
+
+    Returns:
+        tuple: (slope, intercept, x_intercept) of the best-fit line.
+    """
+    x = np.array([point[0] for point in komischeFunktion])
+    y = np.array([point[1] for point in komischeFunktion])
+    x = np.array(komischeFunktion[0])
+    y = np.array(komischeFunktion[1])
+    n = len(x)
+    slope = (n * np.sum(x * y) - np.sum(x) * np.sum(y)) / (n * np.sum(x**2) - np.sum(x)**2)
+    intercept = (np.sum(y) - slope * np.sum(x)) / n
+    x_intercept = -intercept / slope if slope != 0 else None
+    return slope, intercept, x_intercept
+
+    
 
 
 reflectionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_doped_res4_N50_normalized.DPT')
@@ -163,8 +200,8 @@ samplesOhneSiUn = [
 # save_and_open('foo')
 
 
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01)
-plot_the_ns(0.005)
+#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, glättwert=0.01)
+#plot_the_ns(0.005)
 
 
 

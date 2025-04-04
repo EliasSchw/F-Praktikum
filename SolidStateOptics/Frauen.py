@@ -1,5 +1,3 @@
-from scipy.signal import butter, filtfilt
-
 def bügeln(data, alpha = 0.5):
     """
     Applies exponential smoothing to the given data. 
