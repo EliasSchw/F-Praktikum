@@ -6,11 +6,11 @@ import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
 from macroswriter import writeLatexMacro
 
-filepathNormalizedN10 = '/Users/lukashein/Desktop/F-Praktikum-2/SolidStateOptics/RawData/StoN/StoN_res4_N10_normalized.DPT'
-filepathNormalizedN20 = '/Users/lukashein/Desktop/F-Praktikum-2/SolidStateOptics/RawData/StoN/StoN_res4_N20_normalized.DPT'
-filepathNormalizedN50 = '/Users/lukashein/Desktop/F-Praktikum-2/SolidStateOptics/RawData/StoN/StoN_res4_N50_normalized.DPT'
-filepathNormalizedN75 = '/Users/lukashein/Desktop/F-Praktikum-2/SolidStateOptics/RawData/StoN/StoN_res4_N75_normalized.DPT'
-filepathNormalizedN100 = '/Users/lukashein/Desktop/F-Praktikum-2/SolidStateOptics/RawData/StoN/StoN_res4_N100_normalized.DPT'
+filepathNormalizedN10 = './SolidStateOptics/RawData/StoN/StoN_res4_N10_normalized.DPT'
+filepathNormalizedN20 = './SolidStateOptics/RawData/StoN/StoN_res4_N20_normalized.DPT'
+filepathNormalizedN50 = './SolidStateOptics/RawData/StoN/StoN_res4_N50_normalized.DPT'
+filepathNormalizedN75 = './SolidStateOptics/RawData/StoN/StoN_res4_N75_normalized.DPT'
+filepathNormalizedN100 = './SolidStateOptics/RawData/StoN/StoN_res4_N100_normalized.DPT'
 #plotrange
 yMin = 0.98
 yMax = 1.02
@@ -169,5 +169,18 @@ def plotSNR(datasets, x_min, x_max):
     Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
     plt.clf()
 
-plotSNR(datasets, x_min, x_max)
 
+# Plot für alle Datensätze
+plot_data(N10)
+#plot_data(N20)
+#plot_data(N50)
+#plot_data(N75)
+plot_data(N100)
+
+save_and_open()
+
+
+
+
+plotSNR(datasets, x_min, x_max)
+save_and_open()
