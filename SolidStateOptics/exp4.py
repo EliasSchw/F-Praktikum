@@ -159,7 +159,7 @@ def calculate_KomischeFunktion(reflection, transmission, d):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, glättwert=0.01, title="foo"):
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, glättwert=0.01, title="foo", varFürFehler=10):
     komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission, d),glättwert)
     
     #Lin Reg Teil
@@ -169,6 +169,20 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     y_vals = steig * x_vals + y_intercept       # Calculate corresponding y values
     plt.plot(x_vals, y_vals, label='Linear Fit', color='red', linestyle='-')  # Plot the line
     plt.legend()
+    
+    # Fehler LinReg Teil
+    steig1, x_intercept1, y_intercept1 = linear_regression(k_chopper(komischeFunktion,
+                                                k_min=k_min_regression - varFürFehler, k_max=k_max_regression + varFürFehler))
+    steig2, x_intercept2, y_intercept2 = linear_regression(k_chopper(komischeFunktion,
+                                                k_min=k_min_regression - varFürFehler, k_max=k_max_regression - varFürFehler))
+    steig3, x_intercept3, y_intercept3 = linear_regression(k_chopper(komischeFunktion,
+                                                k_min=k_min_regression + varFürFehler, k_max=k_max_regression + varFürFehler))
+    steig4, x_intercept4, y_intercept4 = linear_regression(k_chopper(komischeFunktion,
+                                                k_min=k_min_regression + varFürFehler, k_max=k_max_regression - varFürFehler))
+    
+    steig_fehler = max(abs(steig1-steig), abs(steig2-steig), abs(steig3-steig), abs(steig4-steig))
+    x_intercept_fehler = max(abs(x_intercept1-x_intercept), abs(x_intercept2-x_intercept), abs(x_intercept3-x_intercept), abs(x_intercept4-x_intercept))
+    
         
     plot_data(k_chopper(komischeFunktion,k_min, k_max), label=title)
     
@@ -177,10 +191,16 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     plt.legend()
     plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
     
-    pulseMatrixElement = np.sqrt(steig/factor)
-    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??')
     
-    writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV')
+    steigKorr = steig/(factor*hbar*c*2*np.pi)
+    steigKorr_fehler = steig_fehler/(factor*hbar*c*2*np.pi)
+    pulseMatrixElement = np.sqrt(steigKorr)
+    sigma_steigKorr = steigKorr_fehler/steigKorr
+    pulseMatrixElement_fehler = sigma_steigKorr/2/pulseMatrixElement
+    
+    writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV', x_intercept_fehler*100*c*hbar/e*2*np.pi)
+    
+    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??', pulseMatrixElement_fehler)
     
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')    
     save_and_open(filename=title)
@@ -278,7 +298,7 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
 
 # plot_the_ns(0.005)
 
-#plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
+plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
 #plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
 #plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
 #plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")

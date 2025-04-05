@@ -1,11 +1,13 @@
-def writeLatexMacro(macro_name:str, value, unit=None, error=None, digitsIfNoError:int = 4, filepath='Paper/macros.tex'):
+def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None, digitsIfNoError:int = 4, filepath='Paper/macros.tex'):
     """
     Writes or overrides LaTeX macros in the specified file.
     Rounds the value and error to the same order of magnitude (two digits of the error) and writes them in scientific notation.
     """
-
     
     if error:
+        if error > value:
+            raise ValueError("Error cannot be larger than the value.")  
+        
         value_order = int(f"{value:.1e}".split('e')[1])
         error_order = int(f"{error:.1e}".split('e')[1])
         error *= 10**-value_order
