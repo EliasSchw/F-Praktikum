@@ -18,12 +18,15 @@ def plot_data(data, label=''):
     
     plt.plot(x_values, y_values, '-', linewidth=0.9, label=label)  # Plot as single points
     plt.grid(True)
+    plt.xlabel(plt.gca().get_xlabel(), fontsize=15)
+    plt.ylabel(plt.gca().get_xlabel(), fontsize=15)
+    plt.tick_params(axis='both', labelsize=14)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
+    plt.tick_params(axis='both', length=6, width=1.2)
     plt.xlim(left=min(x_values), right=max(x_values))
 
 
 def save_and_open(filename="foo", title=""):
-    plt.legend()
     plt.title(title)
     plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
