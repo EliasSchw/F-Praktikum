@@ -62,7 +62,7 @@ to noise ratio is plottet for various N's in a double logarithmic scale.
 \end{figure}
 From the slope of the linear regression $a$ can be determined as:
 \begin{align}
-    a = 4.967 \cdot 10^{-1}\pm0.025 ????
+    a = \stn 
 \end{align} 
 which matches with the expectation.
 
@@ -91,20 +91,89 @@ The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown i
     \caption{Extiction coefficient $\kappa$ of different semiconductor samples.}
     \label{fig:kappa}
 \end{figure}
+With the knowledge of the extiction coefficient $\kappa$ an eq.\,\ref{eq:R1}, the real part of the refractive
+index $n$ can be calculated. The result is shown in fig.\,\ref{fig:n}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
     \caption{Refractive index $n$ of different semiconductor samples.}
     \label{fig:n}
 \end{figure}
-
-
+The transmission of the doped Si sample is barely recordable, which is why this sample is not used for the
+calculation of the optical constants.
 
 
 \subsection{Bandgap and pulse matrix element}
+\subsubsection{Direct semiconductor}
+The band gap $E_\text{g}$ and pulse matrix element $|p_\text{cv}|$ can be evaluated by using eq.\,\ref{eq:epsilon_d}.
+When plotting $(\epsilon''^2\omega^2)^2$ over the wave number $k$ a linear regime around the bandgap can be found.
+The dependency given in eq.\,\ref{epsilon_d} allows the determination of the bandgap by extrapolating the linear regime to
+$(\epsilon''^2\omega^2)^2=0$ to obtain the bandgap. $|p_\text{cv}|$ is given by the slope of the extrapolation.
+The method of obtaining the bandgap and pulse matrix element is shown in fig.\,\ref{fig:GaAsDopedBandGap}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/GaAs Doped.png}
-    \caption{Determination of the bandgap.}
+    \caption{Determination of the bandgap and pulse matrix element for a doped GsAs sample.}
     \label{fig:GaAsDopedBandGap}
 \end{figure}
+The determined values for the given direct semiconductor samples are shown in tab.\,\ref{tab:directBandgapPulseMatrixElement}.
+All errors are calculated with a maximum error estimation for different sizes of the linear regime.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        $E_\text{g}$ (GaAs undoped) & $\bandgap_GaAs_Undoped$ \\ \hline
+        $E_\text{g}$ (GaAs doped) & $\bandgap_GaAs_Doped$   \\ \hline
+        $E_\text{g}$ (GaSb doped) & $\bandgap_GaSb_Doped$   \\ \hline
+        $|p_\text{cv}|$ (GaAs undoped) & $\pulseMatrixElement_GaAs_Undoped$   \\ \hline
+        $|p_\text{cv}|$ (GaAs doped) & $\pulseMatrixElement_GaAs_Doped$   \\ \hline
+        $|p_\text{cv}|$ (GaSb doped) & $\pulseMatrixElement_GaSb_Doped$   \\ \hline\hline
+    \end{tabular}
+    \caption{Values of the bandgap and pulseMatrixElement for the given direct semiconductors.
+    The data is obtained by extrapolating like described in \cite{Script}}
+    \label{tab:directBandgapPulseMatrixElement}
+\end{table}
+To examine the accuracy of the measured data, literature values for the bandgaps 
+of the intrinsic materials are given in tab.\ref{tab:literaturedirectBandgapPulseMatrixElement}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        $E_\text{g}$ (GaAs undoped) & $1.424\,\text{eV}$ \\ \hline
+        $E_\text{g}$ (GaSb undoped) & $0.726\,\text{eV}$   \\ \hline\hline
+    \end{tabular}
+    \caption{Bandgap energies for intrinsic GaAs and GaSb at room temperature \cite{ioffe}.}
+    \label{tab:literaturedirectBandgapPulseMatrixElement}
+\end{table}
+The comparison of values is only possible with intrinsic materials, because no information about
+the doping material and concentration is given for the used doped samples. However, the measured values
+for the bandgap are in good agreement with the literature values considering this.
+\subsection{Indirect semiconductor}
+For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
+band to the conduction band (see \ref{sec:semiconductors}).
+The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $np.sqrt(\beta\omega^2)$ over the wavenumber.
+This time, two lineare regimes should be found, which can be seen in the equation. When extrapolating
+both linear regimes to $np.sqrt(\beta\omega^2)=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
+and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
+whereas the difference of both intercepts divided by two gives the phonon energy $\hbar\Omega_\text{ph}$.
+An example for the extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Si_Undoped.png}
+    \caption{Determination of the bandgap and pulse matrix element for a undoped Si sample.}
+    \label{fig:SiUndopedBandGap}
+\end{figure}
+The determined values for the given indirect semiconductor samples are shown in tab.\,\ref{tab:indirectBandgapPulseMatrixElement}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        $E_\text{g}$ (Si undoped) & $\bandgap_Si_Undoped$ \\ \hline
+        $\hbar\Omega_\text{ph}$ (Si undoped) & $\pulseMatrixElement_Si_Undoped$   \\ \hline\hline
+    \end{tabular}
+    \caption{Values of the bandgap and phonon energy for undoped Si.
+    The data is obtained by extrapolating like described in \cite{Script}}
+    \label{tab:indirectBandgapPulseMatrixElement}
+\end{table}
+For intrinsic Si one findes in the literature a value of the bandgap of $1.12\,\text{eV}$ \cite{ioffe}, which
+is in good agreement with the measured value. 
