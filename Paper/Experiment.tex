@@ -97,18 +97,21 @@ in positive and negative direction from the assigned wavenumber and measured bet
 like shown in fig.\,\ref{peaks}. 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/peaks.png}
+    \includegraphics[width=0.5\textwidth]{Images/LewiPeak.png}
     \caption{Distance between the oscillation peaks.}
     \label{fig:peaks}
 \end{figure}
 This contains of about $50$ to $70$ oscillations and is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzulangsam}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/Eliasistzulangsam.png}
+    \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesDiscrete.png}
     \caption{Refractive indices for different values of the wavenumer. The values are calculated by using eq.\,\ref{eq:delta_nu}.}
     \label{fig:Eliasistzulangsam}
 \end{figure}
-
+Neglectable influences on the error are for example the picket fence effect, or the change in wavelength
+over the spectral range. The most significant contribution to the error is the inhomogenity of the thickness of the sample,
+which is assumed to be $2\%$. For GaSb the calculation of the refractive index is not possible, because of
+the ????. 
 
 \subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
 The reflection and transmission spectra shown in fig.\,\ref{fig:highResRef} and \ref{fig:highResTrans} 
@@ -210,9 +213,9 @@ for the bandgap are in good agreement with the literature values considering thi
 \subsection{Indirect semiconductor}
 For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
 band to the conduction band (see \ref{sec:semiconductors}).
-The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\sqrt(\beta\omega^2)$ over the wavenumber.
+The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\sqrt{\beta\omega^2}$ over the wavenumber.
 This time, two lineare regimes should be found, which can be seen in the equation. When extrapolating
-both linear regimes to $\sqrt(\beta\omega^2)=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
+both linear regimes to $\sqrt{\beta\omega^2}=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
 and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
 whereas the difference of both intercepts divided by two gives the phonon energy $\hbar\Omega_\text{ph}$.
 An example for the extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
