@@ -172,12 +172,12 @@ All errors are calculated with a maximum error estimation for different sizes of
     \centering
     \begin{tabular}{c|c}
         \hline\hline
-        $E_\text{g}$ (GaAs undoped) & $\bandgap_GaAs_Undoped$ \\ \hline
-        $E_\text{g}$ (GaAs doped) & $\bandgap_GaAs_Doped$   \\ \hline
-        $E_\text{g}$ (GaSb doped) & $\bandgap_GaSb_Doped$   \\ \hline
-        $|p_\text{cv}|$ (GaAs undoped) & $\pulseMatrixElement_GaAs_Undoped$   \\ \hline
-        $|p_\text{cv}|$ (GaAs doped) & $\pulseMatrixElement_GaAs_Doped$   \\ \hline
-        $|p_\text{cv}|$ (GaSb doped) & $\pulseMatrixElement_GaSb_Doped$   \\ \hline\hline
+        $E_\text{g}$ (GaAs undoped) & $\bandgapGaAsUndoped$ \\ \hline
+        $E_\text{g}$ (GaAs doped) & $\bandgapGaAsDoped$   \\ \hline
+        $E_\text{g}$ (GaSb doped) & $\bandgapGaSbDoped$   \\ \hline
+        $|p_\text{cv}|$ (GaAs undoped) & $\pulseMatrixElementGaAsUndoped$   \\ \hline
+        $|p_\text{cv}|$ (GaAs doped) & $\pulseMatrixElementGaAsDoped$   \\ \hline
+        $|p_\text{cv}|$ (GaSb doped) & $\pulseMatrixElementGaSbDoped$   \\ \hline\hline
     \end{tabular}
     \caption{Values of the bandgap and pulseMatrixElement for the given direct semiconductors.
     The data is obtained by extrapolating like described in \cite{Script}}
@@ -201,9 +201,9 @@ for the bandgap are in good agreement with the literature values considering thi
 \subsection{Indirect semiconductor}
 For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
 band to the conduction band (see \ref{sec:semiconductors}).
-The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\np.sqrt(\beta\omega^2)$ over the wavenumber.
+The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\sqrt(\beta\omega^2)$ over the wavenumber.
 This time, two lineare regimes should be found, which can be seen in the equation. When extrapolating
-both linear regimes to $np.sqrt(\beta\omega^2)=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
+both linear regimes to $\sqrt(\beta\omega^2)=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
 and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
 whereas the difference of both intercepts divided by two gives the phonon energy $\hbar\Omega_\text{ph}$.
 An example for the extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
@@ -218,8 +218,8 @@ The determined values for the given indirect semiconductor samples are shown in 
     \centering
     \begin{tabular}{c|c}
         \hline\hline
-        $E_\text{g}$ (Si undoped) & $\bandgap_Si_Undoped$ \\ \hline
-        $\hbar\Omega_\text{ph}$ (Si undoped) & $\pulseMatrixElement_Si_Undoped$   \\ \hline\hline
+        $E_\text{g}$ (Si undoped) & ??macro?? \\ \hline
+        $\hbar\Omega_\text{ph}$ (Si undoped) & ??macro??   \\ \hline\hline
     \end{tabular}
     \caption{Values of the bandgap and phonon energy for undoped Si.
     The data is obtained by extrapolating like described in \cite{Script}}

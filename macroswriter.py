@@ -15,19 +15,18 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         valueStr = f"{value:.{value_order-error_order+1}f}"
         errorStr = f"{error:.{value_order -error_order+1}f}"
 
-        macro_content = f"\\newcommand{{\\{macro_name}}}{{({valueStr} \\pm {errorStr}) \\cdot 10^{{{value_order}}}"
+        macro_content = f"\\newcommand{{\\{macro_name}}}{{\\left({valueStr} \\pm {errorStr}"
     else:
         value_order = int(f"{value:.1e}".split('e')[1])
         value *= 10**-value_order
         valueStr = f"{value:.{digitsIfNoError-1}f}"
 
-        macro_content = f"\\newcommand{{\\{macro_name}}}{{{valueStr} \\cdot 10^{{{value_order}}}"
+        macro_content = f"\\newcommand{{\\{macro_name}}}{{\\left({valueStr}"
 
     # Add unit if given
     if unit:
-        macro_content += f"\\,{unit}"
-    macro_content += "}\n"
-
+        macro_content += f"\\,\\text{{{unit}}}"
+    macro_content += f"\\right) \\cdot 10^{{{value_order}}}}}\n"
 
     # Read the existing file content
     try:
