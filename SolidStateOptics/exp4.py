@@ -278,10 +278,10 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
 
 # plot_the_ns(0.005)
 
-plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
-plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
+#plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
+#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
+#plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
+#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
 
 
 
