@@ -6,16 +6,16 @@ The thickness of the samples are given in tab.\,\ref{tab:sampleThickness}.
     \centering
     \begin{tabular}{c|c}
         \hline\hline
-        Sample & Thickness \\ \hline
-        GaAs undoped & $470\,\text{\mu m}$ \\ \hline
-        GaAs doped & $440\,\text{\mu m}$ \\ \hline
-        GaSb doped & $500\,\text{\mu m}$ \\ \hline
-        Si undoped & $530\,\text{\mu m}$ \\ \hline
-        Si doped & $500\,\text{\mu m}$ \\ \hline\hline
+        Sample & Thickness \[\mu\text{m}\] \\ \hline
+        GaAs (undoped) & $470$ \\ \hline
+        GaAs (doped) & $440$ \\ \hline
+        GaSb (doped) & $500$ \\ \hline
+        Si (undoped) & $530$ \\ \hline
+        Si (doped) & $500$ \\ \hline\hline
     \end{tabular}
-\end{table}
-    \caption{Thickness of the samples used for the measurements.}
+    \caption{Thickness of the samples used for the measurements \cite{Anleitung}.}
     \label{tab:sampleThickness}
+\end{table}
 \subsection{Gas absorption}
 \begin{figure}[h]
     \centering
@@ -90,16 +90,21 @@ but with the same amount of mirror passes ($N=50$) to save measurement time.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Reflections.png}
-    \caption{Reflection}
+    \caption{Normalized reflection spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResRef}
 \end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Transmissions.png}
-    \caption{Transmission}
+    \caption{Normalized transmission spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResTrans}
 \end{figure}
-
+Both transmission and reflection spectra behave as expected. When approaching the bandgap of the materials,
+transmission and reflection drop nearly to zero. This happens because absorption rises because the light
+has enough energy to excite the electrons form valence bant to conduction band.
+The transmission of the doped Si sample is barely recordable, and over the whole spectral range near zero. 
+This is due to the high doping concentration, which leads to an increase of the plasma frequency.
+Consequently, the sample behaves more like a metal than a semiconductor.??AP??
 \subsection{Refractive index $N$}
 The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
 The absorption coefficient can be determined by numerically solving equations \ref{eq:R} and \ref{eq:T},
@@ -203,4 +208,4 @@ The determined values for the given indirect semiconductor samples are shown in 
     \label{tab:indirectBandgapPulseMatrixElement}
 \end{table}
 For intrinsic Si one findes in the literature a value of the bandgap of $1.12\,\text{eV}$ \cite{ioffe}, which
-is in good agreement with the measured value. 
+is in good agreement with the measured value.
