@@ -1,8 +1,20 @@
 \section{Experiment}
 All following transmission and reflection experiments are done at ambient air in the chamber. The evaluation of the signal with a 'Mertz' phase
 correction is done automatically by the system. Furthermore, the spectal range for all measurements is set to: $(1500-15000)\,\text{cm}^{-1}$.
-
-
+The thickness of the samples are given in tab.\,\ref{tab:sampleThickness}.
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        \hline\hline
+        Sample & Thickness \\ \hline
+        GaAs undoped & $470\,\text{\mu m}$ \\ \hline
+        GaAs doped & $440\,\text{\mu m}$ \\ \hline
+        GaSb doped & $500\,\text{\mu m}$ \\ \hline
+        Si undoped & $530\,\text{\mu m}$ \\ \hline
+        Si doped & $500\,\text{\mu m}$ \\ \hline\hline
+    \end{tabular}
+    \caption{Thickness of the samples used for the measurements.}
+    \label{tab:sampleThickness}
 \subsection{Gas absorption}
 \begin{figure}[h]
     \centering
@@ -67,11 +79,25 @@ From the slope of the linear regression $a$ can be determined as:
 which matches with the expectation.
 
 
-\subsection{Transmission at high resolution}
+\subsection{Transmission at high resolution}\label{sec:transhighRes}
 
 
 \subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
-
+The reflection and transmission spectra shown in fig.\,\ref{fig:highResRef} and \ref{fig:highResTrans} 
+are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
+but with the same amount of mirror passes ($N=50$) to save measurement time. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Low_Res_Reflections.png}
+    \caption{Reflection}
+    \label{fig:lowResRef}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Low_Res_Transmissions.png}
+    \caption{Transmission}
+    \label{fig:lowResTrans}
+\end{figure}
 
 \subsection{Refractive index $N$}
 The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
@@ -151,7 +177,7 @@ for the bandgap are in good agreement with the literature values considering thi
 \subsection{Indirect semiconductor}
 For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
 band to the conduction band (see \ref{sec:semiconductors}).
-The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $np.sqrt(\beta\omega^2)$ over the wavenumber.
+The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\np.sqrt(\beta\omega^2)$ over the wavenumber.
 This time, two lineare regimes should be found, which can be seen in the equation. When extrapolating
 both linear regimes to $np.sqrt(\beta\omega^2)=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
 and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
