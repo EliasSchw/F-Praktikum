@@ -12,14 +12,20 @@ from macroswriter import writeLatexMacro
 
 e = const.e  # Elementary charge in Coulombs
 hbar = const.hbar  # Reduced Planck's constant in J.s
+h = const.h  # Planck's constant in J.s
 m = const.m_e  # Electron mass in kg
 epsilon_0 = const.epsilon_0  # Vacuum permittivity in F/m
 c= const.c  # Speed of light in m/s
 
 #moch willkürliche Werte
 mu_GaAs = 0.036872 * const.m_e  # Effective mass of electron in GaAs (müssen quelle finden!!)
+mu_GaSb = 0.0053207 * const.m_e
 m_e = const.m_e  # Electron mass in kg
-factor = e*e*(2*mu_GaAs)**(3/2)*2*np.pi/(epsilon_0*m_e**2*hbar**3)    
+
+factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaAs**3
+factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaSb**3
+
+
 
 reflectionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_GaAs_doped_res4_N50_normalized.DPT')
 transmissionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\GaAs_doped_res4_N50_normalized.DPT')
@@ -35,7 +41,6 @@ transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4
 
 reflectionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Reflection_ex4\refl_Si_doped_res4_N50_normalized.DPT')
 transmissionSiDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex4\Si_doped_res4_N50_normalized.DPT')
-
 d_SiDo = 500*10**-6
 
 samplesOhneSiUn = [
@@ -101,8 +106,7 @@ def plot_the_ns(glättwert=0.02):
     plt.xlabel(r'wave number $\nu$  / ' + r'$cm^{-1}$')
     plt.ylabel('n')
     save_and_open('RefractiveIndicesSmooth')
-    
-    
+     
 def plot_the_betas(title="foo", glättwert=1):
     plt.figure()
     for reflection, transmission, label, d in samplesOhneSiUn:
@@ -117,8 +121,7 @@ def plot_the_betas(title="foo", glättwert=1):
     plt.ylabel(r'absorption coefficient $\beta$ / ' + r'$cm^{-1}$')
     plt.legend()
     save_and_open(filename=title)
-    
-    
+        
 def plot_the_kappas(title="foo", glättwert = 1):
     plt.figure()
     for reflection, transmission, label, d in samplesOhneSiUn:
@@ -133,8 +136,7 @@ def plot_the_kappas(title="foo", glättwert = 1):
     plt.ylabel(r'absorption coefficient $\kappa$ / ' + r'$cm^{-1}$')
     plt.legend()
     save_and_open(filename=title)
-    
-    
+     
 def calculate_nu_epsilon_2(reflection, transmission, d):
     k_n_kappa = calculate_k_n1_kappa(reflection, transmission, d)
     epsilon_2 = []
@@ -143,7 +145,6 @@ def calculate_nu_epsilon_2(reflection, transmission, d):
         kappa = i[2]
         epsilon_2.append([i[0], 2*n*kappa])
     return epsilon_2
-
 
 def k_chopper(data, k_min, k_max):
     return [point for point in data if k_min <= point[0] <= k_max]
@@ -159,7 +160,7 @@ def calculate_KomischeFunktion(reflection, transmission, d):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, glättwert=0.01, title="foo", varFürFehler=10):
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, factor, glättwert=0.01, title="foo", varFürFehler=10):
     komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission, d),glättwert)
     
     #Lin Reg Teil
@@ -192,11 +193,11 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
     
     
-    steigKorr = steig/(factor*hbar*c*2*np.pi)
-    steigKorr_fehler = steig_fehler/(factor*hbar*c*2*np.pi)
-    pulseMatrixElement = np.sqrt(steigKorr)
+    steigKorr = steig/factor
+    steigKorr_fehler = steig_fehler/factor
+    pulseMatrixElement = steigKorr**(1/4)
     sigma_steigKorr = steigKorr_fehler/steigKorr
-    pulseMatrixElement_fehler = sigma_steigKorr/2/pulseMatrixElement
+    pulseMatrixElement_fehler = sigma_steigKorr/4 * pulseMatrixElement**2/steigKorr
     
     writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV', x_intercept_fehler*100*c*hbar/e*2*np.pi)
     
@@ -272,7 +273,27 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     plt.ylabel(r'$ck \cdot \sqrt{\beta}$ / ' + r'??')
     save_and_open(filename=title)
 
-
+def plot_reflections(glättwert=0.01):
+    plt.figure()
+    
+    for reflection, transmission, label, d in samplesOhneSiUn:
+        plot_data(bügeln(reflection, glättwert), label=label)
+        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+        plt.ylabel('Reflection R')
+    plot_data(bügeln(reflectionSiDo, glättwert))    
+    plt.legend()
+    save_and_open("Low_Res_Reflections")
+    
+def plot_transmissions(glättwert=0.01):
+    plt.figure()
+    
+    for reflection, transmission, label, d in samplesOhneSiUn:
+        plot_data(bügeln(transmission, glättwert), label=label)
+        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+        plt.ylabel('Transmission T')
+    plot_data(bügeln(transmissionSiDo, glättwert))    
+    plt.legend()
+    save_and_open("Low_Res_Transmissions")
 
 
 
@@ -298,13 +319,13 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
 
 # plot_the_ns(0.005)
 
-plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], glättwert=0.1, title="GaSb Doped")
+#Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
+#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaAs ,glättwert=0.1, title="GaSb Doped")
 #plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
 #plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
 
 
-
-
+plot_reflections(glättwert=0.02)
+plot_transmissions(glättwert=1)
 
 
