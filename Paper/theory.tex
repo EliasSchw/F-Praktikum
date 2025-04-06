@@ -1,17 +1,18 @@
 \nopagebreak
 \section{Theory}
+
 \subsection{Wave equations}
-The propagation of electromagnetic waves in a medium are described with the wave equations:
+
+The propagation of electromagnetic waves in a medium is described by the wave equations:
 \begin{align}
     \nabla^2 \vec{E} &= \frac{\mu \varepsilon}{c^2} \frac{\partial^2 \vec{E}}{\partial t^2} + \sigma \mu_0 \mu \frac{\partial \vec{E}}{\partial t} \label{eq:wave_equation_E} \\
     \nabla^2 \vec{H} &= \frac{\mu \varepsilon}{c^2} \frac{\partial^2 \vec{H}}{\partial t^2} + \sigma \mu_0 \mu \frac{\partial \vec{H}}{\partial t} \label{eq:wave_equation_H}
 \end{align}
-with $\vec{E}$ as the electric field vector, $\vec{H}$ as the magnetic field vector, $\mu$ as the permeability, $\varepsilon$ as the permittivity, $\sigma$ as the conductivity, and $c$ as the speed of light in vacuum.\\
-Under 
-the assumption of plane waves with the components $\vec{E} = E_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ 
-and $\vec{H} = H_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ can be used as an ansatz to solve the wave equations
-\ref{eq:wave_equation_E} and \ref{eq:wave_equation_H}. The dispersion relation of the plane waves is then
-described with:
+with $\vec{E}$ as the electric field vector, $\vec{H}$ as the magnetic field vector, 
+$\mu$ as the permeability, $\varepsilon$ as the permittivity, $\sigma$ as the conductivity, 
+and $c$ as the speed of light in vacuum.
+Under the assumption of plane waves, the components $\vec{E} = E_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ 
+and $\vec{H} = H_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ can be used as an ansatz to solve the wave equations \ref{eq:wave_equation_E} and \ref{eq:wave_equation_H}. The dispersion relation of the plane waves is then described by:
 \begin{align}
     k^2 = \omega^2\cdot(\epsilon_0 + i\frac{\sigma}{\omega\epsilon_0}) \label{eq:dispersion_relation}
 \end{align}
@@ -19,25 +20,21 @@ with $k$ as the wave vector, $\omega$ as the angular frequency, and $\epsilon_0$
 
 
 \subsection{Plane parallel layer}
-The investigated semiconductor samples can in first approximation be described as a plane parallel 
-layer \ref{fig:fabry-perot} with a thickness $d$ and refractive index $N_2$ which acts like a fabry-perot interferometer.
+The investigated semiconductor samples can, in a first approximation, 
+be described as a plane parallel layer (see Fig.\,\ref{fig:fabry-perot}) 
+with thickness $d$ and refractive index $N_2$, acting as a Fabry-Pérot interferometer.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{Images/fabry-perot.png}
-    \caption{Simplified illustration of the measured samples as a plane parallel plate
-    with thickness $d$ and refractive index $N_2$. The surrounding air is described with a 
-    refractive indes $N_1\approx1$ \cite{??}}
+    \caption{Simplified illustration of the measured samples as a plane parallel plate with thickness $d$ and refractive index $N_2$. The surrounding air is described with a refractive index $N_1\approx1$ \cite{??}}
     \label{fig:fabry-perot}
 \end{figure}
-Light is simpliefied as beams. Every incoming beam is partially reflected and 
-partially transmittet at the first interface. The total power reflectivity $R_1$ is described with:
+Light is simplified as beams. Each incoming beam is partially reflected and partially t
+ransmitted at the first interface. The total power reflectivity $R_1$ is described by:
 \begin{align}
     R_1 = \left\lvert \frac{1 - N_2}{1 + N_2} \right\rvert^2 \label{eq:R1}
 \end{align}
-without considering the phase shift of the reflected beam. Like shown in fig.\,\ref{fig:fabry-perot}, the total
-power reflectivity of $R$ then consists of a reflection of the incoming beam at the interfaces of the material.
-Additionally, the absorption of the material is considered.
-Therefore, $R$ is described with:
+without considering the phase shift of the reflected beam. As shown in Fig.\,\ref{fig:fabry-perot}, the total power reflectivity $R$ consists of reflections of the incoming beam at the interfaces of the material. Additionally, absorption of the material is considered. Therefore, $R$ is described by:
 \begin{align}
     R = R_{11}+\frac{(1-R_{11})^2R_{12}e^{-2d\beta}}{1-R_{11}R_{12}e^{-2d\beta}}  \label{eq:R}
 \end{align}
@@ -45,21 +42,17 @@ with the absorption coefficient:
 \begin{align}
     \beta = \frac{2\kappa\omega}{c}. \label{eq:beta}
 \end{align}
-The total transmission $T$ can be determined in a similar fashion:
+The total transmission $T$ can be determined analogously:
 \begin{align}
     T = \frac{(1-R_{11})(1-R_{12})e^{-d\beta}}{1-R_{11}R_{12}e^{-2d\beta}}.  \label{eq:T}
 \end{align}
-The assumption that the reflection of the first interface is the same as the reflection of the second
-interface is in reality not correct. Disturbances like roughness of the interfaces or the absorption of the
-material lead to a different reflection coeffitients of the two interfaces.\\
-Considering this and the phase of the light, the total power reflectivity $R$ is described with:
+The assumption that the reflection at the first interface is equal to that at the second interface 
+is not strictly correct. Disturbances such as interface roughness or material absorption lead to different reflection coefficients at the two interfaces.
+Considering this and the phase of the light, the total power reflectivity $R$ is described by:
 \begin{align}
     R = \left\lvert \frac{(e^{i\frac{2\omega}{c}N_2d}-1)(1-N_2)}{e^{i\frac{2\omega}{c}N_2d}(1-N_2)-(1+N_2)} \right\rvert^2. \label{eq:R}
 \end{align}
-$\omega$ is the angular frequency of the light and $c$ the speed of light. 
-The phase shift of the light is described with $e^{i\frac{2\omega}{c}N_2d}$. In contrast to \ref{eq:Rn}, 
-equation \ref{eq:R} shows a periodic modulation of the reflectivity because of interference.
-The difference between the maxima of the modulation can be calculated with:
+$\omega$ is the angular frequency of the light and $c$ the speed of light. The phase shift of the light is described by $e^{i\frac{2\omega}{c}N_2d}$. In contrast to Eq.\,\ref{eq:Rn}, Eq.\,\ref{eq:R} shows a periodic modulation of the reflectivity due to interference. The difference between the maxima of the modulation is given by:
 \begin{align}
     \Delta \nu = \nu_{\text{m+1}}-\nu_{\text{m}} = \frac{1}{2dN_2} \label{eq:delta_nu}
 \end{align}
@@ -76,115 +69,104 @@ consists of a real part $n$ and an imaginary part $\kappa$ and is related to the
 \end{align}
 
 
-
 \subsection{Drude model}
-The drude model is a classical model in which the electrons in a solid are treated as a gas of free particles.
-In this model the dielectric function $\epsilon$ can be described as:
+The Drude model is a classical model in which the electrons in a solid are treated as a gas of free particles. In this model, the dielectric function $\epsilon$ is given by:
 \begin{align}
     \epsilon = 1-\frac{\omega^2_\text{p}\tau^2}{1+\omega^2\tau^2}+i\frac{\omega^2_\text{p}\tau}{\omega(1+\omega^2\tau^2)} \label{eq:epsilonDrude}
 \end{align}
-with $\omega_\text{p}$ as the plasma frequency:
+with the plasma frequency $\omega_\text{p}$:
 \begin{align}
     \omega_\text{p} = \sqrt{\frac{N_\text{e}e^2}{\epsilon_0m^*}} \label{eq:omega_p}
 \end{align}
-and $\tau$ as the relaxation time of the electrons. 
-$m^*$ is the effective mass of the electrons and $N_\text{e}$ the charge carrier density.
+and $\tau$ as the relaxation time of the electrons. $m^*$ is the effective mass of the electrons and $N_\text{e}$ the charge carrier density.
 At the plasma frequency $\omega_\text{p}$ the real part of the refractive index becomes 
 nearly zero $n(\omega_p)\approx0$ and therefore the phase velocity and wavelength diverge. 
-This means that all electrons are oscillating in phase. Absorption of light is not possible for
-frequencies below the plasma frequency. \\
+This means that all electrons oscillate in phase. Absorption of light is not possible for 
+frequencies below the plasma frequency.
 Eq.\,\ref{eq:epsilonDrude} can be simplified through the introduction of the high frequency conductivity $\sigma$
 \begin{align}
     \sigma = \frac{N_\text{e}e^2\tau}{m^*}\frac{1}{1-i\omega\tau} \label{eq:sigma}
 \end{align}
-to a expression including the lattice contribution of the material $\epsilon_\text{LC}$:
+to an expression including the lattice contribution $\epsilon_\text{LC}$ of the material:
 \begin{align}
     \epsilon = \epsilon_\text{LC} + i\frac{\sigma}{\omega\epsilon_0}. \label{eq:epsilon_semiconductor}
 \end{align}
-For metals the lattice contribution is set to one $\epsilon_\text{LC}=1$ as the electrons are considered
-to be a free electron gas.
-Using equations \ref{eq:epsilon},\ref{eq:epsilonDrude} and \ref{eq:omega_p} with 
-the effective mass $m^* = m_\text{e}$ equal to the electron mass, the theoretical reflectivity of a metal
-can be calculated. The result is shown in fig\,\ref{fig:reflectivity}.
+For metals, the lattice contribution is set to one, $\epsilon_\text{LC}=1$, 
+as the electrons are considered a free electron gas.
+Using equations \ref{eq:epsilon}, \ref{eq:epsilonDrude}, and \ref{eq:omega_p}, 
+and with the effective mass $m^* = m_\text{e}$ equal to the electron mass, 
+the theoretical reflectivity of a metal can be calculated. 
+The result is shown in Fig.\,\ref{fig:reflectivity}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/FabryPerotReflectivity.png}
-    \caption{Theoretical reflectivity of a metal according to the drude model. The reflectivity is reduced
-    significantly for wavenumbers above $k_\text{plasma}$}
+    \caption{Theoretical reflectivity of a metal according to the Drude model. The reflectivity is significantly reduced for wavenumbers above $k_\text{plasma}$.}
     \label{fig:reflectivity}
 \end{figure}
-The used constants for the theoretical reflection of a metal are listed in table\,\ref{tab:metalConstants}
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c}
         \hline\hline
-        charge carrier density $N_\text{e}$ & $5.9\cdot10^{28}\,\text{m}^{-3}$ \\ \hline
-        electron mass $m_\text{e}$  & $9.11\cdot10^{-31}\,\text{kg}$   \\ \hline
-        layer thickness $d$   & $500\,\mu\text{m}$   \\ \hline\hline
+        Charge carrier density $N_\text{e}$ & $5.9\cdot10^{28}\,\text{m}^{-3}$ \\ \hline
+        Electron mass $m_\text{e}$ & $9.11\cdot10^{-31}\,\text{kg}$ \\ \hline
+        Layer thickness $d$ & $500\,\mu\text{m}$ \\ \hline\hline
     \end{tabular}
-    \caption{Constants used for the calculation of the theoretical reflectivity of a metal, shown in
-    fig\,\ref{fig:reflectivity}. The charge carrier Density is taken from \cite{Mathematica}}
+    \caption{Constants used for the calculation of the theoretical reflectivity of a metal, 
+    shown in Fig.\,\ref{fig:reflectivity}. The charge carrier density is taken from \cite{Mathematica}.}
     \label{tab:metalConstants}
 \end{table}
-For frequencies below the plasma frequency the reflectivity is nearly one. However, if the frequency 
-of the light is larger than the plasma frequency, the reflectivity is significantly reduced.
+For frequencies below the plasma frequency, the reflectivity is nearly one. However, if the frequency of the light is larger than the plasma frequency, the reflectivity is significantly reduced.
+
+
 \subsection{Semiconductors}\label{sec:semiconductors}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Bandgap_theory.png}
-    \caption{a) direct and b) indirect semiconductor bandgap. If a photon is absorped by a valence electron
-    the excitation to the conduction band is for the indirect bandgap only possible with an additional phonon
-    absorption or emission process.\cite{Anleitung}}
+    \caption{a) Direct and b) indirect semiconductor bandgap. If a photon is absorbed by a valence electron, excitation to the conduction band in the case of an indirect bandgap is only possible with an additional phonon absorption or emission process.\cite{Anleitung}}
     \label{fig:bandgap}
 \end{figure}
-While metals are described properly with the drude model, for semiconductors the bandgap has 
-to be considered additionally.
-Like shown in \ref{fig:bandgap} the bandgap of a semiconductor can be direct or indirect. To ensure 
-energy and momentum conservation, the excitation of a valence electron to the conduction band for a 
-indirect bandgap is only possible with an additional phonon absorption or emission process.
-Electro magnetic waves are able to polarize the lattice of the semiconductor.¿nahe am AP?
+While metals are well described by the Drude model, the bandgap must be considered for semiconductors. 
+As shown in Fig.\,\ref{fig:bandgap}, the bandgap can be direct or indirect. 
+To ensure energy and momentum conservation, the excitation of a 
+valence electron to the conduction band in the case of an indirect bandgap is only possible with an additional phonon process.
+Electromagnetic waves can polarize the lattice of the semiconductor. 
 This leads to a change in the lattice contribution $\epsilon_\text{LC}$ of the dielectric function:
 \begin{align}
-    \epsilon_\text{LC} = \epsilon_\infty(1+\frac{\omega^2_\text{LO}-\omega^2_\text{TO}}{\omega^2_\text{TO}-\omega^2-i\Gamma\omega}) \label{eq:epsilon_LP}
+    \epsilon_\text{LC} = \epsilon_\infty\left(1+\frac{\omega^2_\text{LO}-\omega^2_\text{TO}}{\omega^2_\text{TO}-\omega^2-i\Gamma\omega}\right) \label{eq:epsilon_LP}
 \end{align}
-with $\epsilon_\infty$ as the high frequency dielectric constant, $\omega_\text{LO}$ as the longitudinal optical phonon frequency,
-$\omega_\text{TO}$ as the transversal optical phonon frequency and $\Gamma$ as the damping constant. 
-Together with eq.\,\ref{eq:epsilon_semiconductor} the theoretical reflectivity of a semiconductor can be
-calculated as shown in fig.\,\ref{fig:reflectivity_semiconductor}.
+with $\epsilon_\infty$ as the high-frequency dielectric constant, 
+$\omega_\text{LO}$ as the longitudinal optical phonon frequency, 
+$\omega_\text{TO}$ as the transverse optical phonon frequency, 
+and $\Gamma$ as the damping constant.
+Together with Eq.\,\ref{eq:epsilon_semiconductor}, 
+the theoretical reflectivity of a semiconductor can be calculated, 
+as shown in Fig.\,\ref{fig:reflectivity_semiconductor}.
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{Images/semi.png}
-    \caption{Theoretical reflectivity of a semiconductor considering the drude model and polarization effects. 
-    }
+    \caption{Theoretical reflectivity of a semiconductor considering the Drude model and polarization effects.}
     \label{fig:reflectivity_semiconductor}
 \end{figure}
-The theoretical reflectivity shows a minimum at the plasma frequency.
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c}
         \hline\hline
-        charge carrier density $N_\text{sc}$ & $1.05\cdot10^{24}\,\text{m}^{-3}$ \\ \hline
-        effective mass $m_\text{eff}$  & $0.063\cdot m_\text{e}$   \\ \hline
-        layer thickness $d$   & $500\,\mu\text{m}$   \\ \hline
-        damping constant $\Gamma$   & $250\,\text{m}^{-1}$   \\ \hline
-        l.o. phonon frequency $\omega_\text{lo}$ & $\hbar^{-1}10^{-3}\cdot36.1\,\text{meV}$   \\ \hline
-        t.o. phonon frequency $\omega_\text{to}$ & $\hbar^{-1}10^{-3}\cdot33.2\,\text{meV}$   \\ \hline
-        relative dielectric constant $\epsilon_{\inf}$ & $10.89$ \\ \hline\hline
+        Charge carrier density $N_\text{sc}$ & $1.05\cdot10^{24}\,\text{m}^{-3}$ \\ \hline
+        Effective mass $m_\text{eff}$ & $0.063\cdot m_\text{e}$ \\ \hline
+        Layer thickness $d$ & $500\,\mu\text{m}$ \\ \hline
+        Damping constant $\Gamma$ & $250\,\text{m}^{-1}$ \\ \hline
+        L.O. phonon frequency $\omega_\text{lo}$ & $\hbar^{-1}10^{-3}\cdot36.1\,\text{meV}$ \\ \hline
+        T.O. phonon frequency $\omega_\text{to}$ & $\hbar^{-1}10^{-3}\cdot33.2\,\text{meV}$ \\ \hline
+        Relative dielectric constant $\epsilon_{\inf}$ & $10.89$ \\ \hline\hline
     \end{tabular}
-    \caption{Constants used for the calculation of the theoretical reflectivity of intrinsic GaAs, shown in
-    fig\,\ref{fig:reflectivity}. Constants are taken from \cite{ioffe}}
+    \caption{Constants used for the calculation of the theoretical reflectivity of intrinsic GaAs, shown in Fig.\,\ref{fig:reflectivity_semiconductor}. Constants are taken from \cite{ioffe}.}
     \label{tab:metalConstants}
 \end{table}
-
-For high frequencies the characteristic of the band gap needs to be considered, as inter band excitation
-processes are possible. For a direct bandgap the imaginary part of the dielectric function is described with:
+For high frequencies, the characteristics of the bandgap must be considered, as interband excitation processes become possible. For a direct bandgap, the imaginary part of the dielectric function is described by:
 \begin{align}
     \epsilon^{''}_d = \frac{e^2(2\mu)^{\frac{3}{2}}|p_\text{cv}|^2}{h\epsilon_0m_\text{e}^2(\hbar\omega)^2}\sqrt{\hbar\omega-E_\text{g}} \label{eq:epsilon_d}
 \end{align}
-and for an indirect bandgap with:
+and for an indirect bandgap by:
 \begin{align}
     \epsilon^{''}_\text{id} \propto (\hbar\omega\pm\hbar\Omega_\text{ph}-E_\text{g}) \label{eq:epsilon_id}
 \end{align}
-for $\hbar\omega \geq E_\text{g}\pm\hbar\Omega$. 
-$|p_\text{cv}|$ is the pulse matrix element of the interband transition, $\mu$ is the reduced mass of the electron-hole pair,
-$E_\text{g}$ is the bandgap energy, $\Omega_\text{ph}$ is the phonon resonance frequency and $m_\text{e}$ is the effective mass of the electron.
-\newpage
+for $\hbar\omega \geq E_\text{g}\pm\hbar\Omega$. $|p_\text{cv}|$ is the pulse matrix element of the interband transition, $\mu$ is the reduced mass of the electron-hole pair, $E_\text{g}$ is the bandgap energy, $\Omega_\text{ph}$ is the phonon resonance frequency, and $m_\text{e}$ is the electron mass.
