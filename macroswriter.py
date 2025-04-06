@@ -24,9 +24,13 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         macro_content = f"\\newcommand{{\\{macro_name}}}{{\\left({valueStr}"
 
     # Add unit if given
+    macro_content += f"\\right) \\cdot 10^{{{value_order}}}}}"
     if unit:
         macro_content += f"\\,\\text{{{unit}}}"
-    macro_content += f"\\right) \\cdot 10^{{{value_order}}}}}\n"
+    macro_content += f"\n"
+    
+    macro_content.replace("_","")
+
 
     # Read the existing file content
     try:

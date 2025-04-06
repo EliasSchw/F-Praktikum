@@ -36,13 +36,14 @@ def plot_data(data, label=''):
 
 def save_and_open(filename="SignalToNoise", title=""):
     plt.legend(fontsize=12)  # Legende vergrößert
-    plt.xlabel(r'wave number $cm^{-1}$')  # x-Achse im LaTeX-Stil benannt
+    plt.xlabel(r'wave number / $cm^{-1}$')  # x-Achse im LaTeX-Stil benannt
     plt.ylabel(r'transmission $T$')  # y-Achse im LaTeX-Stil benannt
 
     # Inset-Plot hinzufügen
     ax = plt.gca()
-    inset_ax = ax.inset_axes([0.15, 0.05, 0.35, 0.35])  # Position und Größe des Insets [x, y, Breite, Höhe]
+    inset_ax = ax.inset_axes([0.17, 0.07, 0.35, 0.35])  # Position und Größe des Insets [x, y, Breite, Höhe]
 
+    y_mean =0
     # Daten für das Inset plotten
     for line in ax.get_lines():
         x_data = line.get_xdata()
@@ -58,18 +59,27 @@ def save_and_open(filename="SignalToNoise", title=""):
         y_shifted = y_inset - y_mean + 1.0  # Verschieben, sodass der Mittelwert bei 1 liegt
 
         inset_ax.plot(x_inset, y_shifted, line.get_linestyle(), linewidth=0.9, label=line.get_label())
+        
+        
+        
 
     # Rechte y-Achse für das Inset hinzufügen
     inset_ax_right = inset_ax.twinx()
-    inset_ax_right.set_ylim(inset_ax.get_ylim())  # Gleiche Skalierung wie die linke Achse
+    inset_ax_right.set_ylim(1.998-y_mean, 2.002-y_mean)  # Gleiche Skalierung wie die linke Achse
     inset_ax_right.tick_params(axis='y', direction='in', which='both', right=True, labelright=True, labelleft=False)
 
+    # Set inset ticks on the inside
+    inset_ax.tick_params(axis='y', direction='in', which='both', top=True, right=False)
+    inset_ax.tick_params(axis='x', direction='in', which='both', top=True, bottom=True)
+    inset_ax_right.tick_params(axis='y', direction='in', which='both', right=True)
+    
     # Einheitliche Achsenbeschriftung und Skalierung
     inset_ax.set_xlim(6000, 7000)
     inset_ax.set_ylim(0.998, 1.002)  # Einheitliche y-Achsenbegrenzung
-    inset_ax.set_ylabel(r'transmission $T$', fontsize=10)  # Beschriftung für die linke y-Achse
-    inset_ax_right.set_ylabel(r'transmission $T$', fontsize=10)  # Gleiche Beschriftung für die rechte y-Achse
+    #inset_ax.set_ylabel(r'transmission $T$', fontsize=10)  # Beschriftung für die linke y-Achse
+    #inset_ax_right.set_ylabel(r'transmission $T$', fontsize=10)  # Gleiche Beschriftung für die rechte y-Achse
 
+    
     plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
     Image.open(".\\Paper\\Images\\"+filename + ".png").show()
@@ -149,20 +159,22 @@ def plotSNR(datasets, x_min, x_max):
 
     # Plot
     plt.figure(figsize=(8, 5))
-    plt.errorbar(x_numeric, y_numeric, yerr=y_errors, fmt='o', color='blue', capsize=2.5, label='SNR Data Points')
+    plt.errorbar(x_numeric, y_numeric, yerr=y_errors, fmt='o', color='blue', capsize=2.5, label='SNR')
     plt.plot(x_numeric, np.exp(regression_line), color='red', linestyle='--', label=f'linear regression')
     plt.xscale('log')  # Logarithmische Skalierung der x-Achse
     plt.yscale('log')  # Logarithmische Skalierung der y-Achse
-    plt.xlabel('Number of Scans (N)')
-    plt.ylabel('Signal-to-Noise Ratio (SNR)')
+    plt.xlabel('Number of Scans / N')
+    plt.ylabel('Signal to Noise Ratio (SNR)')
     #plt.title('Log-Log Plot of Signal-to-Noise Ratio with Errors')
     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+    plt.tick_params(axis='both', which='major', length=6, width=1.3)  # Größere Tick-Marker für Hauptticks
+    plt.tick_params(axis='both', which='minor', length=4, width=0.9)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)  # Ticks an allen Seiten nach innen
     plt.legend()
 
     # Exponenten und Fehler ausgeben und in LaTeX-Makro schreiben
-    print(f"Exponent (x) from Log-Log Fit: {slope}")
-    print(f"Standard Error of Exponent: {std_err}")
+    #print(f"Exponent (x) from Log-Log Fit: {slope}")
+    #print(f"Standard Error of Exponent: {std_err}")
     writeLatexMacro('stn', slope, std_err)
     plt.savefig('.\\Paper\\Images\\'+'STNLog' + '.png', dpi=600)
     from PIL import Image
@@ -171,11 +183,11 @@ def plotSNR(datasets, x_min, x_max):
 
 
 # Plot für alle Datensätze
-plot_data(N10)
+plot_data(N10, label='N = 10')
 #plot_data(N20)
 #plot_data(N50)
 #plot_data(N75)
-plot_data(N100)
+plot_data(N100, label='N = 100')
 save_and_open()
 
 

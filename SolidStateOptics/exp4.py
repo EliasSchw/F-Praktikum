@@ -66,17 +66,17 @@ def equations(vars, T_fabry_perot_value, R_fabry_perot_value, d):
 
 
 def calculate_nu_beta_and_R(ReflectionData, TransmissionData, d):
-    k_beta_R_List = []
+    nu_beta_R_List = []
     for r, t in zip(bügeln(ReflectionData,1), bügeln(TransmissionData,1)):
-        initial_guess = k_beta_R_List[-1][1:] if k_beta_R_List else [10000, 0.3]  # Use last beta and R or default
+        initial_guess = nu_beta_R_List[-1][1:] if nu_beta_R_List else [10000, 0.3]  # Use last beta and R or default
         #initial_guess = [20000,0.3]
         beta, R = fsolve(equations, initial_guess, args=(t[1], r[1], d))
         if beta > 28000:
-            beta = k_beta_R_List[-1][1] if k_beta_R_List else 10000  # Use last beta or default
+            beta = nu_beta_R_List[-1][1] if nu_beta_R_List else 10000  # Use last beta or default
         if R >1:
-            R = k_beta_R_List[-1][2] if k_beta_R_List else 0.3 
-        k_beta_R_List.append([r[0], beta, R])
-    return k_beta_R_List
+            R = nu_beta_R_List[-1][2] if nu_beta_R_List else 0.3 # R > 1 unphysical
+        nu_beta_R_List.append([r[0], beta, R])
+    return nu_beta_R_List
 
 
 def calculate_kappa(ReflectionData, TransmissionData, d):
@@ -106,7 +106,7 @@ def plot_the_ns(glättwert=0.02):
             n.append([i[0], i[1]])
         plot_data(bügeln(n, glättwert), label=label)
     plt.xlabel(r'wave number $\nu$  / ' + r'$cm^{-1}$')
-    plt.ylabel('n')
+    plt.ylabel('refractive index n')
     save_and_open('RefractiveIndicesSmooth')
      
 def plot_the_betas(title="foo", glättwert=1):
@@ -130,13 +130,15 @@ def plot_the_kappas(title="foo", glättwert = 1):
         kappa = []
         for i in calculate_kappa(bügeln(reflection, glättwert), bügeln(transmission,glättwert), d):
             kappa.append([i[0], i[1]])
+        
+        kappa = [[i[0], i[1] * 10**3] for i in kappa]
+        
+        
         plot_data(kappa, label=label)
-        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-        plt.ylabel('kappa')
 
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-    plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$cm^{-1}$')
-    plt.legend()
+    plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$ 10^{-3}\, cm^{-1}$')
+    plt.legend(fontsize=12)
     save_and_open(filename=title)
      
 def calculate_nu_epsilon_2(reflection, transmission, d):
@@ -162,7 +164,7 @@ def calculate_KomischeFunktion(reflection, transmission, d):
     return komischeFunktion
 
 
-def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, factor, glättwert=0.01, title="foo", varFürFehler=10):
+def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regression, k_max_regression, d, factor, glättwert=0.01, title="foo", varFürFehler=15):
     komischeFunktion = bügeln(calculate_KomischeFunktion(reflection, transmission, d),glättwert)
     
     #Lin Reg Teil
@@ -170,8 +172,8 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     steig, x_intercept, y_intercept = linear_regression(chopped)
     x_vals = np.linspace(x_intercept, k_max_regression, 10)  # Generate x values for the line
     y_vals = steig * x_vals + y_intercept       # Calculate corresponding y values
-    plt.plot(x_vals, y_vals, label='Linear Fit', color='red', linestyle='-')  # Plot the line
-    plt.legend()
+    plt.plot(x_vals, y_vals*10**-56, label='Linear Fit', color='red', linestyle='-')  # Plot the line
+    plt.legend(fontsize=12)
     
     # Fehler LinReg Teil
     steig1, x_intercept1, y_intercept1 = linear_regression(k_chopper(komischeFunktion,
@@ -186,26 +188,25 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     steig_fehler = max(abs(steig1-steig), abs(steig2-steig), abs(steig3-steig), abs(steig4-steig))
     x_intercept_fehler = max(abs(x_intercept1-x_intercept), abs(x_intercept2-x_intercept), abs(x_intercept3-x_intercept), abs(x_intercept4-x_intercept))
     
-        
-    plot_data(k_chopper(komischeFunktion,k_min, k_max), label=title)
+    komischeFunktion56 = [[point[0], point[1] * 10**-56] for point in komischeFunktion]
+    plot_data(k_chopper(komischeFunktion56,k_min, k_max), label=title)
     
-    plt.axvline(x=k_min_regression, color='blue', linestyle='--', label='boundary for fit', linewidth=0.5)
-    plt.legend()
+    plt.axvline(x=k_min_regression, color='blue', linestyle='--', label='Boundary for fit', linewidth=0.5)
+    plt.legend(fontsize=12)
     plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
     
     
     steigKorr = steig/factor
-    #steigKorr_fehler = steig_fehler/factor
+    steigKorr_fehler = steig_fehler/factor
     pulseMatrixElement = steigKorr**(1/4)
-    #sigma_steigKorr = steigKorr_fehler/steigKorr
-    #pulseMatrixElement_fehler = sigma_steigKorr/4 * pulseMatrixElement**2/steigKorr
+    pulseMatrixElement_fehler = steigKorr_fehler / steigKorr /4 * pulseMatrixElement
     
     writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV', x_intercept_fehler*100*c*hbar/e*2*np.pi)
     
-    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??')#, pulseMatrixElement_fehler)
+    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, r'$m\, kg s^{-1}$', pulseMatrixElement_fehler)
     
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')   
-    plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, \left[\frac{A}{Vms}\right]^2$') 
+    plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, 10^{56} \left[\frac{A}{Vms}\right]^2$') 
     save_and_open(filename=title)
     
     
@@ -235,8 +236,8 @@ def calculate_komische_indirect_function(reflection, transmission, d):
     komischeFunktion = []
     for i in calculate_nu_beta_and_R(reflection, transmission, d):
         nu = i[0]
-        beta = i[1]/100+1 #convert to cm^-1 and make sure beta is posivive (constant shift of 1), negative beta is not physical
-        komischeFunktion.append([nu, np.sqrt(beta)*nu*c*2*np.pi])
+        beta = i[1]+100 #make sure beta is posivive (constant shift of 1), negative beta is not physical
+        komischeFunktion.append([nu, np.sqrt(beta)*nu*c*2*np.pi*100 * 10**-17])
     return komischeFunktion
 
 def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_min_regression, 
@@ -274,7 +275,8 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     
     plot_data(k_chopper(komischeIndirFunktion, k_min=k_min, k_max=k_max), label=title)
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-    plt.ylabel(r'$ck \cdot \sqrt{\beta}$ / ' + r'??')
+    
+    plt.ylabel(r'$\omega \cdot \sqrt{\beta}$ / ' + r'$10^{17}\,s^{-1}\,m^{-1/2}$')
     save_and_open(filename=title)
 
 def plot_reflections(glättwert=0.01):
@@ -282,10 +284,12 @@ def plot_reflections(glättwert=0.01):
     
     for reflection, transmission, label, d in samplesOhneSiUn:
         plot_data(bügeln(reflection, glättwert), label=label)
-        plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-        plt.ylabel('Reflection R')
-    plot_data(bügeln(reflectionSiDo, glättwert))    
-    plt.legend()
+    plt.ylabel('Reflection R')
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+    plot_data(bügeln(reflectionSiDo, glättwert), label = "Si Doped") 
+    
+    plt.legend(loc='upper right', bbox_to_anchor=(0.53, 0.73))
+    #plt.legend()
     save_and_open("Low_Res_Reflections")
     
 def plot_transmissions(glättwert=0.01):
@@ -295,7 +299,7 @@ def plot_transmissions(glättwert=0.01):
         plot_data(bügeln(transmission, glättwert), label=label)
         plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
         plt.ylabel('Transmission T')
-    plot_data(bügeln(transmissionSiDo, glättwert))    
+    plot_data(bügeln(transmissionSiDo, glättwert), label="Si Doped")    
     plt.legend()
     save_and_open("Low_Res_Transmissions")
 
