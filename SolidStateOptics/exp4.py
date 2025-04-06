@@ -18,14 +18,14 @@ epsilon_0 = const.epsilon_0  # Vacuum permittivity in F/m
 c= const.c  # Speed of light in m/s
 
 #moch willkürliche Werte
-mu_GaAs = 0.036872 * const.m_e  # Effective mass of electron in GaAs (müssen quelle finden!!)
+mu_GaAs = 0.036872 * const.m_e 
+mu_GaAs_Lukas = 0.05607 * const.m_e
 mu_GaSb = 0.0053207 * const.m_e
 mu_GaSb_Lukas = 0.037188208 * const.m_e
 m_e = const.m_e  # Electron mass in kg
 
-factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaAs**3 * (2*np.pi*c)**4
-factor_GaAs_Altprot = e**2/(epsilon_0**m_e**2*h**5) * (2*mu_GaAs)**(3/2)
-factor_GaSb = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaSb**3 * (2*np.pi*c)**4
+factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaAs_Lukas**3 * (2*np.pi*c)**4
+factor_GaSb = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaSb_Lukas**3 * (2*np.pi*c)**4
 
 
 
@@ -312,9 +312,9 @@ def plot_transmissions(glättwert=0.01):
 #plot_the_ns(0.005)
 
 #Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")
+plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")
 plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], factor_GaAs, glättwert=0.1, title="GaAs Undoped")
-#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3],factor_GaAs, glättwert=0.03, title="GaAs Doped")
+plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3],factor_GaAs, glättwert=0.03, title="GaAs Doped")
 
 
 #plot_reflections(glättwert=0.02)
