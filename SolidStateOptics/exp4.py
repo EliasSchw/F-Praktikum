@@ -304,9 +304,9 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
-#plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
-#                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
-#                              glättwert=0.01, title="Si_Undoped")
+plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
+                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
+                              glättwert=0.01, title="Si_Undoped")
 
 
 #plot_the_kappas(glättwert=0.9, title="kappa")

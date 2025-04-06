@@ -29,7 +29,7 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         macro_content += f"\\,\\text{{{unit}}}"
     macro_content += f"\n"
     
-    macro_content.replace("_","")
+    macro_content = macro_content.replace("_","")
 
 
     # Read the existing file content
