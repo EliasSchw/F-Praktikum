@@ -175,7 +175,7 @@ def plotSNR(datasets, x_min, x_max):
     # Exponenten und Fehler ausgeben und in LaTeX-Makro schreiben
     #print(f"Exponent (x) from Log-Log Fit: {slope}")
     #print(f"Standard Error of Exponent: {std_err}")
-    writeLatexMacro('stn', slope, std_err)
+    writeLatexMacro('stn', slope, '', std_err)
     plt.savefig('.\\Paper\\Images\\'+'STNLog' + '.png', dpi=600)
     from PIL import Image
     Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
