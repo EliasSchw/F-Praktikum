@@ -22,8 +22,6 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         valueStr = f"{value:.{digitsIfNoError-1}f}"
 
         macro_content = f"\\newcommand{{\\{macro_name}}}{{\\left({valueStr}"
-
-    # Add unit if given
     macro_content += f"\\right) \\cdot 10^{{{value_order}}}}}"
     if unit:
         macro_content += f"\\,\\text{{{unit}}}"
