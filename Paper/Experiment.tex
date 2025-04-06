@@ -178,6 +178,8 @@ The method of obtaining the bandgap and pulse matrix element is shown in fig.\,\
     \caption{Determination of the bandgap and pulse matrix element for a doped GsAs sample.}
     \label{fig:GaAsDopedBandGap}
 \end{figure}
+The interband excitation can clearly be seen and follows an exponential behaviour. This behaviour can be drescribed
+with the phenomenon of the Urbach tail \cite{Script}.
 The determined values for the given direct semiconductor samples are shown in tab.\,\ref{tab:directBandgapPulseMatrixElement}.
 The reduced mass $\mu$ is calculated by using eq:\ref{eq:reduced_mass}:
 \begin{align}
@@ -228,6 +230,12 @@ The comparison of values is only possible with intrinsic materials, because no i
 the doping material and concentration is given for the used doped samples. However, the measured values
 for the bandgap are in good agreement with the literature values considering this.
 \subsection{Indirect semiconductor}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Si_Undoped.png}
+    \caption{Determination of the bandgap and pulse matrix element for a undoped Si sample.}
+    \label{fig:SiUndopedBandGap}
+\end{figure}
 For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
 band to the conduction band (see \ref{sec:semiconductors}).
 The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\sqrt{\beta\omega^2}$ over the wavenumber.
@@ -236,12 +244,6 @@ both linear regimes to $\sqrt{\beta\omega^2}=0$, intercepts for $E_\text{g}-\hba
 and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
 whereas the difference of both intercepts divided by two gives the phonon energy $\hbar\Omega_\text{ph}$.
 An example for the extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Images/Si_Undoped.png}
-    \caption{Determination of the bandgap and pulse matrix element for a undoped Si sample.}
-    \label{fig:SiUndopedBandGap}
-\end{figure}
 The determined values for the given indirect semiconductor samples are shown in tab.\,\ref{tab:indirectBandgapPulseMatrixElement}.
 \begin{table}[h]
     \centering
