@@ -20,10 +20,12 @@ c= const.c  # Speed of light in m/s
 #moch willkürliche Werte
 mu_GaAs = 0.036872 * const.m_e  # Effective mass of electron in GaAs (müssen quelle finden!!)
 mu_GaSb = 0.0053207 * const.m_e
+mu_GaSb_Lukas = 0.037188208 * const.m_e
 m_e = const.m_e  # Electron mass in kg
 
-factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaAs**3
-factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaSb**3
+factor_GaAs = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaAs**3 * (2*np.pi*c)**4
+factor_GaAs_Altprot = e**2/(epsilon_0**m_e**2*h**5) * (2*mu_GaAs)**(3/2)
+factor_GaSb = e**4*8/(epsilon_0**2*m_e**4*c**3*h**5) * mu_GaSb**3 * (2*np.pi*c)**4
 
 
 
@@ -78,11 +80,11 @@ def calculate_nu_beta_and_R(ReflectionData, TransmissionData, d):
 
 
 def calculate_kappa(ReflectionData, TransmissionData, d):
-    k_beta_R_List = calculate_nu_beta_and_R(ReflectionData, TransmissionData, d)
-    k_kappa_R_List = []
-    for i in k_beta_R_List:
-        k_kappa_R_List.append([i[0], i[1]/(2*i[0]*100), i[2]]) # 100 wegen cm^-1
-    return k_kappa_R_List
+    nu_beta_R_List = calculate_nu_beta_and_R(ReflectionData, TransmissionData, d)
+    nu_kappa_R_List = []
+    for i in nu_beta_R_List:
+        nu_kappa_R_List.append([i[0], i[1]/(2*2*np.pi*i[0]*100), i[2]]) # 100 wegen cm^-1
+    return nu_kappa_R_List
 
 def calculate_k_n1_kappa(ReflectionData, TransmissionData, d):
     k_kappa_R_List = calculate_kappa(ReflectionData, TransmissionData, d)
@@ -133,7 +135,7 @@ def plot_the_kappas(title="foo", glättwert = 1):
         plt.ylabel('kappa')
 
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-    plt.ylabel(r'absorption coefficient $\kappa$ / ' + r'$cm^{-1}$')
+    plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$cm^{-1}$')
     plt.legend()
     save_and_open(filename=title)
      
@@ -156,7 +158,7 @@ def calculate_KomischeFunktion(reflection, transmission, d):
     
     komischeFunktion = []
     for nu, epsilon_2 in nu_epsilon_2:
-        komischeFunktion.append([nu, (epsilon_2*c**2*nu**2*4*np.pi**2/(100**2))**2])
+        komischeFunktion.append([nu, (epsilon_2*c**2*nu**2*4*np.pi**2*(100**2))**2])
     return komischeFunktion
 
 
@@ -187,24 +189,26 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
         
     plot_data(k_chopper(komischeFunktion,k_min, k_max), label=title)
     
-    # Plot a vertical line at k_min_regression
     plt.axvline(x=k_min_regression, color='blue', linestyle='--', label='boundary for fit', linewidth=0.5)
     plt.legend()
     plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
     
     
     steigKorr = steig/factor
-    steigKorr_fehler = steig_fehler/factor
+    #steigKorr_fehler = steig_fehler/factor
     pulseMatrixElement = steigKorr**(1/4)
-    sigma_steigKorr = steigKorr_fehler/steigKorr
-    pulseMatrixElement_fehler = sigma_steigKorr/4 * pulseMatrixElement**2/steigKorr
+    #sigma_steigKorr = steigKorr_fehler/steigKorr
+    #pulseMatrixElement_fehler = sigma_steigKorr/4 * pulseMatrixElement**2/steigKorr
     
     writeLatexMacro('bandgap_' + title.replace(' ','_'), x_intercept*100*c*hbar/e*2*np.pi, 'eV', x_intercept_fehler*100*c*hbar/e*2*np.pi)
     
-    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??', pulseMatrixElement_fehler)
+    writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, '??')#, pulseMatrixElement_fehler)
     
-    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')    
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')   
+    plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, \left[\frac{A}{Vms}\right]^2$') 
     save_and_open(filename=title)
+    
+    
     
 def linear_regression(komischeFunktion):
     """
@@ -296,36 +300,26 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
-
-
-# beta_data = calculate_k_beta_and_R(reflectionSiUnDo, transmissionSiUnDo, samplesOhneSiUn[0][3])
-# beta_plot = [[point[0], point[1] / 100 + 1] for point in beta_data]  # Convert beta to cm^-1
-# plt.figure()
-# plot_data(beta_plot, label="Si Undoped")
-# plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-# plt.ylabel(r'absorption coefficient $\beta$ / ' + r'$cm^{-1}$')
-# plt.legend()
-# save_and_open(filename="SiUnDo_beta_plot")
-
-
 #plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
 #                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
 #                              glättwert=0.01, title="Si_Undoped")
 
 
-# plot_the_kappas(glättwert=0.9, title="kappa")
+#plot_the_kappas(glättwert=0.9, title="kappa")
 
-# plot_the_betas(title="betas", glättwert=0.9)
+#plot_the_betas(title="betas", glättwert=0.9)
 
-# plot_the_ns(0.005)
+#plot_the_ns(0.005)
 
 #Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaAs ,glättwert=0.1, title="GaSb Doped")
-#plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], glättwert=0.1, title="GaAs Undoped")
-#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3], glättwert=0.03, title="GaAs Doped")
+#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")
+plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], factor_GaAs, glättwert=0.1, title="GaAs Undoped")
+#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3],factor_GaAs, glättwert=0.03, title="GaAs Doped")
 
 
-plot_reflections(glättwert=0.02)
-plot_transmissions(glättwert=1)
+#plot_reflections(glättwert=0.02)
+#plot_transmissions(glättwert=1)
+
+
 
 
