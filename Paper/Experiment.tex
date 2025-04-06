@@ -1,8 +1,8 @@
-
 \section{Experiment}
-All following transmission and reflection experiments are done at ambient air in the chamber. The evaluation of the signal with a 'Mertz' phase
-correction is done automatically by the system. Furthermore, the spectal range for all measurements is set to: $(1500-15000)\,\text{cm}^{-1}$.
-The thickness of the samples are given in tab.\,\ref{tab:sampleThickness}.
+All transmission and reflection experiments were conducted in ambient air within the chamber. 
+The evaluation of the signal with the 'Mertz' phase correction is performed automatically by the system. 
+The spectral range for all measurements is set to $(1500-15000)\,\text{cm}^{-1}$. 
+The thicknesses of the samples are provided in Tab.\,\ref{tab:sampleThickness}.
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c}
@@ -17,74 +17,74 @@ The thickness of the samples are given in tab.\,\ref{tab:sampleThickness}.
     \caption{Thickness of the samples used for the measurements \cite{Anleitung}.}
     \label{tab:sampleThickness}
 \end{table}
-\subsection{Gas absorption}
+\subsection{Gas Absorption}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/GasAbsorption.png}
-    \caption{Normalized transmission of an empty chamber filled with ambient air. The spectral
-    ranges for gas absorption are highlighted.}
+    \caption{Normalized transmission of an empty chamber filled with ambient air. 
+    The spectral ranges for gas absorption are highlighted.}
     \label{fig:GasAbsorption}
 \end{figure}
-To identifythe spectral ranges where the result is influenced by the gas absorption, a measurement at ambient air with a resolution
-of $0.3\,\text{cm}^{-1}$ and $N=10$ scans is performed. 
-The measurement at air is normalized. The corresponding reference measurement is done under vacuum.
-One expects gas absorption dips at frequencies that are similar to the resonance frequencies of the air molecules.
-The wavenumbers of the measured gas absorption is shown in tab\,\ref{tab:gasAbsorption}
+To identify the spectral ranges where the results are influenced by gas absorption, 
+a measurement in ambient air with a resolution of $0.3\,\text{cm}^{-1}$ and $N = 10$ scans was performed. 
+The measurement in air was normalized, and the corresponding reference measurement was carried out 
+under vacuum. Gas absorption dips are expected at frequencies corresponding to the resonance frequencies 
+of the air molecules. The wavenumbers for the measured gas absorption are shown in Tab.\,\ref{tab:gasAbsorption}.
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c|c|c}
         \hline\hline
-        $\text{CO}_2$ & $\text{H}_2\text{O}$ $\text{CO}_2$ & $\text{H}_2\text{O}$ & $\text{H}_2\text{O}$ \\\hline
+        $\text{CO}_2$ & $\text{H}_2\text{O}$ $\text{CO}_2$ & $\text{H}_2\text{O}$ & $\text{H}_2\text{O}$ \\ \hline
         $2350\,\text{cm}^{-1}$ & $3750\,\text{cm}^{-1}$ & $5320\,\text{cm}^{-1}$ & $7180\,\text{cm}^{-1}$ \\
         \hline\hline
     \end{tabular}
-    \caption{Regions of strong gas absorption in fig\,\ref{fig:GasAbsorption}. The measured values agree
-    with literature values for $\text{H}_2\text{O}$ and $\text{CO}_2$ \cite{cite:GasAbsorption}.}
+    \caption{Regions of strong gas absorption in Fig.\,\ref{fig:GasAbsorption}. 
+    The measured values are in agreement with literature values for $\text{H}_2\text{O}$ and $\text{CO}_2$ \cite{cite:GasAbsorption}.}
     \label{tab:gasAbsorption}
 \end{table}
-All the measured data agrees with the literature values for the gases $\text{H}_2\text{O}$ and $\text{CO}_2$.
-\subsection{Signal to noise ratio}
+All the measured data agree with the literature values for the gases $\text{H}_2\text{O}$ and $\text{CO}_2$.
+\subsection{Signal-to-Noise Ratio}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/SignalToNoise.png}
-    \caption{Transmission measurements for $N_\text{scan}=10$ and $N_\text{scan}=100$ mirror passes.
-    The inset shows the part used for evaluation of the signal to noise ratio (see fig.\,\ref{fig:StNlog})}
+    \caption{Transmission measurements for $N_\text{scan} = 10$ and $N_\text{scan} = 100$ mirror passes. The inset shows the part used for the evaluation of the signal-to-noise ratio (see Fig.\,\ref{fig:StNlog}).}
     \label{fig:StN}
 \end{figure}
-To determine the influence of the number of scans $N_\text{scan}$ on the signal to noise ratio, measurements with a resolution
-of $4\,\text{cm}^{-1}$ are done at various $N_\text{scan}$. Those are transmission measurements with ambient air.
-Between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$ a region with generally less noise (see fig.\,\ref{fig:StN})
-and no gas absorption (see fig.\,\ref{fig:GasAbsorption}) is identified. To quantitatively examine the
-behaviour of the signal to noise ratio, the mean value $T_\text{mean}$ is divided by the Standard deviation
-$T_\text{std}$ for every transmission measurement. 
-Thus the signal to noise ratio $SNR$ is given by:
+To determine the influence of the number of scans, $N_\text{scan}$, 
+on the signal-to-noise ratio, measurements with a resolution of $4\,\text{cm}^{-1}$ were performed at 
+various values of $N_\text{scan}$. These are transmission measurements with ambient air. 
+A region with generally less noise (see Fig.\,\ref{fig:StN}) and no gas absorption 
+(see Fig.\,\ref{fig:GasAbsorption}) was identified between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$. 
+To quantitatively examine the behavior of the signal-to-noise ratio, 
+the mean value $T_\text{mean}$ is divided by the standard deviation $T_\text{std}$ for each 
+transmission measurement. Thus, the signal-to-noise ratio $SNR$ is given by:
 \begin{align}
     SNR = \frac{T_\text{mean}}{T_\text{std}}
 \end{align}
-Theoretically, one expects $SNR$ to grow according to:
+Theoretically, one expects the $SNR$ to grow according to:
 \begin{align}
     SNR = N^{a}
 \end{align}
-with $a=0.5$ \cite{Script}. To check this dependency, the signal
-to noise ratio is plottet for various N's in a double logarithmic scale.
+with $a = 0.5$ \cite{Script}. To check this dependency, 
+the signal-to-noise ratio is plotted for various values of $N$ in a double logarithmic scale.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/STNLog.png}
-    \caption{$SNR$ over the number of mirror passes in double logarithmic scaling using the specral range between
-    $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$.}
+    \caption{$SNR$ versus the number of mirror passes in double 
+    logarithmic scaling using the spectral range between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$.}
     \label{fig:StNlog}
 \end{figure}
-From the slope of the linear regression $a$ can be determined as:
+From the slope of the linear regression, $a$ can be determined as:
 \begin{align}
-    a = \stn 
-\end{align} 
-which matches with the expectation.
+    a = \stn
+\end{align}
+which matches the expectation.
 
 
 \subsection{Transmission at high resolution}\label{sec:transhighRes}
-The transmission spectra shown in fig.\,\ref{fig:highResTransNu} is measured with a 
-resolution of $0.3\,\text{cm}^{-1}$ and $N=50$ mirror passes. The goal of this precise measurement is to
-determine the distance between the oscillations seen in the inset of fig.\,\ref{fig:highResTransNu}.
+The transmission spectra shown in fig.\,\ref{fig:highResTransNu} are measured with a resolution of 
+$0.3\,\text{cm}^{-1}$ and $N=50$ mirror passes. The aim of this precise measurement is to 
+determine the distance between the oscillations seen in the inset of the figure.\,\ref{fig:highResTransNu}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Transmission_High_Res_GaAs_Doped_N50.png}
@@ -109,15 +109,15 @@ This contains of about $50$ to $70$ oscillations and is done for different waven
     \caption{Refractive indices for different values of the wavenumer. The values are calculated by using eq.\,\ref{eq:delta_nu}.}
     \label{fig:Eliasistzulangsam}
 \end{figure}
-Neglectable influences on the error are for example the picket fence effect, or the change in wavelength
-over the spectral range. The most significant contribution to the error is the inhomogenity of the thickness of the sample,
-which is assumed to be $2\%$. For GaSb the calculation of the refractive index is not possible, because of
-the ????. 
+Negligible influences on the error are, for example, 
+the picket fence effect or the change in wavelength over the spectral range. 
+The most significant contribution to the error is the inhomogeneity of the sample thickness, 
+which is assumed to be $2\%$. For GaSb it is not possible to calculate the refractive index because of the ????.
 
 \subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
 The reflection and transmission spectra shown in fig.\,\ref{fig:highResRef} and \ref{fig:highResTrans} 
 are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
-but with the same amount of mirror passes ($N=50$) to save measurement time. 
+but with the same number of mirror passes ($N=50$) to save measurement time. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Reflections.png}
@@ -130,15 +130,15 @@ but with the same amount of mirror passes ($N=50$) to save measurement time.
     \caption{Normalized transmission spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResTrans}
 \end{figure}
-Both transmission and reflection spectra behave as expected. When approaching the bandgap of the materials,
-transmission and reflection drop nearly to zero. This happens because absorption rises because the light
-has enough energy to excite the electrons form valence bant to conduction band.
-The transmission of the doped Si sample is barely recordable, and over the whole spectral range near zero. 
-This is due to the high doping concentration, which leads to an increase of the plasma frequency.
-Consequently, the sample behaves more like a metal than a semiconductor.??AP??
+Both the transmission and reflection spectra behave as expected. As the band gap of the materials is approached, 
+transmission and reflection drop to near zero. This happens because the absorption increases as the light has enough 
+energy to excite the electrons from the valence band to the conduction band.
+The transmission of the doped Si sample is barely detectable and is close to zero over the entire spectral range. 
+This is due to the high doping concentration which leads to an increase in the plasma frequency.
+As a result, the sample behaves more like a metal than a semiconductor.
 \subsection{Refractive index $N$}
 The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
-The absorption coefficient can be determined by numerically solving equations \ref{eq:R} and \ref{eq:T},
+The absorption coefficient can be determined by numerically solving the equations \ref{eq:R} and \ref{eq:T},
 using the measured reflection and transmission spectra (see sec.\,\ref{sec:RTlowRes}).
 The result is shown in fig.\,\ref{fig:beta}.
 \begin{figure}[h]
@@ -154,29 +154,29 @@ The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown i
     \caption{Extiction coefficient $\kappa$ of different semiconductor samples.}
     \label{fig:kappa}
 \end{figure}
-With the knowledge of the extiction coefficient $\kappa$ an eq.\,\ref{eq:R1}, the real part of the refractive
-index $n$ can be calculated. The result is shown in fig.\,\ref{fig:n}.
+Knowing the extinction coefficient $\kappa$ and eq.\,\ref{eq:R1}, 
+the real part of the refractive index $n$ can be calculated. 
+The result is shown in fig.\,\ref{fig:n}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
     \caption{Refractive index $n$ of different semiconductor samples.}
     \label{fig:n}
 \end{figure}
-The transmission of the doped Si sample is barely recordable, which is why this sample is not used for the
-calculation of the optical constants.
-
+The transmission of the doped Si sample is barely detectable, 
+so this sample is not used to calculate the optical constants.
 
 \subsection{Bandgap and pulse matrix element}
 \subsubsection{Direct semiconductor}
-The band gap $E_\text{g}$ and pulse matrix element $|p_\text{cv}|$ can be evaluated by using eq.\,\ref{eq:epsilon_d}.
-When plotting $(\epsilon''^2\omega^2)^2$ over the wave number $k$ a linear regime around the bandgap can be found.
-The dependency given in eq.\,\ref{epsilon_d} allows the determination of the bandgap by extrapolating the linear regime to
-$(\epsilon''^2\omega^2)^2=0$ to obtain the bandgap. $|p_\text{cv}|$ is given by the slope of the extrapolation.
-The method of obtaining the bandgap and pulse matrix element is shown in fig.\,\ref{fig:GaAsDopedBandGap}.
+The band gap $E_\text{g}$ and the pulse matrix element $|p_\text{cv}|$ can be evaluated using eq.\,\ref{eq:epsilon_d}.
+If $(\epsilon''^2\omega^2)^2$ is plotted against the wave number $k$, a linear regime around the bandgap can be found.
+The dependence given in eq.\,\ref{epsilon_d} allows the bandgap to be determined by extrapolating the linear regime to $(\epsilon''^2\omega^2)^2=0$ to obtain the bandgap.
+$ p_\text{cv}|$ is given by the slope of the extrapolation.
+The method of obtaining the bandgap and the pulse matrix element is shown in fig.\,\ref{fig:GaAsDopedBandGap}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/GaAs Doped.png}
-    \caption{Determination of the bandgap and pulse matrix element for a doped GsAs sample.}
+    \caption{Determination of the bandgap and pulse matrix element for a doped GaAs sample.}
     \label{fig:GaAsDopedBandGap}
 \end{figure}
 The interband excitation can clearly be seen and follows an exponential behaviour. This behaviour can be drescribed
