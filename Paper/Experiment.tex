@@ -95,7 +95,7 @@ determine the distance between the oscillations seen in the inset of the figure.
 Using equation \ref{eq:delta_nu} the refractive Index $N$ can be calculated.
 The distance between the oscillations is averaged over the spectral range of $1000\,\text{cm}^{-1}$
 in positive and negative direction from the assigned wavenumber and measured between the corresponding peaks
-like shown in fig.\,\ref{peaks}. 
+like shown in fig.\,\ref{fig:peaks}. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/LewiPeak.png}
@@ -179,10 +179,9 @@ The method of obtaining the bandgap and the pulse matrix element is shown in fig
     \caption{Determination of the bandgap and pulse matrix element for a doped GaAs sample.}
     \label{fig:GaAsDopedBandGap}
 \end{figure}
-The interband excitation can clearly be seen and follows an exponential behaviour. This behaviour can be drescribed
-with the phenomenon of the Urbach tail \cite{Script}
-The determined values for the given direct semiconductor samples are shown in tab.\,\ref{tab:directBandgapPulseMatrixElement}.
-The reduced mass $\mu$ is calculated by using eq:\ref{eq:reduced_mass}:
+The interband excitation is clearly visible and follows an exponential behaviour. This behaviour can be described by the Urbach tail phenomenon \cite{Script}
+The values determined for the given direct semiconductor samples are shown in tab.\,\ref{tab:directBandgapPulseMatrixElement}.
+The reduced mass $\mu$ is calculated using eq:\ref{eq:reduced_mass}:
 \begin{align}
     \mu = (\frac{1}{m^*_\text{e}}+\frac{1}{m^*_\text{hh}})^{-1} \label{eq:reduced_mass}
 \end{align}
@@ -227,9 +226,10 @@ of the intrinsic materials are given in tab.\ref{tab:literaturedirectBandgapPuls
     \caption{Bandgap energies for intrinsic GaAs and GaSb at room temperature \cite{ioffe}.}
     \label{tab:literaturedirectBandgapPulseMatrixElement}
 \end{table}
-The comparison of values is only possible with intrinsic materials, because no information about
-the doping material and concentration is given for the used doped samples. However, the measured values
-for the bandgap are in good agreement with the literature values considering this.
+The comparison of values is only possible for intrinsic materials, 
+as no information on the doping material and concentration is given for the doped samples used. 
+However, the measured bandgap values are in good agreement with literature values when this is taken 
+into account.
 \subsection{Indirect semiconductor}
 \begin{figure}[h]
     \centering
@@ -237,15 +237,17 @@ for the bandgap are in good agreement with the literature values considering thi
     \caption{Determination of the bandgap and pulse matrix element for a undoped Si sample.}
     \label{fig:SiUndopedBandGap}
 \end{figure}
-For indirect semiconductors, an additional phonon is required for a electron to be excited form the valence
-band to the conduction band (see \ref{sec:semiconductors}).
-The bandgap can be determined by using eq.\,\ref{eq:epsilon_id}, by plotting $\sqrt{\beta\omega^2}$ over the wavenumber.
-This time, two lineare regimes should be found, which can be seen in the equation. When extrapolating
-both linear regimes to $\sqrt{\beta\omega^2}=0$, intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$
-and $E_\text{g}+\hbar\Omega_\text{ph}$ emerge. Adding both intercepts and deviding by two gives the bandgap,
-whereas the difference of both intercepts divided by two gives the phonon energy $\hbar\Omega_\text{ph}$.
-An example for the extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
-The determined values for the given indirect semiconductor samples are shown in tab.\,\ref{tab:indirectBandgapPulseMatrixElement}.
+For indirect semiconductors, an additional phonon is required to excite an electron from 
+the valence band to the conduction band (see \ref{sec:semiconductors}).
+The band gap can be determined using eq.\,\ref{eq:epsilon_id} by plotting $\sqrt{\beta\omega^2}$ 
+over the wavenumber.
+This time we should find two linear regimes, as shown in the equation. Extrapolating both linear 
+regimes to $\sqrt{\beta\omega^2}=0$ gives intercepts for $E_\text{g}-\hbar\Omega_\text{ph}$ and $E_\text{g}+\hbar\Omega_\text{ph}$. 
+Adding both intercepts and dividing by two gives the band gap, while the difference of both intercepts divided by two gives the phonon 
+energy $\hbar\Omega_\text{ph}$.
+An example of extrapolation is given in fig.\,\ref{fig:SiUndopedBandGap}.
+The values obtained for the given indirect semiconductor samples are shown in 
+tab.\,\ref{tab:indirectBandgapPulseMatrixElement}.
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c}
