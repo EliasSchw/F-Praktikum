@@ -72,9 +72,9 @@ def plotReflectivity(d, tau1, tau2, tau3, tau4, tau5, k_max):
     ax.axvline(x=k_plasma*10**-8, color='black', linestyle='--', label=r'$\nu_{plasma}$')
     ax.legend(fontsize=14)
 
-    plt.savefig('Paper/Images/foo.png', dpi=400)
+    plt.savefig('Paper/Images/theoretical_reflectivity.png', dpi=400)
     from PIL import Image
-    Image.open("Paper/Images/foo.png").show()
+    Image.open("Paper/Images/theoretical_reflectivity.png").show()
     plt.clf()
     plt.close()
 

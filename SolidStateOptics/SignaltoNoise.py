@@ -39,7 +39,7 @@ def save_and_open(filename="SignalToNoise", title=""):
     plt.legend(fontsize=16, loc='upper center')  # Legende vergrößert und in der oberen Mitte positioniert
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    plt.xlabel(r'wave number / $cm^{-1}$', fontsize=18)  # x-Achse im LaTeX-Stil benannt
+    plt.xlabel(r'wave number $\nu$ / $cm^{-1}$', fontsize=18)  # x-Achse im LaTeX-Stil benannt
     plt.ylabel(r'transmission $T$', fontsize=18)  # y-Achse im LaTeX-Stil benannt
 
     # Inset-Plot hinzufügen
@@ -173,7 +173,7 @@ def plotSNR(datasets, x_min, x_max):
     plt.gca().set_yticks(y_ticks)
     plt.gca().set_yticklabels(y_ticks)  # Format as plain numbers
 
-    plt.xlabel('Number of Scans / N', fontsize=16)
+    plt.xlabel(r'Number of Scans / $N_{scan}$', fontsize=16)
     plt.ylabel(r'Signal to Noise Ratio (SNR) / $10^{3}$', fontsize=16)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
@@ -193,15 +193,15 @@ def plotSNR(datasets, x_min, x_max):
     Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
     plt.clf()
 
-'''
+
 # Plot für alle Datensätze
-plot_data(N10, label='N = 10')
+plot_data(N10, label=r'$N_{scan}$ = 10')
 #plot_data(N20)
 #plot_data(N50)
 #plot_data(N75)
-plot_data(N100, label='N = 100')
+plot_data(N100, label=r'$N_{scan}$ = 100')
 save_and_open()
-'''
 
-plotSNR(datasets, x_min, x_max)
+
+#plotSNR(datasets, x_min, x_max)
 #save_and_open()

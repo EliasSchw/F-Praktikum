@@ -205,8 +205,8 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     
     writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, r'$m\, kg s^{-1}$', pulseMatrixElement_fehler)
     
-    plt.xticks(fontsize=16)
-    plt.yticks(fontsize=16)
+    plt.xticks(fontsize=18)
+    plt.yticks(fontsize=18)
     
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=19)   
     plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, 10^{56} \left[\frac{A}{Vms}\right]^2$', fontsize=19) 
@@ -302,12 +302,15 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     writeLatexMacro("bandgap_" + title, bandgap, 'eV', bandgap_fehler)
     writeLatexMacro("hquerOMEGA_" + title, hquerOMEGA, 'eV', hquerOMEGA_fehler) # ist der gleiche fehler wie für die bandgap
     
-    plt.legend()
+    plt.legend(fontsize=18)
     
     plot_data(k_chopper(komischeIndirFunktion, k_min=k_min, k_max=k_max), label=title)
-    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
     
-    plt.ylabel(r'$\omega \cdot \sqrt{\beta}$ / ' + r'$10^{17}\,s^{-1}\,m^{-1/2}$')
+    plt.xticks(fontsize=18)
+    plt.yticks(fontsize=18)
+    
+    plt.ylabel(r'$\omega \cdot \sqrt{\beta}$ / ' + r'$10^{17}\,s^{-1}\,m^{-1/2}$', fontsize=18)
     save_and_open(filename=title)
 
 def plot_reflections(glättwert=0.01):
@@ -335,9 +338,9 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
-#plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
-#                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
-#                              glättwert=0.01, title="Si_Undoped")
+plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
+                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
+                              glättwert=0.01, title="Si_Undoped")
 
 
 #plot_the_kappas(glättwert=0.9, title="kappa")

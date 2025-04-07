@@ -62,10 +62,11 @@ def plotReflectivitySemiconductor(d, tau2, tau3, tau4, k_max_semicon):
     plt.axvline(x=k_plasma_semicon / 1000, color='black', linestyle='--', label=r'$k_{plasma}$')
 
     # Achsentitel und Bereich anpassen
-    plt.xlabel(r'wave number $\nu$ / $10^3 \, \mathrm{m}^{-1}$')
-    plt.ylabel('reflectivity R')
-    plt.title('Theoretical reflectivity of a semiconductor')
-    plt.legend()
+    plt.xlabel(r'wave number $\nu$ / $10^3 \, \mathrm{m}^{-1}$',fontsize=15)
+    plt.ylabel('reflectivity R', fontsize=15)
+    plt.xticks(fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.legend(fontsize=15)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
     plt.xlim(left=0, right=1)
     plt.ylim(bottom=0, top=1)
