@@ -45,6 +45,11 @@ All the measured data agree with the literature values for the gases $\text{H}_2
     \label{fig:GasAbsorption}
 \end{figure}
 \subsection{Signal-to-Noise Ratio}
+To determine the influence of the number of scans, $N_\text{scan}$, 
+on the signal-to-noise ratio, measurements with a resolution of $4\,\text{cm}^{-1}$ were performed at 
+various values of $N_\text{scan}$. These are transmission measurements with ambient air. 
+A region with generally less noise (see Fig.\,\ref{fig:StN}) and low gas absorption 
+between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$ was picked. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/SignalToNoise.png}
@@ -52,11 +57,13 @@ All the measured data agree with the literature values for the gases $\text{H}_2
     The inset shows the part used for the evaluation of the signal-to-noise ratio (see Fig.\,\ref{fig:StNlog}).}
     \label{fig:StN}
 \end{figure}
-To determine the influence of the number of scans, $N_\text{scan}$, 
-on the signal-to-noise ratio, measurements with a resolution of $4\,\text{cm}^{-1}$ were performed at 
-various values of $N_\text{scan}$. These are transmission measurements with ambient air. 
-A region with generally less noise (see Fig.\,\ref{fig:StN}) and low gas absorption 
-between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$ was picked. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/STNLog.png}
+    \caption{$SNR$ versus the number of mirror passes in double 
+    logarithmic scaling using the spectral range between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$.}
+    \label{fig:StNlog}
+\end{figure}
 To quantitatively examine the behavior of the signal-to-noise ratio, 
 the mean value $T_\text{mean}$ is divided by the standard deviation $T_\text{std}$ for each 
 transmission measurement. Thus, the signal-to-noise ratio $SNR$ is given by:
@@ -69,19 +76,11 @@ Theoretically, one expects the $SNR$ to grow according to:
 \end{align}
 with $a = 0.5$ \cite{Script}. To check this dependency, 
 the signal-to-noise ratio is plotted for various values of $N_\text{scan}$ in a double logarithmic scale.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Images/STNLog.png}
-    \caption{$SNR$ versus the number of mirror passes in double 
-    logarithmic scaling using the spectral range between $6000\,\text{cm}^{-1}$ and $7000\,\text{cm}^{-1}$.}
-    \label{fig:StNlog}
-\end{figure}
 From the slope of the linear regression, $a$ can be determined as:
 \begin{align}
     a = \stn
 \end{align}
 which matches the expectation.
-
 
 \subsection{Transmission at high resolution}\label{sec:transhighRes}
 The transmission spectra shown in fig.\,\ref{fig:highResTransNu} are measured with a resolution of 
@@ -98,14 +97,14 @@ Using equation \ref{eq:delta_nu} the refractive Index $N$ can be calculated.
 The distance between the oscillations is averaged over the spectral range of $100\,\text{cm}^{-1}$
 in positive and negative direction from the assigned wavenumber (contains about $50$ to $70$ oscillations) and measured between the corresponding peaks
 like shown in fig.\,\ref{fig:peaks}.
-Peak detection is only possible for spectral ranges with low noise. Fig.\,\ref{fig:peaks} shows a spectral range
-with average noise, where it is possible to detect the peaks.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/LewiPeak.png}
     \caption{Distance between the oscillation peaks.}
     \label{fig:peaks}
 \end{figure}
+Peak detection is only possible for spectral ranges with low noise. Fig.\,\ref{fig:peaks} shows a spectral range
+with average noise, where it is possible to detect the peaks.
 The method is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzulangsam}
 \begin{figure}[h]
     \centering
@@ -116,21 +115,21 @@ The method is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzul
 For the doped GaSb sample, determination of the refractive index was not possible, as the signal was too noisy.
 Furthermore, the refractive index of the other samples could also only be determined in a limited, less noisy spectral range.
 The most significant contribution to the error is the sample thickness, which might differ from the given value. 
-The error is assumed to be $2\%$. For GaSb it is not possible to calculate the refractive index because of the ???.
+The error is assumed to be $2\%$.
 Negligible influences on the error are, for example, 
 the picket fence effect or the change in wavelength over the spectral range. 
 
 \subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
-The reflection and transmission spectra shown in fig.\,\ref{fig:lowResRef} and \ref{fig:lowResTrans} 
-are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
-but with the same number of mirror passes ($N_\text{scan}=50$) to save measurement time.
-Smoothening of the spectra is done by using exponential smoothening.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Reflections.png}
     \caption{Normalized reflection spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResRef}
 \end{figure}
+The reflection and transmission spectra shown in fig.\,\ref{fig:lowResRef} and \ref{fig:lowResTrans} 
+are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
+but with the same number of mirror passes ($N_\text{scan}=50$) to save measurement time.
+Smoothening of the spectra is done by using exponential smoothening.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Transmissions.png}
@@ -145,16 +144,16 @@ The transmission of the doped Si sample is barely detectable and is close to zer
 This is due to the high doping concentration which leads to an increase in the plasma frequency.
 As a result, the sample behaves more like a metal than a semiconductor.
 \subsection{Refractive index $N$}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.48\textwidth]{Images/betas.png}
+    \caption{Absorption coefficient $\beta$ of different semiconductor samples, smoothened.}
+    \label{fig:beta}
+\end{figure}
 The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
 The absorption coefficient and $R_1$ can be determined by numerically solving the equations \ref{eq:Rwophase} and \ref{eq:T},
 using the measured reflection and transmission spectra (see sec.\,\ref{sec:RTlowRes}).
 The result is shown in fig.\,\ref{fig:beta}.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Images/betas.png}
-    \caption{Absorption coefficient $\beta$ of different semiconductor samples, smoothened.}
-    \label{fig:beta}
-\end{figure}
 The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown in fig.\,\ref{fig:kappa}.
 \begin{figure}[h]
     \centering
@@ -165,14 +164,13 @@ The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown i
 Knowing the $\kappa$, $R_1$ and eq.\,\ref{eq:R1}, 
 the real part of the refractive index $n$ can be calculated. 
 The result is shown in fig.\,\ref{fig:n}.
+The method is not suitable for the doped Si sample.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
     \caption{Refractive index $n$ of different semiconductor samples (smoothened).}
     \label{fig:n}
 \end{figure}
-The method is not suitable for the doped Si sample.
-
 \subsection{Bandgap and pulse matrix element}
 \subsubsection{Direct semiconductor}
 The band gap $E_\text{g}$ and the absolute value of the pulse matrix element $|p_\text{cv}|$ can be evaluated using eq.\,\ref{eq:epsilon_d}.

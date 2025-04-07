@@ -90,6 +90,14 @@ At the plasma frequency $\omega_\text{p}$ the real part of the refractive index 
 nearly zero $n(\omega_p)\approx0$ and therefore the phase velocity and wavelength diverge. 
 This means that all electrons oscillate in phase. Absorption of light goes to zero for 
 frequencies below the plasma frequency.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/theoretical_reflectivity.png}
+    \caption{Theoretical reflectivity of a metal according to the Drude model using equations: 
+    \ref{eq:R}, \ref{eq:epsilon}, \ref{eq:epsilonDrude}, and \ref{eq:omega_p}. 
+    The reflectivity is significantly reduced for wavenumbers above $k_\text{plasma}$.}
+    \label{fig:reflectivity}
+\end{figure}
 Eq.\,\ref{eq:epsilonDrude} can be simplified through the introduction of the high frequency conductivity $\sigma$
 \begin{align}
     \sigma = \frac{N_\text{e}e^2\tau}{m^*}\frac{1}{1-i\omega\tau} \label{eq:sigma}
@@ -106,14 +114,6 @@ the theoretical reflectivity of a metal can be calculated.
 The result is shown in Fig.\,\ref{fig:reflectivity}.
 For frequencies below the plasma frequency, the reflectivity is nearly one. 
 However, if the frequency of the light is larger than the plasma frequency, the reflectivity is significantly reduced.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Images/foo.png}
-    \caption{Theoretical reflectivity of a metal according to the Drude model using equations: 
-    \ref{eq:R}, \ref{eq:epsilon}, \ref{eq:epsilonDrude}, and \ref{eq:omega_p}. 
-    The reflectivity is significantly reduced for wavenumbers above $k_\text{plasma}$.}
-    \label{fig:reflectivity}
-\end{figure}
 \begin{table}[h]
     \centering
     \begin{tabular}{c|c}
@@ -130,7 +130,7 @@ However, if the frequency of the light is larger than the plasma frequency, the 
 \subsection{Semiconductors}\label{sec:semiconductors}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/Bandgap_theory.png}
+    \includegraphics[width=0.45\textwidth]{Images/Bandgap_theory.png}
     \caption{a) Direct and b) indirect semiconductor bandgap. 
     If a photon is absorbed by a valence electron, excitation to the conduction 
     band in the case of an indirect bandgap is only possible with an additional phonon 
