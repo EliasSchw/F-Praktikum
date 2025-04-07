@@ -9,7 +9,6 @@ e = const.e
 m_eff = 1*const.m_e
 epsilon_0 = 1.66818
 N_Dichte = 5.9*10**28
-tau1 = 1
 tau2 = 0.1
 tau3 = 0.01
 tau4 = 0.001
@@ -44,13 +43,13 @@ def calculateKPlasmaSemiconductor(N_DichteSemicon, esquared, m_eff_Semicon, epsi
     k_plasma_semicon = omega_plasma_semicon  # Keine zusätzliche Umrechnung
     return k_plasma_semicon
 
-def plotReflectivitySemiconductor(d, tau1, tau2, tau3, tau4, k_max_semicon):
+def plotReflectivitySemiconductor(d, tau2, tau3, tau4, k_max_semicon):
     k = np.linspace(0.1, k_max_semicon, 500000)  # k wird hier definiert
     k_plasma_semicon = calculateKPlasmaSemiconductor(N_DichteSemicon, esquared, m_eff_Semicon, epsilon_0, epsilon_r)
 
-    taus = [tau1, tau2, tau3, tau4]
+    taus = [tau2, tau3, tau4]
     fig, ax = plt.subplots()
-    tausGray = np.logspace(np.log10(tau1), np.log10(tau4), 25)
+    tausGray = np.logspace(np.log10(tau2), np.log10(tau4), 25)
     for tauGray in tausGray:
         R_S_gray = calculateReflectivitySemiconductor(epsilon_r, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tauGray)
         ax.plot(k / 1000, R_S_gray, color='gray', linewidth=0.5, alpha=0.7)  # Graue Linien
@@ -63,7 +62,7 @@ def plotReflectivitySemiconductor(d, tau1, tau2, tau3, tau4, k_max_semicon):
     plt.axvline(x=k_plasma_semicon / 1000, color='black', linestyle='--', label=r'$k_{plasma}$')
 
     # Achsentitel und Bereich anpassen
-    plt.xlabel(r'wave number k [$10^3 \, \mathrm{m}^{-1}$]')
+    plt.xlabel(r'wave number $\nu$ \ $10^3 \, \mathrm{m}^{-1}$')
     plt.ylabel('reflectivity R')
     plt.title('Theoretical reflectivity of a semiconductor')
     plt.legend()
@@ -77,7 +76,7 @@ def plotReflectivitySemiconductor(d, tau1, tau2, tau3, tau4, k_max_semicon):
     plt.clf()
 
 
-plotReflectivitySemiconductor(d, tau1, tau2, tau3, tau4, k_max_semicon)
+plotReflectivitySemiconductor(d, tau2, tau3, tau4, k_max_semicon)
 
 
 
