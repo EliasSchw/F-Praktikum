@@ -115,7 +115,7 @@ def plot_the_betas(title="foo", glättwert=1):
         beta = []
         for i in calculate_nu_beta_and_R(bügeln(reflection, glättwert), bügeln(transmission, glättwert), d):
             beta.append([i[0], i[1]/100])
-        plot_data(beta, label=label)
+        plot_data(bügeln(beta, 0.05), label=label)
         plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
         plt.ylabel('beta')
 
@@ -134,7 +134,7 @@ def plot_the_kappas(title="foo", glättwert = 1):
         kappa = [[i[0], i[1] * 10**3] for i in kappa]
         
         
-        plot_data(kappa, label=label)
+        plot_data(bügeln(kappa, 0.05), label=label)
 
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
     plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$ 10^{-3}\, cm^{-1}$')
@@ -173,7 +173,7 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     x_vals = np.linspace(x_intercept, k_max_regression, 10)  # Generate x values for the line
     y_vals = steig * x_vals + y_intercept       # Calculate corresponding y values
     plt.plot(x_vals, y_vals*10**-56, label='Linear Fit', color='red', linestyle='-')  # Plot the line
-    plt.legend(fontsize=12)
+    plt.legend(fontsize=18)
     
     # Fehler LinReg Teil
     steig1, x_intercept1, y_intercept1 = linear_regression(k_chopper(komischeFunktion,
@@ -191,9 +191,9 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     komischeFunktion56 = [[point[0], point[1] * 10**-56] for point in komischeFunktion]
     plot_data(k_chopper(komischeFunktion56,k_min, k_max), label=title)
     
-    plt.axvline(x=k_min_regression, color='blue', linestyle='--', label='Boundary for fit', linewidth=0.5)
-    plt.legend(fontsize=12)
-    plt.axvline(x=k_max_regression, color='blue', linestyle='--', linewidth =0.5)
+    plt.axvline(x=k_min_regression, color='red', linestyle='--', label='Boundary for fit', linewidth=0.5)
+    plt.legend(fontsize=16)
+    plt.axvline(x=k_max_regression, color='red', linestyle='--', linewidth =0.5)
     
     
     steigKorr = steig/factor
@@ -205,8 +205,11 @@ def plotKomischeFunktion(reflection, transmission, k_min, k_max, k_min_regressio
     
     writeLatexMacro('pulseMatrixElement_' + title.replace(' ','_'), pulseMatrixElement, r'$m\, kg s^{-1}$', pulseMatrixElement_fehler)
     
-    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')   
-    plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, 10^{56} \left[\frac{A}{Vms}\right]^2$') 
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=19)   
+    plt.ylabel(r'($\epsilon ^{\prime \prime} \omega^2)^2\, / \, 10^{56} \left[\frac{A}{Vms}\right]^2$', fontsize=19) 
     save_and_open(filename=title)
     
     
@@ -241,7 +244,8 @@ def calculate_komische_indirect_function(reflection, transmission, d):
     return komischeFunktion
 
 def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_min_regression, 
-                                 k1_max_regression, k2_min_regression, k2_max_regression, glättwert=0.01, title="foo"):
+                                 k1_max_regression, k2_min_regression, k2_max_regression, glättwert=0.01, title="foo",
+                                 varFürFehler=15):
     komischeIndirFunktion = bügeln(calculate_komische_indirect_function(reflection, transmission, d), glättwert)
     
     
@@ -254,6 +258,17 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     plt.axvline(x=k1_min_regression, color='purple', linestyle='--', label='', linewidth=1)
     plt.axvline(x=k1_max_regression, color='purple', linestyle='--', linewidth =1)
     plt.legend()
+    steigVerschoben1, x_interceptVerschoben1, y_interceptVerschoben1 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k1_min_regression - varFürFehler, k_max=k1_max_regression + varFürFehler))
+    steigVerschoben2, x_interceptVerschoben2, y_interceptVerschoben2 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k1_min_regression - varFürFehler, k_max=k1_max_regression - varFürFehler))
+    steigVerschoben3, x_interceptVerschoben3, y_interceptVerschoben3 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k1_min_regression + varFürFehler, k_max=k1_max_regression + varFürFehler))
+    steigVerschoben4, x_interceptVerschoben4, y_interceptVerschoben4 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k1_min_regression + varFürFehler, k_max=k1_max_regression - varFürFehler))
+    x_intercept_fehler1 = max(abs(x_interceptVerschoben1-x_intercept1), abs(x_interceptVerschoben2-x_intercept1),
+                             abs(x_interceptVerschoben3-x_intercept1), abs(x_interceptVerschoben4-x_intercept1))
+    
     
     
     #Lin Reg Teil 2
@@ -265,11 +280,27 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     plt.axvline(x=k2_min_regression, color='red', linestyle='--', linewidth=1)
     plt.axvline(x=k2_max_regression, color='red', linestyle='--', linewidth =1)
     plt.legend()
+    steig2Verschoben1, x_intercept2Verschoben1, y_intercept2Verschoben1 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k2_min_regression - varFürFehler, k_max=k2_max_regression + varFürFehler))
+    steig2Verschoben2, x_intercept2Verschoben2, y_intercept2Verschoben2 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k2_min_regression - varFürFehler, k_max=k2_max_regression - varFürFehler))
+    steig2Verschoben3, x_intercept2Verschoben3, y_intercept2Verschoben3 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k2_min_regression + varFürFehler, k_max=k2_max_regression + varFürFehler))
+    steig2Verschoben4, x_intercept2Verschoben4, y_intercept2Verschoben4 = linear_regression(k_chopper(komischeIndirFunktion,
+                                                k_min=k2_min_regression + varFürFehler, k_max=k2_max_regression - varFürFehler))
+    x_intercept_fehler2 = max(abs(x_interceptVerschoben1-x_intercept1), abs(x_interceptVerschoben2-x_intercept1),
+                             abs(x_interceptVerschoben3-x_intercept1), abs(x_interceptVerschoben4-x_intercept1))
+
+    x_fehler_gesamt = (x_intercept_fehler1 + x_intercept_fehler2) /2
     
-    bandgap = (x_intercept1+x_intercept2)/2*100*c*hbar/e*2*np.pi
-    writeLatexMacro("bandgap_" + title, bandgap, 'eV')
+    bandgap = (x_intercept1 + x_intercept2)/2*100*c*hbar/e*2*np.pi
+    bandgap_fehler = x_fehler_gesamt *100*c*hbar/e*2*np.pi
+    
     hquerOMEGA = (x_intercept2-x_intercept1)/2*100*c*hbar/e*2*np.pi
-    writeLatexMacro("hquerOMEGA_" + title, hquerOMEGA, 'eV')
+    hquerOMEGA_fehler = x_fehler_gesamt*100*c*hbar/e*2*np.pi
+    
+    writeLatexMacro("bandgap_" + title, bandgap, 'eV', bandgap_fehler)
+    writeLatexMacro("hquerOMEGA_" + title, hquerOMEGA, 'eV', hquerOMEGA_fehler) # ist der gleiche fehler wie für die bandgap
     
     plt.legend()
     
@@ -304,9 +335,9 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
-plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
-                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
-                              glättwert=0.01, title="Si_Undoped")
+#plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
+#                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
+#                              glättwert=0.01, title="Si_Undoped")
 
 
 #plot_the_kappas(glättwert=0.9, title="kappa")
@@ -316,9 +347,9 @@ plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6,
 #plot_the_ns(0.005)
 
 #Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
-plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")
-plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], factor_GaAs, glättwert=0.1, title="GaAs Undoped")
-plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3],factor_GaAs, glättwert=0.03, title="GaAs Doped")
+#plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")
+#plotKomischeFunktion(reflectionGaAsUnDo, transmissionGaAsUnDo, 11000, 11400, 11230, 11280, samplesOhneSiUn[2][3], factor_GaAs, glättwert=0.1, title="GaAs Undoped")
+#plotKomischeFunktion(reflectionGaAsDo, transmissionGaAsDo, 10500, 12000, 11120, 11200, samplesOhneSiUn[3][3],factor_GaAs, glättwert=0.03, title="GaAs Doped")
 
 
 #plot_reflections(glättwert=0.02)
