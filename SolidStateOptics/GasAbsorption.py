@@ -17,7 +17,14 @@ dataReference = read_dpt_file(filepathReference)
 
 
 plot_data(read_dpt_file(filepathNormalized))
-plt.xlabel('wave number k / ' + r'$cm^{-1}$')
-plt.ylabel('Transmission T')
+plt.xlabel('wave number k / ' + r'$cm^{-1}$', fontsize=17)
+plt.ylabel('Transmission T', fontsize=17)
+plt.tick_params(axis='both', which='major', labelsize=17)
+
+
+plt.text(2100, 0.62, '(1)', fontsize=15, color='black')
+plt.text(3500, 0.68, '(2)', fontsize=15, color='black')
+plt.text(5100, 0.95, '(3)', fontsize=15, color='black')
+plt.text(7000, 0.98, '(4)', fontsize=15, color='black')
 
 save_and_open("GasAbsorption")

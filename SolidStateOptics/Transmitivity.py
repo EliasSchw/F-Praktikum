@@ -7,8 +7,8 @@ from Frauen import bügeln
 
 transmission = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_doped_res03_N50_new_normalized.DPT')
 
-x1_inset = 1500
-x2_inset = 1600
+x1_inset = 6000
+x2_inset = 6100
 
 
 
@@ -38,6 +38,10 @@ ax_inset.plot([point[0] for point in chopped_data], [point[1] for point in chopp
 ax_inset.tick_params(axis='both', direction='in')
 ax_inset.tick_params(axis='both', which='both', direction='in', top=True, right=True)
 
-plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=15)
-plt.ylabel(r'Transmission T', fontsize=15)
-save_and_open(filename="foo")#Transmission_High_Res_GaAs_Doped_N50")
+
+
+plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
+plt.ylabel(r'transmission T', fontsize=18)
+plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
+save_and_open(filename="Transmission_High_Res_GaAs_Doped_N50")#Transmission_High_Res_GaAs_Doped_N50")

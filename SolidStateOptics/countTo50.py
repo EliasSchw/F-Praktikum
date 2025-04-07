@@ -49,13 +49,13 @@ def plot_peaks(data, d, x_center, x_range, prominence=0.004, filename=""):
        
     plt.xlabel(plt.gca().get_xlabel(), fontsize=15)
     plt.ylabel(plt.gca().get_xlabel(), fontsize=15)
-    plt.tick_params(axis='both', labelsize=14)
+    plt.tick_params(axis='both', labelsize=18)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
     plt.tick_params(axis='both', length=6, width=1.2)
-    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=15)
-    plt.ylabel(r'Reflectivity R', fontsize=15)
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
+    plt.ylabel(r'reflectivity R', fontsize=20)
     plt.xlim(left=x_min, right=x_max)
-    plt.legend(fontsize=15) 
+    plt.legend(fontsize=20) 
     save_and_open(filename=filename)
 
 def calculate_n(data, d, x_center, windowSize, prominence=0.004):
@@ -71,7 +71,7 @@ def calculate_n(data, d, x_center, windowSize, prominence=0.004):
     
     periods = [- x_values[peaksInWindow[i + 1]] + x_values[peaksInWindow[i]] for i in range(len(peaksInWindow)-1)]
     period = sum(periods) / len(periods)
-    print(f"nr. period {len(periods)} bei nu {x_center}")      
+    #print(f"nr. period {len(periods)} bei nu {x_center}")      
     return 1/(2*d*period*100)
 
 
@@ -87,19 +87,19 @@ def plot_the_ns(windowsize=200):
         plt.plot([nu for nu in range(nu_min, nu_max, 500)], ns, '.', label=label, markersize=10, color=colors[idx % len(colors)])  # Use color from the list
 
     plt.grid(True)
-    plt.xlabel(plt.gca().get_xlabel(), fontsize=15)
-    plt.ylabel(plt.gca().get_xlabel(), fontsize=15)
-    plt.tick_params(axis='both', labelsize=14)
+    plt.xlabel(plt.gca().get_xlabel(), fontsize=20)
+    plt.ylabel(plt.gca().get_xlabel(), fontsize=20)
+    plt.tick_params(axis='both', labelsize=18)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
     plt.tick_params(axis='both', length=6, width=1.2)
-    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=15)
-    plt.ylabel(r'refractive index n', fontsize=15)
-    plt.legend(fontsize=15) 
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=20)
+    plt.ylabel(r'refractive index n', fontsize=20)
+    plt.legend(fontsize=18) 
     save_and_open("RefractiveIndicesDiscrete")
 
 
-plot_peaks(transmissionSiUnDo, 500, 8000, 150, 0.004, filename="LewiPeak")
-#plot_the_ns()
+#plot_peaks(transmissionSiUnDo, 500, 8000, 150, 0.004, filename="LewiPeak")
+plot_the_ns()
 
 
 # Example usage
