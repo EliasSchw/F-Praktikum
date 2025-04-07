@@ -103,7 +103,7 @@ k = np.linspace(1, k_max_semicon, 50000)  # Startwert auf 0.1 gesetzt, höhere A
 
 taus = [tau1, tau2, tau3, tau4]
 for tau in taus:
-    R_S = calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau)
+    R_S = calculateReflectivitySemiconductor(epsilon_inf, omega_LO, omega_TO, gamma, d, k, N_DichteSemicon, tau)/10**8
     # Überprüfung, ob R_S gültige Werte enthält
     if np.all(np.isnan(R_S)) or np.all(R_S == 0):
         print(f"Warnung: Alle Werte von R_S für τ={tau} sind ungültig oder Null.")
@@ -114,7 +114,7 @@ for tau in taus:
 plt.axvline(x=k_plasma_semicon, color='black', linestyle='--', label=r'$k_{plasma}$')
 
 # Achsentitel, Legende und Speichern
-plt.xlabel('wave number k / ' + r'$m^{-1}$')
+plt.xlabel('wave number $\nu\cdot10^{-8}$ / ' + r'$m^{-1}$')
 plt.ylabel('reflectivity R')
 plt.title('Theoretical reflectivity of a semiconductor')
 plt.legend()
