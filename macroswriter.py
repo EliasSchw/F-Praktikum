@@ -22,10 +22,10 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         valueStr = f"{value:.{digitsIfNoError-1}f}"
 
         macro_content = f"\\newcommand{{\\{macro_name}}}{{\\left({valueStr}"
-    macro_content += f"\\right) \\cdot 10^{{{value_order}}}}}"
+    macro_content += f"\\right) \\cdot 10^{{{value_order}}}"
     if unit:
         macro_content += f"\\,\\text{{{unit}}}"
-    macro_content += f"\n"
+    macro_content += '}' + f"\n"
     
     macro_content = macro_content.replace("_","")
 
@@ -38,7 +38,7 @@ def writeLatexMacro(macro_name:str, value:float, unit:str=None, error:float=None
         lines = []
 
     # Remove existing macro with the same name
-    lines = [line for line in lines if not line.strip().startswith(f"\\newcommand{{\\{macro_name}}}")] 
+    lines = [line for line in lines if not line.strip().startswith(f"\\newcommand{{\\{macro_name.replace('_','')}}}")] 
 
     # Append the new macro
     lines.append(macro_content)

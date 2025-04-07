@@ -5,6 +5,7 @@ from scipy.stats import linregress
 import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
 from macroswriter import writeLatexMacro
+from matplotlib.ticker import ScalarFormatter
 
 filepathNormalizedN10 = './SolidStateOptics/RawData/StoN/StoN_res4_N10_normalized.DPT'
 filepathNormalizedN20 = './SolidStateOptics/RawData/StoN/StoN_res4_N20_normalized.DPT'
@@ -35,9 +36,11 @@ def plot_data(data, label=''):
     plt.ylim(yMin, yMax)
 
 def save_and_open(filename="SignalToNoise", title=""):
-    plt.legend(fontsize=12)  # Legende vergrößert
-    plt.xlabel(r'wave number / $cm^{-1}$')  # x-Achse im LaTeX-Stil benannt
-    plt.ylabel(r'transmission $T$')  # y-Achse im LaTeX-Stil benannt
+    plt.legend(fontsize=16, loc='upper center')  # Legende vergrößert und in der oberen Mitte positioniert
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.xlabel(r'wave number / $cm^{-1}$', fontsize=18)  # x-Achse im LaTeX-Stil benannt
+    plt.ylabel(r'transmission $T$', fontsize=18)  # y-Achse im LaTeX-Stil benannt
 
     # Inset-Plot hinzufügen
     ax = plt.gca()
@@ -79,6 +82,7 @@ def save_and_open(filename="SignalToNoise", title=""):
     #inset_ax.set_ylabel(r'transmission $T$', fontsize=10)  # Beschriftung für die linke y-Achse
     #inset_ax_right.set_ylabel(r'transmission $T$', fontsize=10)  # Gleiche Beschriftung für die rechte y-Achse
 
+    
     
     plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
@@ -159,18 +163,26 @@ def plotSNR(datasets, x_min, x_max):
 
     # Plot
     plt.figure(figsize=(8, 5))
-    plt.errorbar(x_numeric, y_numeric, yerr=y_errors, fmt='o', color='blue', capsize=2.5, label='SNR')
-    plt.plot(x_numeric, np.exp(regression_line), color='red', linestyle='--', label=f'linear regression')
+    plt.errorbar(x_numeric, y_numeric*10**-3, yerr=y_errors*10**-3, fmt='o', color='blue', capsize=2.5, label='SNR')
+    plt.plot(x_numeric, np.exp(regression_line)*10**-3, color='red', linestyle='--', label=f'linear regression')
     plt.xscale('log')  # Logarithmische Skalierung der x-Achse
     plt.yscale('log')  # Logarithmische Skalierung der y-Achse
-    plt.xlabel('Number of Scans / N')
-    plt.ylabel('Signal to Noise Ratio (SNR)')
+
+    # Manually set y-axis ticks and labels
+    y_ticks = [3, 4,6,10]  # Example tick values
+    plt.gca().set_yticks(y_ticks)
+    plt.gca().set_yticklabels(y_ticks)  # Format as plain numbers
+
+    plt.xlabel('Number of Scans / N', fontsize=16)
+    plt.ylabel(r'Signal to Noise Ratio (SNR) / $10^{3}$', fontsize=16)
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
     #plt.title('Log-Log Plot of Signal-to-Noise Ratio with Errors')
     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     plt.tick_params(axis='both', which='major', length=6, width=1.3)  # Größere Tick-Marker für Hauptticks
     plt.tick_params(axis='both', which='minor', length=4, width=0.9)
     plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)  # Ticks an allen Seiten nach innen
-    plt.legend()
+    plt.legend(fontsize=14)
 
     # Exponenten und Fehler ausgeben und in LaTeX-Makro schreiben
     #print(f"Exponent (x) from Log-Log Fit: {slope}")
@@ -181,7 +193,7 @@ def plotSNR(datasets, x_min, x_max):
     Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
     plt.clf()
 
-
+'''
 # Plot für alle Datensätze
 plot_data(N10, label='N = 10')
 #plot_data(N20)
@@ -189,7 +201,7 @@ plot_data(N10, label='N = 10')
 #plot_data(N75)
 plot_data(N100, label='N = 100')
 save_and_open()
-
+'''
 
 plotSNR(datasets, x_min, x_max)
 #save_and_open()
