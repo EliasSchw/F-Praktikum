@@ -98,8 +98,30 @@ def plot_the_ns(windowsize=200):
     save_and_open("RefractiveIndicesDiscrete")
 
 
+def plot_Discrete_ns_for_comparison(windowsize=200):
+    colors = ['blue', 'green', 'red', 'purple', 'orange']  # Add a list of colors
+    for idx, (data, label, d, prominence, nu_min, nu_max) in enumerate(samplesOhneSiUn):
+        ns = []
+        for nu in range(nu_min, nu_max, 500):
+            ns.append(calculate_n(data, d, nu, windowsize, prominence=prominence))
+            error = 0.02 * calculate_n(data, d, nu, windowsize, prominence=prominence)
+            # ist die dicke der probe
+            plt.errorbar(nu, ns[-1], yerr=error, fmt='o', color=colors[idx % len(colors)], capsize=5)  # Use color from the list
+        plt.plot([nu for nu in range(nu_min, nu_max, 500)], ns, '.', label=label, markersize=10, color=colors[idx % len(colors)])  # Use color from the list
+
+    #plt.grid(True)
+    #plt.xlabel(plt.gca().get_xlabel(), fontsize=20)
+    #plt.ylabel(plt.gca().get_xlabel(), fontsize=20)
+    #plt.tick_params(axis='both', labelsize=18)
+    #plt.tick_params(axis='both', direction='in', which='both', top=True, right=True)
+    #plt.tick_params(axis='both', length=6, width=1.2)
+    #plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=20)
+    #plt.ylabel(r'refractive index n', fontsize=20)
+    #plt.legend(fontsize=18) 
+    #save_and_open("RefractiveIndicesDiscrete")
+
 #plot_peaks(transmissionSiUnDo, 500, 8000, 150, 0.004, filename="LewiPeak")
-plot_the_ns()
+#plot_the_ns(windowsize=200)
 
 
 # Example usage
