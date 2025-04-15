@@ -22,9 +22,9 @@ plt.ylabel('Transmission T', fontsize=17)
 plt.tick_params(axis='both', which='major', labelsize=17)
 
 
-plt.text(2100, 0.62, '(1)', fontsize=15, color='black')
-plt.text(3500, 0.68, '(2)', fontsize=15, color='black')
-plt.text(5100, 0.95, '(3)', fontsize=15, color='black')
-plt.text(7000, 0.98, '(4)', fontsize=15, color='black')
+plt.text(2100, 0.62, r'$(1):\ \text{CO}_2$', fontsize=15, color='black')
+plt.text(3500, 0.68, r'$(2):\ \text{CO}_2, \text{H}_2\text{O}$', fontsize=15, color='black')
+plt.text(5100, 0.95, r'$(3):\ \text{H}_2\text{O}$', fontsize=15, color='black')
+plt.text(7000, 0.98, r'$(4):\ \text{H}_2\text{O}$', fontsize=15, color='black')
 
 save_and_open("GasAbsorption")

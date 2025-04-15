@@ -12,6 +12,8 @@ filepathNormalizedN20 = './SolidStateOptics/RawData/StoN/StoN_res4_N20_normalize
 filepathNormalizedN50 = './SolidStateOptics/RawData/StoN/StoN_res4_N50_normalized.DPT'
 filepathNormalizedN75 = './SolidStateOptics/RawData/StoN/StoN_res4_N75_normalized.DPT'
 filepathNormalizedN100 = './SolidStateOptics/RawData/StoN/StoN_res4_N100_normalized.DPT'
+filepathNormalizedN150 = './SolidStateOptics/RawData/StoN/StoN_res4_N150_normalized.DPT'
+filepathNormalizedN200 = './SolidStateOptics/RawData/StoN/StoN_res4_N200_normalized.DPT'
 #plotrange
 yMin = 0.98
 yMax = 1.02
@@ -94,9 +96,18 @@ N20 = read_dpt_file(filepathNormalizedN20)
 N50 = read_dpt_file(filepathNormalizedN50)
 N75 = read_dpt_file(filepathNormalizedN75)
 N100 = read_dpt_file(filepathNormalizedN100)
+N150 = read_dpt_file(filepathNormalizedN150)
+N200 = read_dpt_file(filepathNormalizedN200)
 
-
-datasets = [(N10, 'N=10'), (N20, 'N=20'), (N50, 'N=50'), (N75, 'N=75'), (N100, 'N=100')]
+datasets = [
+    (N10, 'N=10'),
+    (N20, 'N=20'),
+    (N50, 'N=50'),
+    (N75, 'N=75'),
+    (N100, 'N=100'),
+    (N150, 'N=150'),
+    (N200, 'N=200')
+]
 x_min = 6000
 x_max = 7000
 
@@ -148,7 +159,7 @@ def plotSNR(datasets, x_min, x_max):
     """
     snr_results, snr_errors, snr_labels = calculateSNRWithError(datasets, x_min, x_max)
     
-    # Konvertiere Labels in numerische Werte (z. B. 10, 20, 50, 75, 100)
+    # Konvertiere Labels in numerische Werte (z. B. 10, 20, 50, 75, 100, 150, 200)
     x_numeric = np.array([int(label.split('=')[1]) for _, label in datasets])
     y_numeric = np.array(snr_results)
     y_errors = np.array(snr_errors)
@@ -163,21 +174,20 @@ def plotSNR(datasets, x_min, x_max):
 
     # Plot
     plt.figure(figsize=(8, 5))
-    plt.errorbar(x_numeric, y_numeric*10**-3, yerr=y_errors*10**-3, fmt='o', color='blue', capsize=2.5, label='SNR')
-    plt.plot(x_numeric, np.exp(regression_line)*10**-3, color='red', linestyle='--', label=f'linear regression')
+    plt.errorbar(x_numeric, y_numeric * 10**-3, yerr=y_errors * 10**-3, fmt='o', color='blue', capsize=2.5, label='SNR')
+    plt.plot(x_numeric, np.exp(regression_line) * 10**-3, color='red', linestyle='--', label=f'linear regression')
     plt.xscale('log')  # Logarithmische Skalierung der x-Achse
     plt.yscale('log')  # Logarithmische Skalierung der y-Achse
 
     # Manually set y-axis ticks and labels
-    y_ticks = [3, 4,6,10]  # Example tick values
+    y_ticks = [3, 4, 6, 10]  # Beispiel-Tick-Werte
     plt.gca().set_yticks(y_ticks)
-    plt.gca().set_yticklabels(y_ticks)  # Format as plain numbers
+    plt.gca().set_yticklabels(y_ticks)  # Format als einfache Zahlen
 
     plt.xlabel(r'Number of Scans / $N_{scan}$', fontsize=16)
     plt.ylabel(r'Signal to Noise Ratio (SNR) / $10^{3}$', fontsize=16)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
-    #plt.title('Log-Log Plot of Signal-to-Noise Ratio with Errors')
     plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     plt.tick_params(axis='both', which='major', length=6, width=1.3)  # Größere Tick-Marker für Hauptticks
     plt.tick_params(axis='both', which='minor', length=4, width=0.9)
@@ -185,23 +195,21 @@ def plotSNR(datasets, x_min, x_max):
     plt.legend(fontsize=14)
 
     # Exponenten und Fehler ausgeben und in LaTeX-Makro schreiben
-    #print(f"Exponent (x) from Log-Log Fit: {slope}")
-    #print(f"Standard Error of Exponent: {std_err}")
     writeLatexMacro('stn', slope, '', std_err)
-    plt.savefig('.\\Paper\\Images\\'+'STNLog' + '.png', dpi=600)
+    plt.savefig('.\\Paper\\Images\\' + 'STNLog' + '.png', dpi=600)
     from PIL import Image
-    Image.open(".\\Paper\\Images\\"+'STNLog' + ".png").show()
+    Image.open(".\\Paper\\Images\\" + 'STNLog' + ".png").show()
     plt.clf()
-
 
 # Plot für alle Datensätze
 plot_data(N10, label=r'$N_{scan}$ = 10')
-#plot_data(N20)
-#plot_data(N50)
-#plot_data(N75)
+plot_data(N20, label=r'$N_{scan}$ = 20')
+plot_data(N50, label=r'$N_{scan}$ = 50')
+plot_data(N75, label=r'$N_{scan}$ = 75')
 plot_data(N100, label=r'$N_{scan}$ = 100')
+plot_data(N150, label=r'$N_{scan}$ = 150')
+plot_data(N200, label=r'$N_{scan}$ = 200')
 save_and_open()
 
-
-#plotSNR(datasets, x_min, x_max)
-#save_and_open()
+# Plot für die lineare Regression mit allen Datensätzen
+plotSNR(datasets, x_min, x_max)

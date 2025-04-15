@@ -12,12 +12,23 @@ with $\vec{E}$ as the electric field vector, $\vec{H}$ as the magnetic field vec
 $\mu$ as the permeability, $\mu_0$ as the permeability in vacuum, $\varepsilon$ as the permittivity, $\sigma$ as the conductivity, 
 and $c$ as the speed of light in vacuum.
 Under the assumption of plane waves, the components $\vec{E} = E_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ 
-and $\vec{H} = H_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ can be used as an ansatz to solve the wave equations \ref{eq:wave_equation_E} and \ref{eq:wave_equation_H}. The dispersion relation of the plane waves is then described by:
+and $\vec{H} = H_0 e^{i(\vec{k}\cdot\vec{r}-\omega t)}$ can be used as an ansatz to solve the wave equations \ref{eq:wave_equation_E} and \ref{eq:wave_equation_H}. 
+The dispersion relation of the plane waves is then described by:
 \begin{align}
     \vec{k}^2 = \omega^2\cdot(\epsilon_0 + i\frac{\sigma}{\omega\epsilon_0}) \label{eq:dispersion_relation}
 \end{align}
 with $\vec{k}$ as the wave vector, $\omega$ as the angular frequency, and $\epsilon_0$ as the permittivity of vacuum.
 
+\subsection{Optical properties}
+The refractive index $N$:
+\begin{align}
+    N(\omega) = n(\omega) + i\kappa(\omega) \label{eq:refractive_index}
+\end{align}
+consists of a real part $n$ and an imaginary part $\kappa$. $\kappa$ is also often referred to as extinction coefficient 
+and is related to the dielectric function $\epsilon(\omega)$:
+\begin{align}
+    \epsilon(\omega) = \epsilon'+i\epsilon'' = N^2 = n^2 - \kappa^2 + 2i n \kappa \label{eq:epsilon}
+\end{align}
 
 \subsection{Plane parallel layer}
 The investigated semiconductor samples can, in a first approximation, 
@@ -54,26 +65,21 @@ The total power transmission $T$ can be determined analogously:
 \begin{align}
     T = \frac{(1-R_{11})(1-R_{12})e^{-d\beta}}{1-R_{11}R_{12}e^{-2d\beta}}.  \label{eq:T}
 \end{align}
-Considering the interference, the total power reflectivity $R$ is described by:
+Considering the interference,\,\ref{eq:R1} gets more complicated. For a high enough resolution, 
+a periodic modulation of the reflectivity dependent on the wave number is expected, 
+which results from a relative phase difference between the reflected light.
+Is the phase difference a multiple of $2\pi$, the light is in phase and the reflectivity is at a maximum.
+For a multiple of odd $\pi$, the light is out of phase and the reflectivity is at a minimum.
+Considering this, the total power reflectivity $R$ is then described by:
 \begin{align}
     R = \left\lvert \frac{(e^{i\frac{2\omega}{c}Nd}-1)(1-N)}{e^{i\frac{2\omega}{c}Nd}(1-N)-(1+N)} \right\rvert^2. \label{eq:R}
 \end{align}
-The phase shift of the light is described by $e^{i\frac{2\omega}{c}Nd}$. In contrast to Eq.\,\ref{eq:Rwophase}, Eq.\,\ref{eq:R} shows a periodic modulation of the reflectivity due to interference. The difference between the maxima of the modulation is given by:
+The phase shift of the light is described by $e^{i\frac{2\omega}{c}Nd}$. 
+The difference between the maxima of the modulation is given by:
 \begin{align}
     \Delta \nu = \nu_{\text{m+1}}-\nu_{\text{m}} = \frac{1}{2dN} \label{eq:delta_nu}
 \end{align}
 
-
-\subsection{Optical properties}
-The refractive index $N$:
-\begin{align}
-    N(\omega) = n(\omega) + i\kappa(\omega) \label{eq:refractive_index}
-\end{align}
-consists of a real part $n$ and an imaginary part $\kappa$. $\kappa$ is also often referred to as extinction coefficient 
-and is related to the dielectric function $\epsilon(\omega)$:
-\begin{align}
-    \epsilon(\omega) = \epsilon'+i\epsilon'' = N^2 = n^2 - \kappa^2 + 2i n \kappa \label{eq:epsilon}
-\end{align}
 
 
 \subsection{Drude model}
