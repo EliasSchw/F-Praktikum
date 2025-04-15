@@ -109,7 +109,7 @@ The method is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzul
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesDiscrete.png}
-    \caption{Refractive indices for different values of the wavenumer. The values are calculated by using eq.\,\ref{eq:delta_nu} from the data gained from the oscillations.}
+    \caption{Refractive indices for different values of the wavenumber. The values are calculated by using eq.\,\ref{eq:delta_nu} from the data gained from the oscillations.}
     \label{fig:Eliasistzulangsam}
 \end{figure}
 For the doped GaSb sample, determination of the refractive index was not possible, as the signal was too noisy.
@@ -172,6 +172,17 @@ The method is not suitable for the doped Si sample.
     \label{fig:n}
 \end{figure}
 \subsection{Bandgap and pulse matrix element}
+The obtained data of fig.\,\ref{fig:n} can be compared with the data obtained from the high resolution measurement and evaluation of the oscillations in fig.\,\ref{fig:Eliasistzulangsam}:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesVergleich.png}
+    \caption{Comparison of the refractive index $n$ determined from the oscillations of the high resolution data and obtained from the low resolution data of transmittivity and reflection.}
+    \label{fig:comparison}
+\end{figure}
+One can see that the refractive indices differ slightly from each other. This is due to the fact that different datasets are used for the evaluation of $n$.
+For the high resolution data, only the transmittivity is used, whereas for the low resolution data both transmittivity and reflectivity are used to determine $n$.
+Furthermore, for the high resolution method, the mean distance of the oscillations is used for a wide spectral range, which can also cause some deviation.
+However, most datapoints for the Si and doped GaAs sample are in agreement within their error with each other. $n$ for GaAs undoped differs more significantly.
 \subsubsection{Direct semiconductor}
 The band gap $E_\text{g}$ and the absolute value of the pulse matrix element $|p_\text{cv}|$ can be evaluated using eq.\,\ref{eq:epsilon_d}.
 If $(\epsilon''^2\omega^2)^2$ is plotted against the wave number $\nu$, a linear regime around the bandgap can be found.
@@ -184,6 +195,7 @@ The method of obtaining the bandgap and the pulse matrix element is shown in fig
     \caption{Determination of the bandgap and pulse matrix element for a doped GaAs sample (smoothened).}
     \label{fig:GaAsDopedBandGap}
 \end{figure}
+The plots for the undoped GaAs and the doped GaSb sample are shown sec.\,\ref{sec:appendix}
 The interband excitation is clearly visible and follows an exponential behaviour. This behaviour can be described by the Urbach tail phenomenon \cite{Script}.
 The values determined for the given direct semiconductor samples are shown in tab.\,\ref{tab:directBandgapPulseMatrixElement}.
 The reduced mass $\mu$ is calculated using eq:\ref{eq:reduced_mass}:
