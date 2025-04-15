@@ -368,6 +368,53 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
+
+
+
+
+transmissionGaAsDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_doped_res03_N50_new_normalized.DPT')
+#2000-9000
+transmissionGaAsUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_undoped_res03_N50_new_normalized.DPT')
+#2000-10500
+transmissionGaSbDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaSb_doped_res03_N50_new_normalized.DPT')
+#GaSb nicht möglich wegen rauschen
+transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\Si_undoped_res03_N50_normalized.DPT')
+#SiUnDo 2000-8500
+
+samplesOhneSiUnDiscrete = [(transmissionSiUnDo, "Si Undoped", 530*10**-6, 0.0035, 2000, 8500),
+        #(transmissionGaSbDo, "GaSb Doped", 500*10**-6, 69, 69, 69),#geht nicht
+        (transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6, 0.004, 2000, 10500),
+        (transmissionGaAsDo, "GaAs Doped", 440*10**-6, 0.004, 2000, 9000)
+    ]
+
+from countTo50 import calculate_n
+def plot_epxilon_with_scuffed_kappa(windowsize=200):
+    colors = ['blue', 'green', 'red', 'purple', 'orange']  # Add a list of colors
+    for idx, (data, label, d, prominence, nu_min, nu_max) in enumerate(samplesOhneSiUnDiscrete):
+        ns = []
+        nerrors =[]
+        kappas = []
+        for nu in range(nu_min, nu_max, 500):
+            ns.append(calculate_n(data, d, nu, windowsize, prominence=prominence))
+            nerrors.append(0.02 * calculate_n(data, d, nu, windowsize, prominence=prominence))
+            for reflection, transmission, label_kontinuierlich, d in samplesOhneSiUnVergleich:
+                if label == label_kontinuierlich:
+                    kappas = calculate_kappa(reflection, transmission, d)
+                            
+                
+                
+            
+            
+            # ist die dicke der probe
+
+        
+        
+        
+
+        plt.plot([nu for nu in range(nu_min, nu_max, 500)], ns, '.', label=label, markersize=10, color=colors[idx % len(colors)])  # Use color from the list
+
+
+
 #plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
 #                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
 #                              glättwert=0.01, title="Si_Undoped")
@@ -378,8 +425,9 @@ def plot_transmissions(glättwert=0.01):
 #plot_the_betas(title="betas", glättwert=0.9)
 
 #plot_the_ns(0.005)
+plot_epxilon_with_scuffed_kappa()
 
-plot_the_ns_vergleich()
+#plot_the_ns_vergleich()
 
 #Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
 #plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")

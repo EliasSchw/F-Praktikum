@@ -203,12 +203,13 @@ def plotSNR(datasets, x_min, x_max):
 
 # Plot für alle Datensätze
 plot_data(N10, label=r'$N_{scan}$ = 10')
-plot_data(N20, label=r'$N_{scan}$ = 20')
-plot_data(N50, label=r'$N_{scan}$ = 50')
-plot_data(N75, label=r'$N_{scan}$ = 75')
+#plot_data(N20, label=r'$N_{scan}$ = 20')
+#plot_data(N50, label=r'$N_{scan}$ = 50')
+#plot_data(N75, label=r'$N_{scan}$ = 75')
+
 plot_data(N100, label=r'$N_{scan}$ = 100')
-plot_data(N150, label=r'$N_{scan}$ = 150')
-plot_data(N200, label=r'$N_{scan}$ = 200')
+#plot_data(N150, label=r'$N_{scan}$ = 150')
+#plot_data(N200, label=r'$N_{scan}$ = 200')
 save_and_open()
 
 # Plot für die lineare Regression mit allen Datensätzen
