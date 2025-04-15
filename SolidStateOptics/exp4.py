@@ -8,6 +8,7 @@ from Frauen import bügeln
 import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split("/")[0:-2]))
 from macroswriter import writeLatexMacro
+from countTo50 import plot_Discrete_ns_for_comparison
 
 
 e = const.e  # Elementary charge in Coulombs
@@ -50,6 +51,13 @@ samplesOhneSiUn = [
         (reflectionGaSbDo, transmissionGaSbDo, "GaSb Doped", 500*10**-6),
         (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6),
         (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped", 440*10**-6)
+        
+    ]
+
+samplesOhneSiUnVergleich = [
+    (reflectionSiUnDo, transmissionSiUnDo, "Si Undoped", 530*10**-6,'blue'),
+        (reflectionGaAsUnDo, transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6, 'green'),
+        (reflectionGaAsDo, transmissionGaAsDo, "GaAs Doped", 440*10**-6, 'red')
         
     ]
 
@@ -107,7 +115,27 @@ def plot_the_ns(glättwert=0.02):
         plot_data(bügeln(n, glättwert), label=label)
     plt.xlabel(r'wave number $\nu$  / ' + r'$cm^{-1}$')
     plt.ylabel('refractive index n')
+    plt.legend(fontsize=12)
     save_and_open('RefractiveIndicesSmooth')
+    
+    
+def plot_the_ns_vergleich(glättwert=0.02):
+    plt.figure()
+    for reflection, transmission, label, d, color in samplesOhneSiUnVergleich:
+        n = []
+        for i in calculate_k_n1_kappa(reflection, transmission, d):
+            n.append([i[0], i[1]])
+        plot_data(bügeln(n, glättwert), label=label, color = color)
+    plt.xlabel(r'wave number $\nu$  / ' + r'$cm^{-1}$')
+    plt.ylabel('refractive index n')
+    plot_Discrete_ns_for_comparison()
+    plt.ylim(2.8,4.2)
+    plt.xlim(1800, 10500)
+    
+    plt.legend(fontsize=12)
+    save_and_open('RefractiveIndicesVergleich')
+
+
      
 def plot_the_betas(title="foo", glättwert=1):
     plt.figure()
@@ -299,6 +327,8 @@ def plotKomischeIndirectFunction(reflection, transmission, d, k_min, k_max, k1_m
     hquerOMEGA = (x_intercept2-x_intercept1)/2*100*c*hbar/e*2*np.pi
     hquerOMEGA_fehler = x_fehler_gesamt*100*c*hbar/e*2*np.pi
     
+    writeLatexMacro("OMEGA_" + title, hquerOMEGA/hbar, 'Hz', hquerOMEGA_fehler/hbar) # ist der gleiche fehler wie für die bandgap
+     
     writeLatexMacro("bandgap_" + title, bandgap, 'eV', bandgap_fehler)
     writeLatexMacro("hquerOMEGA_" + title, hquerOMEGA, 'eV', hquerOMEGA_fehler) # ist der gleiche fehler wie für die bandgap
     
@@ -338,9 +368,9 @@ def plot_transmissions(glättwert=0.01):
     save_and_open("Low_Res_Transmissions")
 
 
-plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
-                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
-                              glättwert=0.01, title="Si_Undoped")
+#plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
+#                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
+#                              glättwert=0.01, title="Si_Undoped")
 
 
 #plot_the_kappas(glättwert=0.9, title="kappa")
@@ -348,6 +378,8 @@ plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6,
 #plot_the_betas(title="betas", glättwert=0.9)
 
 #plot_the_ns(0.005)
+
+plot_the_ns_vergleich()
 
 #Die macht keinen Sinn, ist indirekt!! plotKomischeFunktion(reflectionSiUnDo, transmissionSiUnDo, 9000, 11000, 10050, 10250, samplesOhneSiUn[0][3], glättwert=0.1, title="Si Undoped")
 #plotKomischeFunktion(reflectionGaSbDo, transmissionGaSbDo, 5000, 6000, 5600, 5680, samplesOhneSiUn[1][3], factor_GaSb ,glättwert=0.1, title="GaSb Doped")

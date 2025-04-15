@@ -5,7 +5,7 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from Frauen import bügeln
 
 
-transmission = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_doped_res03_N50_new_normalized.DPT')
+transmission = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3\GaAs_undoped_res03_N50_new_normalized.DPT')
 
 x1_inset = 6000
 x2_inset = 6100
@@ -44,4 +44,4 @@ plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
 plt.ylabel(r'transmission T', fontsize=18)
 plt.xticks(fontsize=18)
 plt.yticks(fontsize=18)
-save_and_open(filename="Transmission_High_Res_GaAs_Doped_N50")#Transmission_High_Res_GaAs_Doped_N50")
+save_and_open(filename="foo")#Transmission_High_Res_GaAs_Doped_N50")

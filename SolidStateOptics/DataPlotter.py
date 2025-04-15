@@ -5,7 +5,7 @@ from DataReader import read_dpt_file
 
 
 plt.figure(figsize=(10, 6))
-def plot_data(data, label=''):
+def plot_data(data, label='', color=None):
     """
     Plots the data using matplotlib.
 
@@ -16,7 +16,11 @@ def plot_data(data, label=''):
     x_values = [point[0] for point in data]
     y_values = [point[1] for point in data]
     
-    plt.plot(x_values, y_values, '-', linewidth=0.9, label=label)  # Plot as single points
+    if color == None:
+        plt.plot(x_values, y_values, '-', linewidth=0.9, label=label)  # Plot as single points
+    else:
+        plt.plot(x_values, y_values, '-', linewidth=0.9, label=label, color=color)  # Plot as single points
+        
     plt.grid(True)
     plt.xlabel(plt.gca().get_xlabel(), fontsize=15)
     plt.ylabel(plt.gca().get_ylabel(), fontsize=15)
