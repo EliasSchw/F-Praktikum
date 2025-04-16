@@ -11,7 +11,6 @@ x1_inset = 6000
 x2_inset = 6100
 
 
-
 def k_chopper(data, k_min, k_max):
     return [point for point in data if k_min <= point[0] <= k_max]
 

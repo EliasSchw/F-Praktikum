@@ -109,6 +109,11 @@ def plot_Discrete_ns_for_comparison(windowsize=200):
             plt.errorbar(nu, ns[-1], yerr=error, fmt='o', color=colors[idx % len(colors)], capsize=5)  # Use color from the list
         plt.plot([nu for nu in range(nu_min, nu_max, 500)], ns, '.', label=label, markersize=10, color=colors[idx % len(colors)])  # Use color from the list
 
+
+
+
+
+
     #plt.grid(True)
     #plt.xlabel(plt.gca().get_xlabel(), fontsize=20)
     #plt.ylabel(plt.gca().get_xlabel(), fontsize=20)

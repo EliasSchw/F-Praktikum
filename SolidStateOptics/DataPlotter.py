@@ -34,6 +34,7 @@ def save_and_open(filename="foo", title=""):
     plt.title(title)
     plt.savefig('.\\Paper\\Images\\'+filename + '.png', dpi=600)
     from PIL import Image
+    print('kümmel öffne dich')
     Image.open(".\\Paper\\Images\\"+filename + ".png").show()
     plt.clf()
 
