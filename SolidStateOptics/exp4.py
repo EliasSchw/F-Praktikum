@@ -382,37 +382,83 @@ transmissionSiUnDo = read_dpt_file(r'.\SolidStateOptics\RawData\Transmission_ex3
 #SiUnDo 2000-8500
 
 samplesOhneSiUnDiscrete = [(transmissionSiUnDo, "Si Undoped", 530*10**-6, 0.0035, 2000, 8500),
-        #(transmissionGaSbDo, "GaSb Doped", 500*10**-6, 69, 69, 69),#geht nicht
         (transmissionGaAsUnDo, "GaAs Undoped", 470*10**-6, 0.004, 2000, 10500),
         (transmissionGaAsDo, "GaAs Doped", 440*10**-6, 0.004, 2000, 9000)
     ]
 
 from countTo50 import calculate_n
-def plot_epxilon_with_scuffed_kappa(windowsize=200):
+def plot_epxilon_stich_with_scuffed_kappa(windowsize=200):
     colors = ['blue', 'green', 'red', 'purple', 'orange']  # Add a list of colors
     for idx, (data, label, d, prominence, nu_min, nu_max) in enumerate(samplesOhneSiUnDiscrete):
+        nus = np.array(range(nu_min, nu_max, 500))
         ns = []
         nerrors =[]
         kappas = []
-        for nu in range(nu_min, nu_max, 500):
+        for nu in nus:
             ns.append(calculate_n(data, d, nu, windowsize, prominence=prominence))
             nerrors.append(0.02 * calculate_n(data, d, nu, windowsize, prominence=prominence))
-            for reflection, transmission, label_kontinuierlich, d in samplesOhneSiUnVergleich:
-                if label == label_kontinuierlich:
-                    kappas = calculate_kappa(reflection, transmission, d)
-                            
+        
+        for reflection, transmission, label_kontinuierlich, d,_ in samplesOhneSiUnVergleich:
+            if label == label_kontinuierlich:
+                kappa_liste = np.array(calculate_kappa(reflection, transmission, d))
+                                
+                kappa_liste = sorted(kappa_liste, key=lambda x: x[0])
+                kappas = np.interp(nus, [item[0] for item in kappa_liste], [item[1] for item in kappa_liste])
+        
+        
+        epsilon_striche = [n**2-kappa**2 for (n,kappa) in zip(ns, kappas)]
+        epsilon_strich_fehler = [0.02 * np.sqrt(2)/2 * epsilon_strich for epsilon_strich in epsilon_striche]
+        #epsilon_2_strich = [2*n*kappa for (n,kappa) in zip(ns, kappas)]
+        #epsilon_2_strich_fehler = [0.02 * epsilon_2_strich for epsilon_2_strich in epsilon_2_striche]
+
+        plt.scatter(nus, epsilon_striche, color=colors[idx], label=label)
+        plt.errorbar(nus, epsilon_striche, yerr=epsilon_strich_fehler, fmt='o', color=colors[idx % len(colors)], capsize=5)
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
+    plt.ylabel(r'$\epsilon^\prime$', fontsize=19)
+    plt.grid()
+    plt.legend(fontsize=18)
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+
+    import DataPlotter as plotter
+    plotter.save_and_open(filename='epsilon1StrichDiskret')                
+    
+
+def plot_epxilon_2_stich_with_scuffed_kappa(windowsize=200):
+    colors = ['blue', 'green', 'red', 'purple', 'orange']  # Add a list of colors
+    for idx, (data, label, d, prominence, nu_min, nu_max) in enumerate(samplesOhneSiUnDiscrete):
+        nus = np.array(range(nu_min, nu_max, 500))
+        ns = []
+        nerrors =[]
+        kappas = []
+        for nu in nus:
+            ns.append(calculate_n(data, d, nu, windowsize, prominence=prominence))
+            nerrors.append(0.02 * calculate_n(data, d, nu, windowsize, prominence=prominence))
+        
+        for reflection, transmission, label_kontinuierlich, d,_ in samplesOhneSiUnVergleich:
+            if label == label_kontinuierlich:
+                kappa_liste = np.array(calculate_kappa(reflection, transmission, d))
+                                
+                kappa_liste = sorted(kappa_liste, key=lambda x: x[0])
+                kappas = np.interp(nus, [item[0] for item in kappa_liste], [item[1] for item in kappa_liste])
+        
+        
+        #epsilon_striche = [n**2-kappa**2 for (n,kappa) in zip(ns, kappas)]
+        #epsilon_strich_fehler = [0.02 * np.sqrt(2)/2 * epsilon_strich for epsilon_strich in epsilon_striche]
+        epsilon_2_striche = [2*n*kappa for (n,kappa) in zip(ns, kappas)]
+        epsilon_2_strich_fehler = [np.abs(0.02 * epsilon_2_strich) for epsilon_2_strich in epsilon_2_striche]
+
+        plt.scatter(nus, epsilon_2_striche, color=colors[idx], label=label)
+        plt.errorbar(nus, epsilon_2_striche, yerr=epsilon_2_strich_fehler, fmt='o', color=colors[idx % len(colors)], capsize=5)
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
+    plt.ylabel(r'$\epsilon^{\prime\prime}$', fontsize=19)
+    plt.grid()
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.legend(fontsize=18)
+    import DataPlotter as plotter
+    plotter.save_and_open(filename='epsilon2StrichDiskret')   
                 
-                
-            
-            
-            # ist die dicke der probe
-
-        
-        
-        
-
-        plt.plot([nu for nu in range(nu_min, nu_max, 500)], ns, '.', label=label, markersize=10, color=colors[idx % len(colors)])  # Use color from the list
-
 
 
 #plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
@@ -425,7 +471,8 @@ def plot_epxilon_with_scuffed_kappa(windowsize=200):
 #plot_the_betas(title="betas", glättwert=0.9)
 
 #plot_the_ns(0.005)
-plot_epxilon_with_scuffed_kappa()
+plot_epxilon_2_stich_with_scuffed_kappa()
+plot_epxilon_stich_with_scuffed_kappa()
 
 #plot_the_ns_vergleich()
 
