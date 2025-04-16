@@ -461,6 +461,29 @@ def plot_epxilon_2_stich_with_scuffed_kappa(windowsize=200):
                 
 
 
+def plot_epxilon_stich(windowsize=200):
+    for reflection, transmission, label_kontinuierlich, d,_ in samplesOhneSiUnVergleich:
+        kappa_liste = np.array(calculate_kappa(reflection, transmission, d))
+            
+        
+        #epsilon_striche = [n**2-kappa**2 for (n,kappa) in zip(ns, kappas)]
+        #epsilon_strich_fehler = [0.02 * np.sqrt(2)/2 * epsilon_strich for epsilon_strich in epsilon_striche]
+        epsilon_2_striche = [2*n*kappa for (n,kappa) in zip(ns, kappas)]
+        epsilon_2_strich_fehler = [np.abs(0.02 * epsilon_2_strich) for epsilon_2_strich in epsilon_2_striche]
+
+        plt.scatter(nus, epsilon_2_striche, color=colors[idx], label=label)
+        plt.errorbar(nus, epsilon_2_striche, yerr=epsilon_2_strich_fehler, fmt='o', color=colors[idx % len(colors)], capsize=5)
+    plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$', fontsize=18)
+    plt.ylabel(r'$\epsilon^{\prime\prime}$', fontsize=19)
+    plt.grid()
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    plt.legend(fontsize=18)
+    import DataPlotter as plotter
+    plotter.save_and_open(filename='epsilon2StrichDiskret') 
+
+
+
 #plotKomischeIndirectFunction(reflectionSiUnDo, transmissionSiUnDo, d=530*10**-6, k_min=7500, k_max=11000,
 #                              k1_min_regression=8450, k1_max_regression=9100, k2_min_regression=9450, k2_max_regression=10200,
 #                              glättwert=0.01, title="Si_Undoped")
@@ -471,8 +494,11 @@ def plot_epxilon_2_stich_with_scuffed_kappa(windowsize=200):
 #plot_the_betas(title="betas", glättwert=0.9)
 
 #plot_the_ns(0.005)
-plot_epxilon_2_stich_with_scuffed_kappa()
-plot_epxilon_stich_with_scuffed_kappa()
+
+#plot_epxilon_2_stich_with_scuffed_kappa()
+#plot_epxilon_stich_with_scuffed_kappa()
+
+
 
 #plot_the_ns_vergleich()
 
