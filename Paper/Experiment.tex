@@ -17,10 +17,18 @@ The thicknesses of the samples are provided in Tab.\,\ref{tab:sampleThickness}.
     \label{tab:sampleThickness}
 \end{table}
 \subsection{Gas Absorption}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/GasAbsorptionSample.png}
+    \caption{Transmission of an empty chamber filled with ambient air.}
+    \label{fig:GasAbsorptionSample}
+\end{figure}
 To identify the spectral ranges where the results are influenced by gas absorption, 
 a measurement in ambient air with a resolution of $0.3\,\text{cm}^{-1}$ and $N = 10$ scans was performed.
 It is important to know how much the gas absorption influences the measurement,
 as this can lead to significant errors in the evaluation of the optical components. 
+In fig.\,\ref{fig:GasAbsorptionSample} the gas absorption dips are shown. To evaluate the influence of the
+different air molecules, the normalized transmission spectra are used.
 The measurement in air was normalized with the corresponding reference measurement, which was carried out 
 under vacuum. Gas absorption dips are expected at frequencies corresponding to the resonance frequencies 
 of the air molecules. The wavenumbers for the measured gas absorption are shown in Tab.\,\ref{tab:gasAbsorption}.
@@ -37,6 +45,7 @@ All the measured data agree with the literature values for the gases $\text{H}_2
     The measured values are in agreement with literature values for $\text{H}_2\text{O}$ and $\text{CO}_2$ \cite{cite:GasAbsorption}.}
     \label{tab:gasAbsorption}
 \end{table}
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/GasAbsorption.png}
@@ -95,14 +104,15 @@ determine the distance between the oscillations seen in the inset of the fig.\,\
 \end{figure}
 Using equation \ref{eq:delta_nu} the refractive Index $N$ can be calculated.
 Additionally, the dielectric permittivity can be calculated using $\kappa$ from the low resolution data
-according to eq.\,\ref{eq:epsilon}. In the spectral range of the oscillations, $\kappa$ nearly vanishes
+according to eq.\,\ref{eq:epsilon}. In the spectral range where $n$ could be determined using the oscillations, $\kappa$ nearly vanishes
 and therefore $\epsilon''$ vanishes too. $\epsilon'$ is shown in fig.\,\ref{fig:epsilonoscillation}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/EpsilonOscillation.png}
-    \caption{Real part of the dielectric permittivity $\epsilon'$ of the doped GaAs sample.}
+    \includegraphics[width=0.5\textwidth]{Images/epsilon1StrichDiskret.png}
+    \caption{Real part of the dielectric permittivity $\epsilon'$ determined using high resolution data.}
     \label{fig:epsilonoscillation}
 \end{figure}
+In the observed spectral range, $\epsilon'$ is increasing with higher wavenumbers for the three samples. 
 The distance between the oscillations is averaged over the spectral range of $100\,\text{cm}^{-1}$
 in positive and negative direction from the assigned wavenumber (contains about $50$ to $70$ oscillations) and measured between the corresponding peaks
 like shown in fig.\,\ref{fig:peaks}.
@@ -159,30 +169,34 @@ As a result, the sample behaves more like a metal than a semiconductor.
     \caption{Absorption coefficient $\beta$ of different semiconductor samples, smoothened.}
     \label{fig:beta}
 \end{figure}
-The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
-The absorption coefficient and $R_1$ can be determined by numerically solving the equations \ref{eq:Rwophase} and \ref{eq:T},
-using the measured reflection and transmission spectra (see sec.\,\ref{sec:RTlowRes}).
-The result is shown in fig.\,\ref{fig:beta}.
-The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown in fig.\,\ref{fig:kappa}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/kappa.png}
     \caption{Extiction coefficient $\kappa$ of different semiconductor samples.}
     \label{fig:kappa}
 \end{figure}
-Knowing the $\kappa$, $R_1$ and eq.\,\ref{eq:R1}, 
-the real part of the refractive index $n$ can be calculated. 
-The result is shown in fig.\,\ref{fig:n}.
-The method is not suitable for the doped Si sample.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesSmooth.png}
     \caption{Refractive index $n$ of different semiconductor samples (smoothened).}
     \label{fig:n}
 \end{figure}
+The complex refractive index is given by eq.\,\ref{eq:refractive_index} with a real and an imaginary part.
+The absorption coefficient and $R_1$ can be determined by numerically solving the equations \ref{eq:Rwophase} and \ref{eq:T},
+using the measured reflection and transmission spectra (see sec.\,\ref{sec:RTlowRes}).
+The result is shown in fig.\,\ref{fig:beta}.
+The extiction coefficient can be calculated by using eq.\,\ref{eq:beta}, shown in fig.\,\ref{fig:kappa}.
+Knowing the $\kappa$, $R_1$ and eq.\,\ref{eq:R1}, 
+the real part of the refractive index $n$ can be calculated. 
+The result is shown in fig.\,\ref{fig:n}.
+The method is not suitable for the doped Si sample.
+
+
+
+
 \subsection{Bandgap and pulse matrix element}
 The obtained data of fig.\,\ref{fig:n} can be compared with the data obtained from the high resolution measurement and evaluation of the oscillations in fig.\,\ref{fig:Eliasistzulangsam}:
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesVergleich.png}
     \caption{Comparison of the refractive index $n$ determined from the oscillations of the high resolution data and obtained from the low resolution data of transmittivity and reflection.}
@@ -192,6 +206,7 @@ One can see that the refractive indices differ slightly from each other. This is
 For the high resolution data, only the transmittivity is used, whereas for the low resolution data both transmittivity and reflectivity are used to determine $n$.
 Furthermore, for the high resolution method, the mean distance of the oscillations is used for a wide spectral range, which can also cause some deviation.
 However, most datapoints for the Si and doped GaAs sample are in agreement within their error with each other. $n$ for GaAs undoped differs more significantly.
+
 \subsubsection{Direct semiconductor}
 The band gap $E_\text{g}$ and the absolute value of the pulse matrix element $|p_\text{cv}|$ can be evaluated using eq.\,\ref{eq:epsilon_d}.
 If $(\epsilon''^2\omega^2)^2$ is plotted against the wave number $\nu$, a linear regime around the bandgap can be found.
