@@ -92,52 +92,52 @@ From the slope of the linear regression, $a$ can be determined as:
 which matches the expectation.
 
 \subsection{Transmission at high resolution}\label{sec:transhighRes}
-The transmission spectra shown in fig.\,\ref{fig:highResTransNu} are measured with a resolution of 
-$0.3\,\text{cm}^{-1}$ and $N_\text{scan}=50$ mirror passes. The aim of this precise measurement is to 
-determine the distance between the oscillations seen in the inset of the fig.\,\ref{fig:highResTransNu}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/Transmission_High_Res_GaAs_Doped_N50.png}
+    \includegraphics[width=0.45\textwidth]{Images/Transmission_High_Res_GaAs_Doped_N50.png}
     \caption{Transmission spectrum of doped GaAs with higher resolution. The inset shows the spectral range
     which is used for the evaluation of the distance of the oscillation peaks.}
     \label{fig:highResTransNu}
 \end{figure}
-Using equation \ref{eq:delta_nu} the refractive Index $N$ can be calculated.
-Additionally, the dielectric permittivity can be calculated using $\kappa$ from the low resolution data
-according to eq.\,\ref{eq:epsilon}. In the spectral range where $n$ could be determined using the oscillations, $\kappa$ nearly vanishes
-and therefore $\epsilon''$ vanishes too. $\epsilon'$ is shown in fig.\,\ref{fig:epsilonoscillation}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/epsilon1StrichDiskret.png}
     \caption{Real part of the dielectric permittivity $\epsilon'$ determined using high resolution data.}
     \label{fig:epsilonoscillation}
 \end{figure}
-In the observed spectral range, $\epsilon'$ is increasing with higher wavenumbers for the three samples. 
-The distance between the oscillations is averaged over the spectral range of $100\,\text{cm}^{-1}$
-in positive and negative direction from the assigned wavenumber (contains about $50$ to $70$ oscillations) and measured between the corresponding peaks
-like shown in fig.\,\ref{fig:peaks}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/LewiPeak.png}
     \caption{Distance between the oscillation peaks.}
     \label{fig:peaks}
 \end{figure}
-Peak detection is only possible for spectral ranges with low noise. Fig.\,\ref{fig:peaks} shows a spectral range
-with average noise, where it is possible to detect the peaks.
-The method is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzulangsam}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/RefractiveIndicesDiscrete.png}
     \caption{Refractive indices for different values of the wavenumber. The values are calculated by using eq.\,\ref{eq:delta_nu} from the data gained from the oscillations.}
     \label{fig:Eliasistzulangsam}
 \end{figure}
+The transmission spectra shown in fig.\,\ref{fig:highResTransNu} are measured with a resolution of 
+$0.3\,\text{cm}^{-1}$ and $N_\text{scan}=50$ mirror passes. The aim of this precise measurement is to 
+determine the distance between the oscillations seen in the inset of the fig.\,\ref{fig:highResTransNu}.
+Using equation \ref{eq:delta_nu} the refractive Index $N$ can be calculated.
+Additionally, the dielectric permittivity can be calculated using $\kappa$ from the low resolution data
+according to eq.\,\ref{eq:epsilon}. In the spectral range where $n$ could be determined using the oscillations, $\kappa$ nearly vanishes
+and therefore $\epsilon''$ vanishes too. $\epsilon'$ is shown in fig.\,\ref{fig:epsilonoscillation}.
+In the observed spectral range, $\epsilon'$ is increasing with higher wavenumbers for the three samples. 
+The distance between the oscillations is averaged over the spectral range of $100\,\text{cm}^{-1}$
+in positive and negative direction from the assigned wavenumber (contains about $50$ to $70$ oscillations) and measured between the corresponding peaks
+like shown in fig.\,\ref{fig:peaks}.
+Peak detection is only possible for spectral ranges with low noise. Fig.\,\ref{fig:peaks} shows a spectral range
+with average noise, where it is possible to detect the peaks.
+The method is done for different wavenumbers shown in fig.\,\ref{fig:Eliasistzulangsam}
 For the doped GaSb sample, determination of the refractive index was not possible, as the signal was too noisy.
 Furthermore, the refractive index of the other samples could also only be determined in a limited, less noisy spectral range.
 The most significant contribution to the error is the sample thickness, which might differ from the given value. 
 The error is assumed to be $2\%$.
 Negligible influences on the error are, for example, 
 the picket fence effect or the change in wavelength over the spectral range. 
-
+\newpage
 \subsection{Reflection and transmission at low resolution}\label{sec:RTlowRes}
 \begin{figure}[h]
     \centering
@@ -145,16 +145,16 @@ the picket fence effect or the change in wavelength over the spectral range.
     \caption{Normalized reflection spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResRef}
 \end{figure}
-The reflection and transmission spectra shown in fig.\,\ref{fig:lowResRef} and \ref{fig:lowResTrans} 
-are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
-but with the same number of mirror passes ($N_\text{scan}=50$) to save measurement time.
-Smoothening of the spectra is done by using exponential smoothening.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Low_Res_Transmissions.png}
     \caption{Normalized transmission spectra of all semiconductor samples. The spectra are slightly smoothened.}
     \label{fig:lowResTrans}
-\end{figure}\\
+\end{figure}
+The reflection and transmission spectra shown in fig.\,\ref{fig:lowResRef} and \ref{fig:lowResTrans} 
+are measured with a lower resolution of $4\,\text{cm}^{-1}$ than in \ref{sec:RTlowRes} 
+but with the same number of mirror passes ($N_\text{scan}=50$) to save measurement time.
+Smoothening of the spectra is done by using exponential smoothening.
 As the band gap of the materials is approached, 
 transmittivity and reflection show a significant drop. The transmittivity drops even futher nerly to zero.
 This happens because the absorption increases as the light has enough 
@@ -162,6 +162,7 @@ energy to excite the electrons from the valence band to the conduction band.
 The transmission of the doped Si sample is barely detectable and is close to zero over the entire spectral range. 
 This is due to the high doping concentration which leads to an increase in the plasma frequency.
 As a result, the sample behaves more like a metal than a semiconductor.
+\newpage
 \subsection{Refractive index $N$}
 \begin{figure}[h]
     \centering
