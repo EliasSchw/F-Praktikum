@@ -165,7 +165,7 @@ def plot_the_kappas(title="foo", glättwert = 1):
         plot_data(bügeln(kappa, 0.05), label=label)
 
     plt.xlabel(r'wave number $\nu$ / ' + r'$cm^{-1}$')
-    plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$ 10^{-3}\, cm^{-1}$')
+    plt.ylabel(r'extinction coefficient $\kappa$ / ' + r'$ 10^{-3}$')
     plt.legend(fontsize=12)
     save_and_open(filename=title)
      
@@ -489,7 +489,7 @@ def plot_epxilon_stich(windowsize=200):
 #                              glättwert=0.01, title="Si_Undoped")
 
 
-#plot_the_kappas(glättwert=0.9, title="kappa")
+plot_the_kappas(glättwert=0.9, title="kappa")
 
 #plot_the_betas(title="betas", glättwert=0.9)
 
